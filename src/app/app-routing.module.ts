@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppShellComponent } from './app-shell';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./view-wrappers/home-page-wrapper.module').then(
-        (_m) => _m.HomePageWrapperModule
-      ),
+    component: AppShellComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./view-wrappers/home-page-wrapper.module').then(
+            (_m) => _m.HomePageWrapperModule
+          ),
+      },
+    ],
   },
 ];
 
