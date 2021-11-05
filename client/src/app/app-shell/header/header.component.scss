@@ -1,9 +1,21 @@
 @import "colors";
+@import "spacing";
+@import "typography";
 
 :host {
   display: block;
 }
 
 header {
-  height: 120px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $spacing-lg;
+}
+
+a.nav-link {
+  margin-left: $spacing-lg;
+  font-size: $fontsize-sm;
+  font-weight: bold;
 }
