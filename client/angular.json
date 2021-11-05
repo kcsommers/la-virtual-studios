@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/la-virtual-studios",
+            "outputPath": "dist/la-virtual-studios/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -96,6 +96,70 @@
             "styles": ["src/styles/styles.scss"],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/la-virtual-studios/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "la-virtual-studios:build:development",
+              "serverTarget": "la-virtual-studios:server:development"
+            },
+            "production": {
+              "browserTarget": "la-virtual-studios:build:production",
+              "serverTarget": "la-virtual-studios:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "la-virtual-studios:build:production",
+              "serverTarget": "la-virtual-studios:server:production"
+            },
+            "development": {
+              "browserTarget": "la-virtual-studios:build:development",
+              "serverTarget": "la-virtual-studios:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

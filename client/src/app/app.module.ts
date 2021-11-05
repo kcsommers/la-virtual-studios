@@ -5,7 +5,7 @@ import { AppShellModule } from './app-shell';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  imports: [BrowserModule, AppRoutingModule, AppShellModule],
+  imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), AppRoutingModule, AppShellModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })
