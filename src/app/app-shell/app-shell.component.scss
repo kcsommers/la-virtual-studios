@@ -1,0 +1,11 @@
+@import "colors";
+
+div.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+div.app-body-container {
+  flex: 1;
+}
