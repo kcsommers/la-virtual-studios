@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HomePageComponentModule } from '../views';
+import { HomePageComponentModule } from '../home';
 
 @NgModule({
   imports: [HomePageComponentModule],

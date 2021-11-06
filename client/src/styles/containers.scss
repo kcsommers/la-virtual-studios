@@ -1,0 +1,23 @@
+@import "./spacing.scss";
+
+div.section-header {
+  text-align: center;
+  padding: $spacing-xl;
+  > h2 {
+    margin-bottom: $spacing-md;
+  }
+}
+
+div.section-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: 200px;
+  justify-content: center;
+  column-gap: $spacing-lg;
+}
+
+div.section-grid-img-wrap {
+  > img {
+    width: 100%;
+  }
+}

@@ -1,8 +1,17 @@
 @import "./reset.scss";
 @import "./typography.scss";
+@import "./containers.scss";
 
 * {
   font-family: $font-main;
   box-sizing: border-box;
   font-size: $fontsize-md;
+}
+
+h2 {
+  @include h2-styles;
+}
+
+p {
+  line-height: 140%;
 }
