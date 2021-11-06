@@ -17,7 +17,12 @@
     "target": "es2017",
     "module": "es2020",
     "lib": ["es2018", "dom"],
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "paths": {
+      "@la/core": ["src/app/core/index.ts"],
+      "@la/components": ["src/app/components/index.ts"],
+      "@la/data": ["src/app/data/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -10,14 +10,8 @@ div.section-header {
 
 div.section-grid {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
-  grid-template-rows: 200px;
+  grid-template-columns: repeat(3, 250px);
+  grid-auto-rows: auto;
   justify-content: center;
-  column-gap: $spacing-lg;
-}
-
-div.section-grid-img-wrap {
-  > img {
-    width: 100%;
-  }
+  column-gap: $spacing-xl;
 }

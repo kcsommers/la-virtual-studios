@@ -1,11 +1,7 @@
 import { ICoach } from '../coaches/coach.interface';
+import { IProduct } from '../common/product.interface';
 
-export interface IClass {
-  name: string;
-  blurb: string;
-  description: string;
-  coverImage: string;
-  images: string[];
+export interface IClass extends IProduct {
   slots: number;
   coach: ICoach;
 }

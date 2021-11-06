@@ -7,15 +7,15 @@
 </div>
 <div class="classes-section">
   <div class="section-header">
-    <h2>Acting Classes</h2>
+    <h2>Virtual and In Person Acting Classes</h2>
     <p>
-      Offering live and in person classes with top L.A. casting directors and
+      Offering virtual and in person classes with top L.A. casting directors and
       coaches
     </p>
   </div>
   <div class="section-grid">
-    <div *ngFor="let class of classes$ | async" class="section-grid-img-wrap">
-      <img src="{{ class.coverImage }}" alt="{{ class.name }}" />
+    <div *ngFor="let class of classes$ | async" class="section-grid-card-wrap">
+      <la-info-card [product]="class"></la-info-card>
     </div>
   </div>
 </div>
