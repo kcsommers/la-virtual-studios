@@ -1,0 +1,21 @@
+<div class="landing-wrap">
+  <video
+    class="landing-video"
+    src="https://rr4---sn-vgqsrned.c.drive.google.com/videoplayback?expire=1636105704&ei=qMWEYcHrD-zi-LYPutCU-Ak&ip=2601:602:8e00:1c80::418e&cp=QVRIWEJfVFdORVhPOmtDaUQ2azA5dF9zMXdxLTVYRTRINzR4aXY5ZC1OSW82X194T0U5UTFUUVc&id=7a9ff70fb6b5db64&itag=22&source=webdrive&requiressl=yes&ttl=transient&susc=dr&driveid=1xTvX096yayFAm-L6AD3oZsY-9cp1pPR5&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=134.164&lmt=1636091139505928&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRgIhANIiiipS7WfXAbOJi6OTEwRzLbeR6TtK_Q3m5iUgIT2vAiEAlesAOenli2nXeZ97Hg3H5KoullHgjqiyOUCtt-4P28Q=&cpn=AAzniXmbD0pMUE4c&c=WEB_EMBEDDED_PLAYER&cver=1.20211102.01.00&redirect_counter=1&cm2rm=sn-nx5sz7z&req_id=42856d48548da3ee&cms_redirect=yes&mh=4c&mm=34&mn=sn-vgqsrned&ms=ltu&mt=1636091082&mv=m&mvi=4&pl=36&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRQIhAMRJfvBokyy2S5fE9Dmoq99LY_QtpxIbzLwQ7m1CeWGkAiAttEtdDQM3VUBbqHf0WW1ofiE8mcWsUowAaJAF6vOOqw%3D%3D"
+    controls
+  ></video>
+</div>
+<div class="classes-section">
+  <div class="section-header">
+    <h2>Acting Classes</h2>
+    <p>
+      Offering live and in person classes with top L.A. casting directors and
+      coaches
+    </p>
+  </div>
+  <div class="section-grid">
+    <div *ngFor="let class of classes$ | async" class="section-grid-img-wrap">
+      <img src="{{ class.coverImage }}" alt="{{ class.name }}" />
+    </div>
+  </div>
+</div>
