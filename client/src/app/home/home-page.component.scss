@@ -10,21 +10,25 @@ video.landing-video {
 
 div.icon-section-inner {
   text-align: center;
-  padding: $spacing-lg;
+  padding: $spacing-md;
   > la-icon {
-    margin: 0 $spacing-lg;
+    margin: 0 $spacing-md;
   }
 }
 
 section.classes-section {
   @include max-width-container;
-  padding: $spacing-lg 6rem;
+  padding: $spacing-md 6rem;
+}
+
+div.classes-section-header {
+  margin-bottom: $spacing-lg;
 }
 
 div.classes-section-grid {
   display: grid;
-  grid-gap: $spacing-lg;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: $spacing-md;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 section.star-section {
@@ -37,7 +41,7 @@ section.star-section {
 div.star-section-inner {
   color: #fff;
   > p {
-    margin: $spacing-md 0 $spacing-lg 0;
+    margin: $spacing-sm 0 $spacing-md 0;
     max-width: 550px;
   }
 }

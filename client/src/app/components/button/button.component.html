@@ -1,7 +1,7 @@
 <button
   class="la-btn"
   [class.full-width-btn]="isFullWidth"
-  [ngClass]="['btn-' + size, 'btn-' + look]"
+  [ngClass]="['btn-' + size, 'btn-' + look, 'btn-' + color]"
   (click)="!isDisabled && clickListener($event)"
 >
   {{ text }}

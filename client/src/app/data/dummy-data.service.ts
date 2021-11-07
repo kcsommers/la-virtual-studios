@@ -40,8 +40,7 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 4',
-        blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
+        blurb: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-4.jpg',
@@ -52,7 +51,7 @@ export class DummyDataService {
       {
         name: 'Acting class 5',
         blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto, inventore ea, reiciendis autem sit saepe! Eveniet, quos',
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-5.jpg',
@@ -63,7 +62,7 @@ export class DummyDataService {
       {
         name: 'Acting class 6',
         blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto, inventore ea, reiciendis autem sit saepe! Eveniet, quos',
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-3.jpg',

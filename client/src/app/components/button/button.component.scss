@@ -11,12 +11,36 @@ button.la-btn {
   border-radius: $border-radius;
   border: none;
   display: inline-block;
-  background-color: $blue;
   transition: all 0.2s ease;
-  box-shadow: $box-shadow;
   max-width: 100%;
-  color: #fff;
-  padding: $spacing-sm $spacing-md;
+  font-size: $fontsize-sm;
+  padding: 0;
+
+  &.btn-primary {
+    &:not(.btn-flat) {
+      background-color: $primary;
+      color: #fff;
+    }
+    &.btn-flat {
+      color: $primary;
+    }
+  }
+
+  &.btn-accent {
+    &:not(.btn-flat) {
+      background-color: $accent;
+      color: #fff;
+    }
+    &.btn-flat {
+      color: $accent;
+    }
+  }
+
+  &:not(.btn-flat) {
+    padding: $spacing-sm $spacing-md;
+    color: #fff;
+    box-shadow: $box-shadow;
+  }
 
   &.full-width-btn {
     width: 100%;
@@ -24,6 +48,8 @@ button.la-btn {
 
   &:hover,
   &:focus {
-    background-color: $dark-blue;
+    &:not(.btn-flat) {
+      background-color: $dark-blue;
+    }
   }
 }

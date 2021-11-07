@@ -1,11 +1,15 @@
-<div class="info-card-img-wrap">
+<div class="event-card-img-wrap">
   <div
-    class="info-card-img"
+    class="event-card-img"
     [ngStyle]="{ backgroundImage: 'url(' + product?.coverImage + ')' }"
   ></div>
 </div>
-<div class="info-card-body">
-  <span>{{ product?.name }}</span>
+<div class="event-card-body">
+  <span class="event-name">{{ product?.name }}</span>
   <p class="product-blurb">{{ product?.blurb }}</p>
-  <la-button [text]="'More Info'"></la-button>
+  <la-button
+    [text]="'More Info'"
+    [look]="'flat'"
+    [color]="'accent'"
+  ></la-button>
 </div>
