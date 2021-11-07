@@ -1,8 +1,18 @@
+@import "containers";
+
 :host {
   display: block;
+  cursor: pointer;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
 }
 
 div.info-card-img {
   height: 200px;
   background-size: cover;
+}
+
+div.info-card-body {
+  text-align: center;
+  padding: $spacing-md;
 }
