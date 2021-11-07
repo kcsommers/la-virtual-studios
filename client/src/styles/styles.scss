@@ -15,10 +15,25 @@ h3 {
   @include h3-styles;
 }
 
+h4 {
+  @include h4-styles;
+}
+
 p {
   @include p-styles;
 }
 
 div.classes-grid {
   margin-top: $spacing-lg;
+}
+
+div.angle-down-div {
+  width: 40px;
+  height: 40px;
+  background-color: inherit;
+  transform: rotate(45deg) translateX(-50%);
+  position: absolute;
+  left: 50%;
+  bottom: -40%;
+  z-index: 100;
 }

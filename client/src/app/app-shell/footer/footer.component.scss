@@ -1,4 +1,7 @@
+@import "colors";
+
 :host {
   display: block;
   height: 200px;
+  background-color: $primary;
 }

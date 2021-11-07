@@ -30,6 +30,7 @@ span.icon-wrap {
     }
   }
   &.icon-outlined {
-    border: 2px solid #000;
+    border-width: 2px;
+    border-style: solid;
   }
 }

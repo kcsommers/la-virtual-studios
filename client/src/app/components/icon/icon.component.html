@@ -1,6 +1,7 @@
 <span
   class="icon-wrap"
   [class.icon-outlined]="outlined"
+  [ngStyle]="{ borderColor: color }"
   [ngClass]="'icon-' + size"
 >
   <fa-icon [icon]="icon | getIcon" [ngStyle]="{ color: color }"></fa-icon>

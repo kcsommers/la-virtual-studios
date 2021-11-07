@@ -4,10 +4,12 @@
   display: inline-block;
   &.full-width-btn {
     width: 100%;
+    min-width: 175px;
   }
 
   &.responsive-btn {
     width: 33.33%;
+    min-width: 175px;
   }
 }
 
