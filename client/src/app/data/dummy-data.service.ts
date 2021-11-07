@@ -10,8 +10,7 @@ export class DummyDataService {
     const _classes: IEvent[] = [
       {
         name: 'Acting class 1',
-        blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
+        blurb: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-2.jpg',
@@ -21,8 +20,7 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 2',
-        blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
+        blurb: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-1.jpg',
@@ -32,8 +30,7 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 3',
-        blurb:
-          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
+        blurb: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-2.jpg',
