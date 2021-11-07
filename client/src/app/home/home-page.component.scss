@@ -25,6 +25,11 @@ div.classes-section-header {
   margin-bottom: $spacing-lg;
 }
 
+div.classes-section-more-info-wrap {
+  text-align: center;
+  margin-top: $spacing-md;
+}
+
 div.classes-section-grid {
   display: grid;
   grid-gap: $spacing-md;

@@ -2,6 +2,13 @@
 
 :host {
   display: inline-block;
+  &.full-width-btn {
+    width: 100%;
+  }
+
+  &.responsive-btn {
+    width: 33.33%;
+  }
 }
 
 button.la-btn {
@@ -12,44 +19,45 @@ button.la-btn {
   border: none;
   display: inline-block;
   transition: all 0.2s ease;
+  width: 100%;
   max-width: 100%;
   font-size: $fontsize-sm;
-  padding: 0;
+  padding: $spacing-xs $spacing-md;
+  color: #fff;
+  box-shadow: $box-shadow;
 
   &.btn-primary {
-    &:not(.btn-flat) {
-      background-color: $primary;
-      color: #fff;
-    }
-    &.btn-flat {
+    background-color: $primary;
+    color: #fff;
+    &.btn-flat,
+    &.btn-outline {
       color: $primary;
+    }
+    &.btn-outline {
+      border: 2px solid $primary;
     }
   }
 
   &.btn-accent {
-    &:not(.btn-flat) {
-      background-color: $accent;
-      color: #fff;
-    }
-    &.btn-flat {
+    background-color: $accent;
+    color: #fff;
+    &.btn-flat,
+    &.btn-outline {
       color: $accent;
     }
-  }
-
-  &:not(.btn-flat) {
-    padding: $spacing-sm $spacing-md;
-    color: #fff;
-    box-shadow: $box-shadow;
-  }
-
-  &.full-width-btn {
-    width: 100%;
-  }
-
-  &:hover,
-  &:focus {
-    &:not(.btn-flat) {
-      background-color: $dark-blue;
+    &.btn-outline {
+      border: 2px solid $accent;
     }
+  }
+
+  &.btn-flat {
+    padding: 0;
+    box-shadow: none;
+    font-weight: bold;
+  }
+
+  &.btn-flat,
+  &.btn-outline {
+    background-color: rgba(0, 0, 0, 0);
   }
 }

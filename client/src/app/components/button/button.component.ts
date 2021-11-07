@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 import { ColorType } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -31,8 +36,21 @@ export class ButtonComponent {
   public isFullWidth: boolean = false;
 
   @Input()
+  public isResponsive: boolean = false;
+
+  @Input()
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
   @Input()
   public clickListener: (_event: MouseEvent) => void;
+
+  @HostBinding('class.full-width-btn')
+  get fullWidth(): boolean {
+    return this.isFullWidth;
+  }
+
+  @HostBinding('class.responsive-btn')
+  get responsive(): boolean {
+    return this.isResponsive;
+  }
 }
