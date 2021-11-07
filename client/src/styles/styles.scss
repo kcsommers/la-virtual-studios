@@ -16,7 +16,7 @@ h3 {
 }
 
 p {
-  line-height: 140%;
+  @include p-styles;
 }
 
 div.classes-grid {

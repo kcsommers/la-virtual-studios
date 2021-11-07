@@ -1,3 +1,7 @@
-<button class="la-btn" (click)="!isDisabled && clickListener($event)">
+<button
+  class="la-btn"
+  [class.full-width-btn]="isFullWidth"
+  (click)="!isDisabled && clickListener($event)"
+>
   {{ text }}
 </button>

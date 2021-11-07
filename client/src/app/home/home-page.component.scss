@@ -8,16 +8,35 @@ video.landing-video {
   width: 100%;
 }
 
+section.classes-section {
+  padding: 6rem;
+}
+
 section.star-section {
+  padding: 6rem;
   background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636245088/LA%20Virtual%20Studios/audition-2.jpg);
   background-size: cover;
   background-position: center;
 }
 
 div.star-cta {
-  display: inline-block;
-  background-color: #fff;
+  background-color: rgba(#fff, 0.85);
   box-shadow: $box-shadow;
   border-radius: $border-radius;
-  padding: 3rem;
+  width: 60%;
+  height: 300px;
+  min-width: 200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $spacing-md;
+  text-align: center;
+  > p {
+    margin-top: $spacing-sm;
+  }
+  > la-button {
+    margin-top: $spacing-md;
+  }
 }

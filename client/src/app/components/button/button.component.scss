@@ -1,5 +1,9 @@
 @import "variables";
 
+:host {
+  display: inline-block;
+}
+
 button.la-btn {
   background: none;
   outline: none;
@@ -13,6 +17,10 @@ button.la-btn {
   max-width: 100%;
   color: #fff;
   padding: $spacing-sm $spacing-md;
+
+  &.full-width-btn {
+    width: 100%;
+  }
 
   &:hover,
   &:focus {

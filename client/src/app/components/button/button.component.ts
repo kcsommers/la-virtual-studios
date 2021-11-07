@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'la-button',
@@ -11,10 +12,13 @@ export class ButtonComponent {
   public text: string;
 
   @Input()
-  public isDisabled: boolean;
+  public isDisabled: boolean = false;
 
   @Input()
-  public isLoading: boolean;
+  public isFullWidth: boolean = false;
+
+  @Input()
+  public isLoading$ = new BehaviorSubject<boolean>(false);
 
   @Input()
   public clickListener: (_event: MouseEvent) => void;

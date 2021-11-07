@@ -1,10 +1,12 @@
-@import "containers";
+@import "variables";
 
 :host {
   display: block;
   cursor: pointer;
+  background-color: $blue;
   box-shadow: $box-shadow;
   border-radius: $border-radius;
+  color: #fff;
 }
 
 div.info-card-img {

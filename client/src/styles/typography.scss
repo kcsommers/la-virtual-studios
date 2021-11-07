@@ -8,9 +8,15 @@ $font-main: "Open Sans";
 
 @mixin h2-styles {
   font-size: $fontsize-xl;
+  line-height: 160%;
 }
 
 @mixin h3-styles {
   font-size: $fontsize-lg;
   font-weight: bold;
+  line-height: 150%;
+}
+
+@mixin p-styles {
+  line-height: 140%;
 }

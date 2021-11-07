@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { asyncScheduler, Observable, of } from 'rxjs';
+import { asyncScheduler, Observable, scheduled } from 'rxjs';
 import { IClass } from '../core/classes/class.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DummyDataService {
-  public getClasses(): Observable<IClass[]> {
+  public getClasses(_count = 3): Observable<IClass[]> {
     const _classes: IClass[] = [
       {
         name: 'Acting class 1',
@@ -69,6 +69,6 @@ export class DummyDataService {
         coach: null,
       },
     ];
-    return of(_classes, asyncScheduler);
+    return scheduled([_classes.slice(0, _count)], asyncScheduler);
   }
 }

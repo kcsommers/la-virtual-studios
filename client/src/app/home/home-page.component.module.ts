@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ButtonComponentModule, InfoCardComponentModule } from '../components';
+import {
+  ButtonComponentModule,
+  IconComponentModule,
+  InfoCardComponentModule,
+} from '../components';
 import { HomePageComponent } from './home-page.component';
 
 const routes: Routes = [
@@ -17,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     InfoCardComponentModule,
     ButtonComponentModule,
+    IconComponentModule,
   ],
   declarations: [HomePageComponent],
   exports: [HomePageComponent],
