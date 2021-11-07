@@ -5,17 +5,24 @@
     controls
   ></video>
 </div>
-<div class="classes-section">
+<section class="page-section classes-section">
   <div class="section-header">
     <h2>Virtual and In Person Acting Classes</h2>
-    <p>
-      Offering virtual and in person classes with top L.A. casting directors and
-      coaches
-    </p>
+    <p>Offering classes with top L.A. casting directors and coaches</p>
   </div>
-  <div class="section-grid">
+  <div class="classes-grid section-grid">
     <div *ngFor="let class of classes$ | async" class="section-grid-card-wrap">
       <la-info-card [product]="class"></la-info-card>
     </div>
   </div>
-</div>
+</section>
+<section class="page-section star-section">
+  <div class="section-header">
+    <div class="star-cta">
+      <h2>STAR</h2>
+      <h3>Self Tape Audition Room</h3>
+      <p>Book our audition room and put your audition on tape!</p>
+      <la-button [text]="'Learn More'"></la-button>
+    </div>
+  </div>
+</section>

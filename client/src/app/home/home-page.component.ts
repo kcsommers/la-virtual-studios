@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { IClass } from '../core';
@@ -8,6 +8,7 @@ import { DummyDataService } from '../data';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
   public classes$ = new BehaviorSubject<IClass[]>(null);

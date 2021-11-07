@@ -1,4 +1,5 @@
-$fontsize-lg: 2rem;
+$fontsize-xl: 2rem;
+$fontsize-lg: 1.25rem;
 $fontsize-md: 1rem;
 $fontsize-sm: 0.85rem;
 $fontsize-xs: 0.275rem;
@@ -6,5 +7,10 @@ $fontsize-xs: 0.275rem;
 $font-main: "Open Sans";
 
 @mixin h2-styles {
+  font-size: $fontsize-xl;
+}
+
+@mixin h3-styles {
   font-size: $fontsize-lg;
+  font-weight: bold;
 }

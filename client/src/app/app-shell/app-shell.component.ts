@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-shell',
@@ -12,5 +12,6 @@ import { Component } from '@angular/core';
     </div>
   `,
   styleUrls: ['./app-shell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppShellComponent {}

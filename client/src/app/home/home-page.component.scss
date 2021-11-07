@@ -1,7 +1,23 @@
+@import "containers";
+
 :host {
   display: block;
 }
 
 video.landing-video {
   width: 100%;
+}
+
+section.star-section {
+  background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636245088/LA%20Virtual%20Studios/audition-2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+div.star-cta {
+  display: inline-block;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  border-radius: $border-radius;
+  padding: 3rem;
 }

@@ -38,6 +38,36 @@ export class DummyDataService {
         slots: 10,
         coach: null,
       },
+      {
+        name: 'Acting class 4',
+        blurb: '',
+        description: '',
+        coverImage:
+          'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-4.jpg',
+        images: [],
+        slots: 10,
+        coach: null,
+      },
+      {
+        name: 'Acting class 5',
+        blurb: '',
+        description: '',
+        coverImage:
+          'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-5.jpg',
+        images: [],
+        slots: 10,
+        coach: null,
+      },
+      {
+        name: 'Acting class 6',
+        blurb: '',
+        description: '',
+        coverImage:
+          'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-3.jpg',
+        images: [],
+        slots: 10,
+        coach: null,
+      },
     ];
     return of(_classes, asyncScheduler);
   }

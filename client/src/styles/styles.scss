@@ -1,6 +1,5 @@
-@import "./reset.scss";
-@import "./typography.scss";
-@import "./containers.scss";
+@import "reset.scss";
+@import "variables";
 
 * {
   font-family: $font-main;
@@ -12,6 +11,14 @@ h2 {
   @include h2-styles;
 }
 
+h3 {
+  @include h3-styles;
+}
+
 p {
   line-height: 140%;
+}
+
+div.classes-grid {
+  margin-top: $spacing-xl;
 }
