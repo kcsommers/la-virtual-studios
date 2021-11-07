@@ -1,0 +1,21 @@
+@import "variables";
+
+button.la-btn {
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: $border-radius;
+  border: none;
+  display: inline-block;
+  background-color: $blue;
+  transition: all 0.2s ease;
+  box-shadow: $box-shadow;
+  max-width: 100%;
+  color: #fff;
+  padding: $spacing-sm $spacing-md;
+
+  &:hover,
+  &:focus {
+    background-color: $dark-blue;
+  }
+}
