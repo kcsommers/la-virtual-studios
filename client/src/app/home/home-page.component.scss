@@ -1,4 +1,4 @@
-@import "containers";
+@import "variables";
 
 :host {
   display: block;
@@ -18,6 +18,8 @@ div.icon-section-inner {
 
 section.classes-section {
   padding: 3rem 6rem;
+  background-color: #8ec5fc;
+  background-image: linear-gradient(62deg, #2d5a87 0%, #e0c3fc 100%);
 }
 
 div.classes-section-inner {
