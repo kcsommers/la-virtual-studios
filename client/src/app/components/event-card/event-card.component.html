@@ -1,12 +1,12 @@
 <div class="event-card-img-wrap">
   <div
     class="event-card-img"
-    [ngStyle]="{ backgroundImage: 'url(' + product?.coverImage + ')' }"
+    [ngStyle]="{ backgroundImage: 'url(' + event?.coverImage + ')' }"
   ></div>
 </div>
 <div class="event-card-body">
-  <span class="event-name">{{ product?.name }}</span>
-  <p class="product-blurb">{{ product?.blurb }}</p>
+  <span class="event-name">{{ event?.name }}</span>
+  <p class="product-blurb">{{ event?.blurb }}</p>
   <la-button
     [text]="'More Info'"
     [look]="'flat'"

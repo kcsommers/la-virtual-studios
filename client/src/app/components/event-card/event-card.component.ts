@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IProduct } from '@la/core';
+import { IEvent } from '@la/core';
 
 @Component({
   selector: 'la-event-card',
@@ -9,5 +9,5 @@ import { IProduct } from '@la/core';
 })
 export class EventCardComponent {
   @Input()
-  public product: IProduct;
+  public event: IEvent;
 }

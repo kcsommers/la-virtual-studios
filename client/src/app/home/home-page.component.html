@@ -24,7 +24,7 @@
   <div class="classes-section-grid">
     <la-event-card
       *ngFor="let event of events$ | async"
-      [product]="event"
+      [event]="event"
     ></la-event-card>
   </div>
 </section>
