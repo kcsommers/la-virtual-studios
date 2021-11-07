@@ -5,21 +5,35 @@
     controls
   ></video>
 </div>
-<section>
-  <la-icon [icon]="'faPen'"></la-icon>
-</section>
-<section class="page-section classes-section">
-  <div class="section-header">
-    <h2>Virtual and In Person Acting Classes</h2>
-    <p>Offering classes with top L.A. casting directors and coaches</p>
+<section class="icon-section">
+  <div class="icon-section-inner">
+    <la-icon [icon]="'faFilm'" [outlined]="true"></la-icon>
+    <la-icon [icon]="'faVideo'" [outlined]="true"></la-icon>
+    <la-icon [icon]="'faCamera'" [outlined]="true"></la-icon>
+    <la-icon [icon]="'faStar'" [outlined]="true"></la-icon>
   </div>
-  <div class="classes-grid section-grid">
-    <div *ngFor="let class of classes$ | async" class="section-grid-card-wrap">
-      <la-info-card [product]="class"></la-info-card>
+</section>
+<section class="classes-section">
+  <div class="classes-section-inner">
+    <div class="classes-section-left">
+      <h2>Virtual and In Person Classes</h2>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit
+        dolorem aliquid quidem fugiat repudiandae deserunt eaque possimus quod
+        natus ratione architecto, inventore ea, reiciendis autem sit saepe!
+        Eveniet, quos
+      </p>
+      <la-button [text]="'View Calendar'"></la-button>
+    </div>
+    <div class="classes-section-right">
+      <la-info-card
+        *ngFor="let class of classes$ | async"
+        [product]="class"
+      ></la-info-card>
     </div>
   </div>
 </section>
-<section class="page-section star-section">
+<section class="star-section">
   <div class="star-cta">
     <h2>STAR</h2>
     <h3>Self Tape Audition Room</h3>

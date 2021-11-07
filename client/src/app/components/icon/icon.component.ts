@@ -8,11 +8,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input()
-  public icon: string;
+  public icon: string = 'faQuestion';
 
   @Input()
-  public color: string;
+  public color: string = '#000';
 
   @Input()
-  public size: string;
+  public size: string = 'large';
+
+  @Input()
+  public outlined: boolean = false;
 }

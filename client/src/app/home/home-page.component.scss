@@ -8,8 +8,40 @@ video.landing-video {
   width: 100%;
 }
 
+div.icon-section-inner {
+  text-align: center;
+  padding: $spacing-lg;
+  > la-icon {
+    margin: 0 $spacing-lg;
+  }
+}
+
 section.classes-section {
-  padding: 6rem;
+  padding: 3rem 6rem;
+}
+
+div.classes-section-inner {
+  display: flex;
+}
+
+div.classes-section-left {
+  flex: 0.75;
+  padding-right: $spacing-xl;
+
+  > p {
+    margin: $spacing-md 0 $spacing-lg 0;
+  }
+}
+
+div.classes-section-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > la-info-card {
+    margin-bottom: $spacing-lg;
+  }
 }
 
 section.star-section {

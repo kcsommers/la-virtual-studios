@@ -10,7 +10,8 @@ export class DummyDataService {
     const _classes: IClass[] = [
       {
         name: 'Acting class 1',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-2.jpg',
@@ -20,7 +21,8 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 2',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-1.jpg',
@@ -30,7 +32,8 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 3',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-2.jpg',
@@ -40,7 +43,8 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 4',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto.',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-4.jpg',
@@ -50,7 +54,8 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 5',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto, inventore ea, reiciendis autem sit saepe! Eveniet, quos',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-5.jpg',
@@ -60,7 +65,8 @@ export class DummyDataService {
       },
       {
         name: 'Acting class 6',
-        blurb: '',
+        blurb:
+          'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit dolorem aliquid quidem fugiat repudiandae deserunt quodnatus ratione architecto, inventore ea, reiciendis autem sit saepe! Eveniet, quos',
         description: '',
         coverImage:
           'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-3.jpg',

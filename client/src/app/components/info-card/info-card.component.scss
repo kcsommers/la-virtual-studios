@@ -1,20 +1,34 @@
 @import "variables";
 
 :host {
-  display: block;
+  display: flex;
   cursor: pointer;
-  background-color: $blue;
+  background-color: #fff;
   box-shadow: $box-shadow;
   border-radius: $border-radius;
-  color: #fff;
+  width: 100%;
+}
+
+div.info-card-img-wrap {
+  flex: 0.65;
+  padding: $spacing-sm;
 }
 
 div.info-card-img {
-  height: 200px;
+  flex: 1;
+  height: 0;
+  padding-bottom: 100%;
   background-size: cover;
+  background-position: center;
+  border-radius: $border-radius;
 }
 
 div.info-card-body {
-  text-align: center;
+  flex: 1;
   padding: $spacing-md;
+}
+
+p.product-blurb {
+  font-size: $fontsize-sm;
+  margin: $spacing-md 0;
 }

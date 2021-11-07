@@ -1,1 +1,7 @@
-<fa-icon [icon]="icon | getIcon"></fa-icon>
+<span
+  class="icon-wrap"
+  [class.icon-outlined]="outlined"
+  [ngClass]="'icon-' + size"
+>
+  <fa-icon [icon]="icon | getIcon" [ngStyle]="{ color: color }"></fa-icon>
+</span>

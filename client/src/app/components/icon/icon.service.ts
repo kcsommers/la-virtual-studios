@@ -1,10 +1,25 @@
 import { Injectable } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
-import { faPen, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCamera,
+  faCameraRetro,
+  faFilm,
+  faPen,
+  faQuestion,
+  faStar,
+  faVideo,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Injectable()
 export class IconService {
-  private _iconMap = new Map([['faPen', faPen]]);
+  private _iconMap = new Map([
+    ['faQuestion', faQuestion],
+    ['faCamera', faCamera],
+    ['faCameraRetro', faCameraRetro],
+    ['faVideo', faVideo],
+    ['faFilm', faFilm],
+    ['faStar', faStar],
+  ]);
 
   public getIcon(_iconName: string): IconDefinition {
     const _icon: IconDefinition = this._iconMap.get(_iconName) || faQuestion;
