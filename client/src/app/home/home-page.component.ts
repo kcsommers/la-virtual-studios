@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { IClass } from '../core';
+import { IEvent } from '../core';
 import { DummyDataService } from '../data';
 
 @Component({
@@ -11,14 +11,14 @@ import { DummyDataService } from '../data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
-  public classes$ = new BehaviorSubject<IClass[]>(null);
+  public events$ = new BehaviorSubject<IEvent[]>(null);
 
   constructor(private _dummyDataService: DummyDataService) {
     this._dummyDataService
       .getClasses()
       .pipe(take(1))
       .subscribe({
-        next: (_classes: IClass[]) => this.classes$.next(_classes),
+        next: (_events: IEvent[]) => this.events$.next(_events),
       });
   }
 }

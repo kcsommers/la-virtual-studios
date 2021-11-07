@@ -17,31 +17,14 @@ div.icon-section-inner {
 }
 
 section.classes-section {
-  padding: 3rem 6rem;
+  @include max-width-container;
+  padding: $spacing-lg 6rem;
 }
 
-div.classes-section-inner {
-  display: flex;
-}
-
-div.classes-section-left {
-  flex: 0.75;
-  padding-right: $spacing-xl;
-
-  > p {
-    margin: $spacing-md 0 $spacing-lg 0;
-  }
-}
-
-div.classes-section-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  > la-info-card {
-    margin-bottom: $spacing-lg;
-  }
+div.classes-section-grid {
+  display: grid;
+  grid-gap: $spacing-lg;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
 section.star-section {

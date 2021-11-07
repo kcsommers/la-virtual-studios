@@ -14,23 +14,18 @@
   </div>
 </section>
 <section class="classes-section">
-  <div class="classes-section-inner">
-    <div class="classes-section-left">
-      <h2>Virtual and In Person Classes</h2>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit
-        dolorem aliquid quidem fugiat repudiandae deserunt eaque possimus quod
-        natus ratione architecto, inventore ea, reiciendis autem sit saepe!
-        Eveniet, quos
-      </p>
-      <la-button [text]="'View Calendar'"></la-button>
-    </div>
-    <div class="classes-section-right">
-      <la-info-card
-        *ngFor="let class of classes$ | async"
-        [product]="class"
-      ></la-info-card>
-    </div>
+  <div class="classes-section-header">
+    <h2>Virtual and In Person Classes</h2>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit Ipsum suscipit
+      dolorem aliquid quidem.
+    </p>
+  </div>
+  <div class="classes-section-grid">
+    <la-event-card
+      *ngFor="let event of events$ | async"
+      [product]="event"
+    ></la-event-card>
   </div>
 </section>
 <section class="star-section">

@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IProduct } from '@la/core';
 
 @Component({
-  selector: 'la-info-card',
-  templateUrl: './info-card.component.html',
-  styleUrls: ['./info-card.component.scss'],
+  selector: 'la-event-card',
+  templateUrl: './event-card.component.html',
+  styleUrls: ['./event-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfoCardComponent {
+export class EventCardComponent {
   @Input()
   public product: IProduct;
 }

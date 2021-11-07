@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ColorType } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
+
+type ButtonLook = 'solid' | 'outline' | 'flat';
+type ButtonSize = 'small' | 'medium' | 'large';
 
 @Component({
   selector: 'la-button',
@@ -10,6 +14,15 @@ import { BehaviorSubject } from 'rxjs';
 export class ButtonComponent {
   @Input()
   public text: string;
+
+  @Input()
+  public look: ButtonLook = 'solid';
+
+  @Input()
+  public size: ButtonSize = 'medium';
+
+  @Input()
+  public color: ColorType = 'primary';
 
   @Input()
   public isDisabled: boolean = false;

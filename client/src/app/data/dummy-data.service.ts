@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { asyncScheduler, Observable, scheduled } from 'rxjs';
-import { IClass } from '../core/classes/class.interface';
+import { IEvent } from '../core/events/event.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DummyDataService {
-  public getClasses(_count = 3): Observable<IClass[]> {
-    const _classes: IClass[] = [
+  public getClasses(_count = 6): Observable<IEvent[]> {
+    const _classes: IEvent[] = [
       {
         name: 'Acting class 1',
         blurb:

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ButtonComponentModule,
   IconComponentModule,
-  InfoCardComponentModule,
+  EventCardComponentModule,
 } from '../components';
 import { HomePageComponent } from './home-page.component';
 
@@ -19,7 +19,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    InfoCardComponentModule,
+    EventCardComponentModule,
     ButtonComponentModule,
     IconComponentModule,
   ],
