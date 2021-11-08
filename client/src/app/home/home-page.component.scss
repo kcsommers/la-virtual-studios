@@ -12,7 +12,7 @@ div.icon-section-inner {
   text-align: center;
   padding: $spacing-md;
   > la-icon {
-    margin: 0 $spacing-md;
+    margin: 0 $spacing-sm;
   }
 }
 
@@ -25,11 +25,6 @@ div.services-section-header {
   margin: 0 auto $spacing-lg auto;
   text-align: center;
   width: 65%;
-}
-
-div.services-section-more-info-wrap {
-  text-align: center;
-  margin-top: $spacing-md;
 }
 
 div.services-section-grid {
@@ -73,7 +68,7 @@ div.star-section-img {
 
 section.classes-section {
   @include max-width-container;
-  padding: $spacing-md 6rem;
+  padding: $spacing-xl 6rem;
 }
 
 div.classes-section-header {
@@ -91,26 +86,31 @@ div.classes-section-grid {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
+section.coaching-section {
+  background-color: $light;
+}
+
 div.coaching-section-inner {
   @include max-width-container;
   padding: 6rem;
-  position: relative;
+  display: flex;
+}
+
+div.coaching-section-left {
+  flex: 0.75;
 }
 
 div.coaching-section-cta {
-  position: absolute;
-  top: 6rem;
-  right: 6rem;
   text-align: right;
   margin-left: auto;
-  width: 50%;
+  flex: 1;
   > p {
     margin: $spacing-md 0 $spacing-sm 0;
   }
 }
 
 div.coaching-section-img-wrap {
-  width: 33.33%;
+  width: 75%;
   > span.coaching-section-img {
     display: inline-block;
     width: 100%;
@@ -130,19 +130,24 @@ div.coach-wrap {
   text-align: center;
 }
 
+section.headshots-section {
+  margin-bottom: 6rem;
+}
+
 div.headshots-section-header {
   position: relative;
   background-color: #fff;
   padding: $spacing-md 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   @include max-width-container;
 }
 
-div.headshots-action-btns-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  background-color: $primary;
-  position: relative;
+div.headshots-section-header-right {
+  > la-button {
+    margin-left: $spacing-xs;
+  }
 }
 
 div.headshots-section-body {

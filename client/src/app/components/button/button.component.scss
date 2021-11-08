@@ -19,12 +19,16 @@ button.la-btn {
   cursor: pointer;
   border-radius: $border-radius;
   border: none;
-  display: inline-block;
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   transition: all 0.2s ease;
   width: 100%;
   max-width: 100%;
   font-size: $fontsize-sm;
-  padding: $spacing-xs $spacing-md;
+  height: 35px;
+  padding: 0 $spacing-md;
   color: #fff;
   box-shadow: $box-shadow;
 

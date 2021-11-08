@@ -72,6 +72,19 @@
 </section>
 <section class="coaching-section">
   <div class="coaching-section-inner">
+    <div class="coaching-section-left">
+      <div *ngFor="let coach of coaches$ | async" class="coach-wrap">
+        <div class="coaching-section-img-wrap">
+          <span
+            class="coaching-section-img"
+            [ngStyle]="{ backgroundImage: 'url(' + coach.profileImage + ')' }"
+          ></span>
+          <span class="coach-name">{{
+            coach.firstName + " " + coach.lastName
+          }}</span>
+        </div>
+      </div>
+    </div>
     <div class="coaching-section-cta">
       <h2>Private Coaching</h2>
       <h3>Get coached by top LA casting directors and coaches</h3>
@@ -87,25 +100,27 @@
         [isResponsive]="true"
       ></la-button>
     </div>
-    <div class="coaching-section-body">
-      <div *ngFor="let coach of coaches$ | async" class="coach-wrap">
-        <div class="coaching-section-img-wrap">
-          <span
-            class="coaching-section-img"
-            [ngStyle]="{ backgroundImage: 'url(' + coach.profileImage + ')' }"
-          ></span>
-          <span class="coach-name">{{
-            coach.firstName + " " + coach.lastName
-          }}</span>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 <section class="headshots-section">
   <div class="headshots-section-header">
-    <h2>Professional Headshots</h2>
-    <h3>with photographer Greg James</h3>
+    <div class="headshots-section-header-left">
+      <h2>Professional Headshots</h2>
+      <h3>with photographer Greg James</h3>
+    </div>
+    <div class="headshots-section-header-right">
+      <la-button
+        [text]="'Galleries'"
+        [isResponsive]="true"
+        [color]="'accent'"
+        [look]="'outline'"
+      ></la-button>
+      <la-button
+        [text]="'Get In Touch'"
+        [isResponsive]="true"
+        [color]="'accent'"
+      ></la-button>
+    </div>
     <div class="angle-down-div"></div>
   </div>
   <div class="headshots-section-body">
