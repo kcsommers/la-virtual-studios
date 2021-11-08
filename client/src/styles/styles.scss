@@ -19,8 +19,13 @@ h4 {
   @include h4-styles;
 }
 
-p {
+p,
+span {
   @include p-styles;
+}
+
+span {
+  display: inline-block;
 }
 
 div.classes-grid {
@@ -28,12 +33,12 @@ div.classes-grid {
 }
 
 div.angle-down-div {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   background-color: inherit;
   transform: rotate(45deg) translateX(-50%);
   position: absolute;
   left: 50%;
-  bottom: -40%;
+  bottom: -40px;
   z-index: 100;
 }

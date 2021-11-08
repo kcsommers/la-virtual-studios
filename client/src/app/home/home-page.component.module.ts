@@ -5,6 +5,7 @@ import {
   ButtonComponentModule,
   IconComponentModule,
   EventCardComponentModule,
+  ProductCardComponentModule,
 } from '../components';
 import { HomePageComponent } from './home-page.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
     EventCardComponentModule,
     ButtonComponentModule,
     IconComponentModule,
+    ProductCardComponentModule,
   ],
   declarations: [HomePageComponent],
   exports: [HomePageComponent],

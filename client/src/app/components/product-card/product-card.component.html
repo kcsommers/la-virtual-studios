@@ -1,0 +1,21 @@
+<div class="product-card-img-wrap">
+  <div
+    class="product-card-img"
+    [ngStyle]="{ backgroundImage: 'url(' + product.coverImage + ')' }"
+  ></div>
+</div>
+<div class="product-card-body">
+  <div class="product-card-body-top">
+    <span class="product-name">{{ product.name }}</span>
+    <p class="product-blurb">{{ product.blurb }}</p>
+    <span class="product-price">{{ product.price | getPriceString }}</span>
+  </div>
+  <div class="product-card-body-bottom">
+    <la-button
+      [text]="'Book Now'"
+      [look]="'outline'"
+      [color]="'accent'"
+      [isFullWidth]="true"
+    ></la-button>
+  </div>
+</div>

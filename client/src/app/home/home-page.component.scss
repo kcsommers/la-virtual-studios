@@ -16,24 +16,26 @@ div.icon-section-inner {
   }
 }
 
-section.classes-section {
+section.services-section {
   @include max-width-container;
   padding: $spacing-md 6rem;
 }
 
-div.classes-section-header {
-  margin-bottom: $spacing-lg;
+div.services-section-header {
+  margin: 0 auto $spacing-lg auto;
+  text-align: center;
+  width: 65%;
 }
 
-div.classes-section-more-info-wrap {
+div.services-section-more-info-wrap {
   text-align: center;
   margin-top: $spacing-md;
 }
 
-div.classes-section-grid {
+div.services-section-grid {
   display: grid;
   grid-gap: $spacing-md;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 section.star-section {
@@ -69,7 +71,68 @@ div.star-section-img {
   background-position: center;
 }
 
+section.classes-section {
+  @include max-width-container;
+  padding: $spacing-md 6rem;
+}
+
+div.classes-section-header {
+  margin-bottom: $spacing-lg;
+}
+
+div.classes-section-more-info-wrap {
+  text-align: center;
+  margin-top: $spacing-md;
+}
+
+div.classes-section-grid {
+  display: grid;
+  grid-gap: $spacing-md;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+div.coaching-section-inner {
+  @include max-width-container;
+  padding: 6rem;
+  position: relative;
+}
+
+div.coaching-section-cta {
+  position: absolute;
+  top: 6rem;
+  right: 6rem;
+  text-align: right;
+  margin-left: auto;
+  width: 50%;
+  > p {
+    margin: $spacing-md 0 $spacing-sm 0;
+  }
+}
+
+div.coaching-section-img-wrap {
+  width: 33.33%;
+  > span.coaching-section-img {
+    display: inline-block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  > span.coach-name {
+    display: inline-block;
+    margin-top: $spacing-sm;
+  }
+}
+
+div.coach-wrap {
+  text-align: center;
+}
+
 div.headshots-section-header {
+  position: relative;
+  background-color: #fff;
   padding: $spacing-md 6rem;
   @include max-width-container;
 }

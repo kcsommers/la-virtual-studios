@@ -13,26 +13,19 @@
     <la-icon [icon]="'faStar'" [outlined]="true"></la-icon>
   </div>
 </section>
-<section class="classes-section">
-  <div class="classes-section-header">
-    <h2>Virtual and In Person Classes</h2>
+<section class="services-section">
+  <div class="services-section-header">
+    <h2>Our Services</h2>
     <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit Ipsum suscipit
-      dolorem aliquid quidem.
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit
+      dolorem aliquid quidem fugiat repudiandae deserunt eaque possimus.
     </p>
   </div>
-  <div class="classes-section-grid">
-    <la-event-card
-      *ngFor="let event of events$ | async"
-      [event]="event"
-    ></la-event-card>
-  </div>
-  <div class="classes-section-more-info-wrap">
-    <la-button
-      [text]="'View Calendar'"
-      [look]="'outline'"
-      [isResponsive]="true"
-    ></la-button>
+  <div class="services-section-grid">
+    <la-product-card
+      *ngFor="let product of products$ | async"
+      [product]="product"
+    ></la-product-card>
   </div>
 </section>
 <section class="star-section">
@@ -55,25 +48,65 @@
   </div>
   <div class="star-section-img"></div>
 </section>
+<section class="classes-section">
+  <div class="classes-section-header">
+    <h2>Virtual and In Person Classes</h2>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit Ipsum suscipit
+      dolorem aliquid quidem.
+    </p>
+  </div>
+  <div class="classes-section-grid">
+    <la-event-card
+      *ngFor="let event of events$ | async"
+      [event]="event"
+    ></la-event-card>
+  </div>
+  <div class="classes-section-more-info-wrap">
+    <la-button
+      [text]="'View Calendar'"
+      [look]="'outline'"
+      [isResponsive]="true"
+    ></la-button>
+  </div>
+</section>
+<section class="coaching-section">
+  <div class="coaching-section-inner">
+    <div class="coaching-section-cta">
+      <h2>Private Coaching</h2>
+      <h3>Get coached by top LA casting directors and coaches</h3>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit
+        dolorem aliquid quidem fugiat repudiandae deserunt eaque possimus quod
+        natus ratione architecto, inventore ea, reiciendis autem sit saepe!
+        Eveniet, quos
+      </p>
+      <la-button
+        [text]="'Learn More'"
+        [look]="'outline'"
+        [isResponsive]="true"
+      ></la-button>
+    </div>
+    <div class="coaching-section-body">
+      <div *ngFor="let coach of coaches$ | async" class="coach-wrap">
+        <div class="coaching-section-img-wrap">
+          <span
+            class="coaching-section-img"
+            [ngStyle]="{ backgroundImage: 'url(' + coach.profileImage + ')' }"
+          ></span>
+          <span class="coach-name">{{
+            coach.firstName + " " + coach.lastName
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="headshots-section">
   <div class="headshots-section-header">
     <h2>Professional Headshots</h2>
     <h3>with photographer Greg James</h3>
-    <!-- <la-button
-      [text]="'Pricing'"
-      [look]="'outline'"
-      [isResponsive]="true"
-    ></la-button>
-    <la-button
-      [text]="'Galleries'"
-      [look]="'outline'"
-      [isResponsive]="true"
-    ></la-button>
-    <la-button
-      [text]="'Contact'"
-      [look]="'outline'"
-      [isResponsive]="true"
-    ></la-button> -->
+    <div class="angle-down-div"></div>
   </div>
   <div class="headshots-section-body">
     <div class="headshots-section-img"></div>
