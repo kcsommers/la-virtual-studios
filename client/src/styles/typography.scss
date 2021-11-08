@@ -1,10 +1,17 @@
-$fontsize-xl: 2rem;
+$fontsize-xxl: 2rem;
+$fontsize-xl: 1.65rem;
 $fontsize-lg: 1.25rem;
 $fontsize-md: 1rem;
 $fontsize-sm: 0.85rem;
 $fontsize-xs: 0.275rem;
 
 $font-main: "Open Sans";
+
+@mixin h1-styles {
+  font-size: $fontsize-xxl;
+  line-height: 160%;
+  color: $dark;
+}
 
 @mixin h2-styles {
   font-size: $fontsize-xl;

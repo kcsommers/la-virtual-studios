@@ -11,7 +11,7 @@ export class IconComponent {
   public icon: string = 'faQuestion';
 
   @Input()
-  public color: string = '#000';
+  public color: string = '#171d2b';
 
   @Input()
   public size: string = 'large';

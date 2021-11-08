@@ -8,6 +8,10 @@ video.landing-video {
   width: 100%;
 }
 
+section.icon-section {
+  background-color: $light;
+}
+
 div.icon-section-inner {
   text-align: center;
   padding: $spacing-md;
@@ -19,12 +23,13 @@ div.icon-section-inner {
 section.services-section {
   @include max-width-container;
   padding: $spacing-md 6rem;
+  // background-color: $dark-blue;
 }
 
 div.services-section-header {
   margin: 0 auto $spacing-lg auto;
   text-align: center;
-  width: 65%;
+  max-width: 700px;
 }
 
 div.services-section-grid {
@@ -130,10 +135,6 @@ div.coach-wrap {
   text-align: center;
 }
 
-section.headshots-section {
-  margin-bottom: 6rem;
-}
-
 div.headshots-section-header {
   position: relative;
   background-color: #fff;
@@ -167,5 +168,26 @@ div.headshots-section-img {
   }
   &:nth-child(3) {
     background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636310116/LA%20Virtual%20Studios/headshot-3.jpg);
+  }
+}
+
+section.contact-section {
+  padding: 6rem;
+  background-color: $light;
+}
+
+div.contact-section-inner {
+  @include max-width-container;
+}
+
+div.contact-section-cta {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  > p {
+    margin: $spacing-sm 0;
+  }
+  > la-button {
+    margin-right: $spacing-xs;
   }
 }

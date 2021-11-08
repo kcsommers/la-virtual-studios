@@ -4,6 +4,7 @@
 
 :host {
   display: block;
+  // background-color: $dark-blue;
 }
 
 header {
@@ -18,4 +19,5 @@ a.nav-link {
   margin-left: $spacing-lg;
   font-size: $fontsize-sm;
   font-weight: bold;
+  // color: $light;
 }
