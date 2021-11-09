@@ -1,0 +1,29 @@
+{
+  "name": "la-virtual-studios-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "tsc": "tsc",
+    "watch-tsc": "NODE_ENV=devolopment tsc -w",
+    "deploy": "NODE_ENV=production node dist/main.js",
+    "watch-deploy": "NODE_ENV=development nodemon dist/main.js",
+    "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
+    "start": "npm run deploy",
+    "heroku-postbuild": "npm run tsc",
+    "email": "node dist/src/email.js"
+  },
+  "author": "M Kacy Sommers",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "concurrently": "^6.3.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14",
+    "typescript": "^4.4.4"
+  }
+}
