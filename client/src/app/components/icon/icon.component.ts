@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
+type IconSize = 'small' | 'medium' | 'large' | 'xlarge';
+
 @Component({
   selector: 'la-icon',
   templateUrl: './icon.component.html',
@@ -11,10 +13,10 @@ export class IconComponent {
   public icon: string = 'faQuestion';
 
   @Input()
-  public color: string = '#171d2b';
+  public color: string;
 
   @Input()
-  public size: string = 'large';
+  public size: IconSize = 'large';
 
   @Input()
   public outlined: boolean = false;

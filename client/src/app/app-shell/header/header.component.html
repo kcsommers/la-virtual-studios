@@ -1,15 +1,38 @@
 <header>
   <div class="header-left-wrap">
-    <span>La Virtual Studios</span>
+    <a [routerLink]="'/'">
+      <img
+        src="https://res.cloudinary.com/kcsommers/image/upload/v1636310116/LA%20Virtual%20Studios/la-logo-white.png"
+        class="header-logo"
+      />
+    </a>
   </div>
   <div class="header-right-wrap">
+    <div class="header-right-top">
+      <a href="https://instagram.com" class="nav-social">
+        <la-icon [icon]="'faInstagram'" [size]="'xlarge'"></la-icon>
+      </a>
+      <a href="https://facebook.com" class="nav-social">
+        <la-icon [icon]="'faFacebook'" [size]="'xlarge'"></la-icon>
+      </a>
+      <la-button
+        [text]="'Calendar'"
+        [color]="'accent'"
+        [isResponsive]="true"
+      ></la-button>
+    </div>
     <nav class="header-nav">
       <a class="nav-link" [routerLink]="'/'">Home</a>
       <a class="nav-link" [routerLink]="'/about'">About</a>
-      <a class="nav-link" [routerLink]="'/services'">Services</a>
-      <a class="nav-link" [routerLink]="'/calendar'">Calendar</a>
+      <a class="nav-link icon-right" [routerLink]="'/services'">
+        Services
+        <la-icon [icon]="'faAngleDown'"></la-icon>
+      </a>
       <a class="nav-link" [routerLink]="'/contact'">Contact</a>
-      <a class="nav-link" [routerLink]="'/login'">Log in</a>
+      <a class="nav-link icon-left" [routerLink]="'/login'">
+        <la-icon [icon]="'faUser'"></la-icon>
+        Log in
+      </a>
     </nav>
   </div>
 </header>

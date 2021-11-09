@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import {
   faCamera,
   faCameraRetro,
   faFilm,
-  faPen,
   faQuestion,
   faStar,
   faVideo,
+  faUser,
+  faAngleDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable()
@@ -19,6 +21,10 @@ export class IconService {
     ['faVideo', faVideo],
     ['faFilm', faFilm],
     ['faStar', faStar],
+    ['faUser', faUser],
+    ['faAngleDown', faAngleDown],
+    ['faFacebook', faFacebook],
+    ['faInstagram', faInstagram],
   ]);
 
   public getIcon(_iconName: string): IconDefinition {

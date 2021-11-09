@@ -4,6 +4,12 @@
   display: block;
 }
 
+div.landing-inner {
+  @include max-width-container;
+  text-align: center;
+  padding: 3rem;
+}
+
 video.landing-video {
   width: 100%;
 }
@@ -23,7 +29,6 @@ div.icon-section-inner {
 section.services-section {
   @include max-width-container;
   padding: $spacing-md 6rem;
-  // background-color: $dark-blue;
 }
 
 div.services-section-header {

@@ -4,5 +4,8 @@
   [ngStyle]="{ borderColor: color }"
   [ngClass]="'icon-' + size"
 >
-  <fa-icon [icon]="icon | getIcon" [ngStyle]="{ color: color }"></fa-icon>
+  <fa-icon
+    [icon]="icon | getIcon"
+    [ngStyle]="color && { color: color }"
+  ></fa-icon>
 </span>

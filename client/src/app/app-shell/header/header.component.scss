@@ -4,20 +4,53 @@
 
 :host {
   display: block;
-  // background-color: $dark-blue;
 }
 
 header {
-  height: 100px;
+  height: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 $spacing-lg;
+  padding: $spacing-xs $spacing-lg;
+  background-color: #010522;
+  background-image: linear-gradient(315deg, rgba(#010522, 1) 40%, #fff);
+}
+
+div.header-left-wrap {
+  height: 100%;
+}
+
+img.header-logo {
+  height: 100%;
+}
+
+div.header-right-top {
+  color: $light;
+  margin-bottom: $spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+a.nav-social {
+  margin-right: $spacing-sm;
 }
 
 a.nav-link {
   margin-left: $spacing-lg;
   font-size: $fontsize-sm;
+  color: $light;
   font-weight: bold;
-  // color: $light;
+  display: inline-flex;
+  align-items: center;
+  &.icon-left {
+    > la-icon {
+      margin-right: $spacing-xs;
+    }
+  }
+  &.icon-right {
+    > la-icon {
+      margin-left: $spacing-xs;
+    }
+  }
 }
