@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import {
   ButtonComponentModule,
-  IconComponentModule,
   EventCardComponentModule,
+  IconComponentModule,
   ProductCardComponentModule,
 } from '../components';
 import { HomePageComponent } from './home-page.component';

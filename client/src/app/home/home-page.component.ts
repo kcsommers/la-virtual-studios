@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ICoach, IEvent, IProduct } from '@la/core';
 import { DummyDataService } from '@la/data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
