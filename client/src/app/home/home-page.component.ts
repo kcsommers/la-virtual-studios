@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ICoach, IEvent, IProduct } from '@la/core';
@@ -17,6 +22,9 @@ export class HomePageComponent {
   public events$ = new BehaviorSubject<IEvent[]>(null);
 
   public coaches$ = new BehaviorSubject<ICoach[]>(null);
+
+  @ViewChild('LandingVideo', { read: ElementRef })
+  private _landingVideo: ElementRef<HTMLVideoElement>;
 
   constructor(private _dummyDataService: DummyDataService) {
     this._dummyDataService
@@ -39,5 +47,10 @@ export class HomePageComponent {
       .subscribe({
         next: (_events: ICoach[]) => this.coaches$.next(_events),
       });
+  }
+
+  ngAfterViewInit() {
+    this._landingVideo.nativeElement.muted = true;
+    this._landingVideo.nativeElement.play();
   }
 }

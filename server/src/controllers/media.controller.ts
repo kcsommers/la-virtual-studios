@@ -6,8 +6,6 @@ import path from 'path';
 const router = Router();
 
 router.get('/videos/:videoName', (_req: Request, _res: Response) => {
-  console.log('headers:::: ', _req.headers);
-  console.log('dir:::: ', __dirname);
   const _range = _req.headers.range;
   if (!_range) {
     _res.status(HttpStatusCodes.BAD_REQUEST).send('Requires range header');
@@ -19,6 +17,24 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
     `../public/videos/${_videoName}.mp4`
   );
   const _videoSize = fs.statSync(_videoPath).size;
+
+  const CHUNK_SIZE: number = 10 ** 6; // 1MB
+  const _start: number = Number(_range.replace(/\D/g, ''));
+  const _end: number = Math.min(_start + CHUNK_SIZE, _videoSize - 1);
+  const _contentLength = _end - _start + 1;
+  const _headers = {
+    'Content-Range': `bytes ${_start}-${_end}/${_videoSize}`,
+    'Accept-Ranges': 'bytes',
+    'Content-Length': _contentLength,
+    'Content-Type': 'video/mp4',
+  };
+  _res.writeHead(HttpStatusCodes.PARTIAL_CONTENT, _headers);
+
+  const _videoStream = fs.createReadStream(_videoPath, {
+    start: _start,
+    end: _end,
+  });
+  _videoStream.pipe(_res);
   console.log('video size:::: ', _videoSize);
 });
 

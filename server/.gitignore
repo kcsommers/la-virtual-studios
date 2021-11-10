@@ -1,5 +1,5 @@
 /node_modules
 /.env
 /dist
-/.DS_Store
 /public/videos
+.DS_Store
