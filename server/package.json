@@ -6,16 +6,18 @@
     "tsc": "tsc",
     "watch-tsc": "NODE_ENV=development tsc -w",
     "watch-tsc:windows": "tsc -w",
-    "deploy": "NODE_ENV=production node dist/main.js",
-    "deploy:windows": "node dist/main.js",
-    "watch-deploy": "NODE_ENV=development nodemon dist/main.js",
-    "watch-deploy:windows": "nodemon dist/main.js",
-    "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
-    "start": "npm run deploy",
-    "start:windows": "set NODE_ENV=production && npm run deploy:windows",
-    "heroku-postbuild": "npm run tsc",
+    "deploy": "NODE_ENV=production node dist/bundle.js",
+    "deploy:windows": "node dist/bundle.js",
+    "watch-deploy": "NODE_ENV=development nodemon dist/bundle.js",
+    "watch-deploy:windows": "nodemon dist/bundle.js",
+    "server": "npm run build:dev && concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
+    "start": "npm run build:prod && npm run deploy",
+    "start:windows": "set NODE_ENV=production && npm run build:prod && npm run deploy:windows",
+    "heroku-postbuild": "npm run build:prod",
     "email": "node dist/src/email.js",
-    "server:windows": "set NODE_ENV=development && concurrently \"npm run watch-tsc:windows\" \"npm run watch-deploy:windows\""
+    "server:windows": "set NODE_ENV=development && concurrently \"npm run watch-tsc:windows\" \"npm run watch-deploy:windows\"",
+    "build:prod": "webpack --mode=production --config webpack.config.js",
+    "build:dev": "webpack --mode=development --config webpack.config.js"
   },
   "author": "M Kacy Sommers",
   "license": "ISC",
@@ -26,10 +28,15 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.0.12",
+    "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
     "nodemon": "^2.0.14",
-    "typescript": "^4.4.4"
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.4",
+    "webpack": "^5.63.0",
+    "webpack-cli": "^4.9.1"
   }
 }
