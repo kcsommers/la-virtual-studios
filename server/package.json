@@ -4,13 +4,18 @@
   "description": "",
   "scripts": {
     "tsc": "tsc",
-    "watch-tsc": "NODE_ENV=devolopment tsc -w",
+    "watch-tsc": "NODE_ENV=development tsc -w",
+    "watch-tsc:windows": "tsc -w",
     "deploy": "NODE_ENV=production node dist/main.js",
+    "deploy:windows": "node dist/main.js",
     "watch-deploy": "NODE_ENV=development nodemon dist/main.js",
+    "watch-deploy:windows": "nodemon dist/main.js",
     "server": "concurrently \"npm run watch-tsc\" \"npm run watch-deploy\"",
     "start": "npm run deploy",
+    "start:windows": "set NODE_ENV=production && npm run deploy:windows",
     "heroku-postbuild": "npm run tsc",
-    "email": "node dist/src/email.js"
+    "email": "node dist/src/email.js",
+    "server:windows": "set NODE_ENV=development && concurrently \"npm run watch-tsc:windows\" \"npm run watch-deploy:windows\""
   },
   "author": "M Kacy Sommers",
   "license": "ISC",
