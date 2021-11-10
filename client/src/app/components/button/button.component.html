@@ -3,7 +3,7 @@
   [class.full-width-btn]="isFullWidth"
   [class.responsive-btn]="isResponsive"
   [ngClass]="['btn-' + size, 'btn-' + look, 'btn-' + color]"
-  (click)="!isDisabled && clickListener($event)"
+  (click)="!isDisabled && handleClick($event)"
 >
   {{ text }}
 </button>

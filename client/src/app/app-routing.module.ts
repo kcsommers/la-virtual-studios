@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AppShellComponent } from './app-shell';
 
 const routes: Routes = [
@@ -12,6 +13,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./view-wrappers/home-page-wrapper.module').then(
             (_m) => _m.HomePageWrapperModule
+          ),
+      },
+      {
+        path: 'calendar',
+        loadChildren: () =>
+          import('./view-wrappers/calendar-page-wrapper.module').then(
+            (_m) => _m.CalendarPageWrapperModule
           ),
       },
     ],

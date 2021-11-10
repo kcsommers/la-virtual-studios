@@ -4,6 +4,7 @@ import {
   HostBinding,
   Input,
 } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorType } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -39,10 +40,13 @@ export class ButtonComponent {
   public isResponsive: boolean = false;
 
   @Input()
+  public path: string;
+
+  @Input()
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
   @Input()
-  public clickListener: (_event: MouseEvent) => void;
+  public clickHandler: (_event: MouseEvent) => void;
 
   @HostBinding('class.full-width-btn')
   get fullWidth(): boolean {
@@ -52,5 +56,20 @@ export class ButtonComponent {
   @HostBinding('class.responsive-btn')
   get responsive(): boolean {
     return this.isResponsive;
+  }
+
+  constructor(private _router: Router, private _route: ActivatedRoute) {}
+
+  public handleClick(_event: MouseEvent): void {
+    if (this.path) {
+      this._router.navigate([this.path], {
+        relativeTo: this._route,
+        queryParamsHandling: 'merge',
+      });
+      return;
+    }
+    if (this.clickHandler) {
+      this.clickHandler(_event);
+    }
   }
 }

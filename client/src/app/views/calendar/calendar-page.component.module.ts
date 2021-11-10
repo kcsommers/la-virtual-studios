@@ -1,19 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import {
   ButtonComponentModule,
-  EventCardComponentModule,
+  CalendarComponentModule,
   IconComponentModule,
-  ProductCardComponentModule,
-} from '../components';
-import { HomePageComponent } from './home-page.component';
+} from '@la/components';
+import { CalendarPageComponent } from './calendar-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent,
+    component: CalendarPageComponent,
   },
 ];
 
@@ -21,12 +19,11 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    EventCardComponentModule,
     ButtonComponentModule,
     IconComponentModule,
-    ProductCardComponentModule,
+    CalendarComponentModule,
   ],
-  declarations: [HomePageComponent],
-  exports: [HomePageComponent],
+  declarations: [CalendarPageComponent],
+  exports: [CalendarPageComponent],
 })
-export class HomePageComponentModule {}
+export class CalendarPageComponentModule {}
