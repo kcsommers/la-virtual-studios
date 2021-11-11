@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CalendarDay, ICalendarDay } from '@la/core';
 
 @Component({
   selector: 'la-calendar',
@@ -7,7 +8,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
+  public calendarDays: ICalendarDay[];
   ngOnInit() {
+    this.calendarDays = Array(35).map((_day) => {
+      return new CalendarDay();
+    });
     const _date = new Date();
     _date.setDate(1);
     const _lastDate = new Date(
@@ -56,15 +61,3 @@ export class CalendarComponent implements OnInit {
 //     monthDays.innerHTML = days;
 //   }
 // };
-
-// document.querySelector('.prev').addEventListener('click', () => {
-//   date.setMonth(date.getMonth() - 1);
-//   renderCalendar();
-// });
-
-// document.querySelector('.next').addEventListener('click', () => {
-//   date.setMonth(date.getMonth() + 1);
-//   renderCalendar();
-// });
-
-// renderCalendar();

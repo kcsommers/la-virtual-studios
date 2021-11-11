@@ -7,4 +7,12 @@ export class CalendarDay implements ICalendarDay {
   month: number;
   year: number;
   events: IEvent[];
+
+  constructor(_calendarDay?: Partial<ICalendarDay>) {
+    if (_calendarDay) {
+      Object.keys(_calendarDay).forEach(
+        (_key: string) => (this[_key] = _calendarDay[_key])
+      );
+    }
+  }
 }
