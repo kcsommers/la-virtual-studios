@@ -1,4 +1,4 @@
-import { ICoach } from './coach.interface';
+import { ICoach } from '@la/core';
 
 export const dummyCoaches: ICoach[] = [
   {

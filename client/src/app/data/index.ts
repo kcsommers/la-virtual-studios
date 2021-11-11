@@ -1,1 +1,1 @@
-export * from './dummy-data.service';
+export * from './dummy-data';

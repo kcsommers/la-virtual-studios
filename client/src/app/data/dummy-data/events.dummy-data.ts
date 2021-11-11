@@ -1,4 +1,4 @@
-import { IEvent } from './event.interface';
+import { IEvent } from '@la/core';
 
 export const dummyEvents: IEvent[] = [
   {

@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CalendarComponent } from './calendar.component';
 
-@Component({
-  selector: 'la-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@NgModule({
+  imports: [CommonModule],
+  declarations: [CalendarComponent],
+  exports: [CalendarComponent],
 })
-export class CalendarComponent {}
+export class CalendarComponentModule {}

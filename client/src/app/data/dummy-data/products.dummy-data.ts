@@ -1,4 +1,4 @@
-import { IProduct } from './product.interface';
+import { IProduct } from '@la/core';
 
 export const dummyProducts: IProduct[] = [
   {

@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  dummyCoaches,
-  dummyEvents,
-  dummyProducts,
-  ICoach,
-  IProduct,
-} from '@la/core';
+import { ICoach, IProduct } from '@la/core';
 import { asyncScheduler, Observable, scheduled } from 'rxjs';
-import { IEvent } from '../core/events/event.interface';
+import { dummyEvents } from './events.dummy-data';
+import { IEvent } from '../../core/models/events/event.interface';
+import { dummyCoaches } from './coaches.dummy-data';
+import { dummyProducts } from './products.dummy-data';
 
 @Injectable({
   providedIn: 'root',
