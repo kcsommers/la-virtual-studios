@@ -6,7 +6,11 @@
   background-color: $light;
 }
 
-div.calendar-wrap {
-  @include max-width-container;
-  padding: $spacing-lg;
+div.events-calendar-wrap {
+  display: flex;
+}
+
+div.calendar-wrap,
+div.events-wrap {
+  flex: 1;
 }
