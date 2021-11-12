@@ -21,6 +21,9 @@ const routes: Routes = [
           import('./view-wrappers/calendar-page-wrapper.module').then(
             (_m) => _m.CalendarPageWrapperModule
           ),
+        data: {
+          fixedHeader: true,
+        },
       },
     ],
   },

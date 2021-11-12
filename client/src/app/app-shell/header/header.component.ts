@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +11,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  private _isFixed: boolean;
+
+  public set isFixed(_isFixed: boolean) {
+    this._isFixed = _isFixed;
+  }
+
+  @Input()
+  @HostBinding('class.header-fixed')
+  public get isFixed(): boolean {
+    return this._isFixed;
+  }
+}
