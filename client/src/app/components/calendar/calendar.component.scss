@@ -1,17 +1,56 @@
+@import 'variables';
+
 :host {
   display: block;
   width: 100%;
+}
+
+div.calendar-wrap {
+  border-radius: $border-radius;
+}
+
+div.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+h2.calendar-month {
+  display: flex;
+  align-items: center;
+  > la-icon {
+    cursor: pointer;
+    padding: 0 $spacing-xs;
+    margin-right: $spacing-xs;
+  }
 }
 
 div.calendar-grid-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: auto;
-  grid-gap: 0.25rem;
+  grid-gap: 0.5rem;
+}
+
+div.calendar-header,
+div.calendar-column-header,
+div.calendar-day {
+  background-color: #fff;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $spacing-xs;
+}
+
+div.calendar-column-header {
+  background-color: $primary;
+  color: #fff;
 }
 
 div.calendar-day {
-  background-color: salmon;
+  &.calendar-day-disabled {
+    opacity: 0.45;
+  }
 }
 
 div.calendar-day-inner {

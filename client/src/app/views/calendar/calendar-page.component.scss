@@ -3,4 +3,10 @@
 :host {
   display: block;
   width: 100%;
+  background-color: $light;
+}
+
+div.calendar-wrap {
+  @include max-width-container;
+  padding: $spacing-lg;
 }
