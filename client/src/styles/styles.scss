@@ -1,5 +1,5 @@
-@import "reset.scss";
-@import "variables";
+@import 'reset.scss';
+@import 'variables';
 
 * {
   font-family: $font-main;
@@ -45,4 +45,40 @@ div.angle-down-div {
   left: 50%;
   bottom: -40px;
   z-index: 100;
+}
+
+*.color-primary {
+  color: $primary;
+}
+
+*.color-accent {
+  color: $accent;
+}
+
+*.primary-bold {
+  color: $primary;
+  font-weight: bold;
+}
+
+*.accent-bold {
+  color: $accent;
+  font-weight: bold;
+}
+
+*.font-small {
+  font-size: $fontsize-sm;
+}
+
+*.font-small-bold {
+  font-size: $fontsize-sm;
+  font-weight: bold;
+}
+
+*.font-xsmall {
+  font-size: $fontsize-xs;
+}
+
+*.font-xsmall-bold {
+  font-size: $fontsize-xs;
+  font-weight: bold;
 }

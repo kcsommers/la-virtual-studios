@@ -1,10 +1,22 @@
-@import "./spacing.scss";
+@import './spacing.scss';
 
 $border-radius: 3px;
 $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $max-width: 1272px;
+$min-width: 980px;
+
+@mixin min-max-width-container {
+  max-width: $max-width;
+  min-width: $min-width;
+  margin: 0 auto;
+}
 
 @mixin max-width-container {
   max-width: $max-width;
+  margin: 0 auto;
+}
+
+@mixin min-width-container {
+  min-width: $min-width;
   margin: 0 auto;
 }

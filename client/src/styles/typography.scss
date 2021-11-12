@@ -3,9 +3,9 @@ $fontsize-xl: 1.65rem;
 $fontsize-lg: 1.25rem;
 $fontsize-md: 1rem;
 $fontsize-sm: 0.85rem;
-$fontsize-xs: 0.275rem;
+$fontsize-xs: 0.75rem;
 
-$font-main: "Open Sans";
+$font-main: 'Open Sans';
 
 @mixin h1-styles {
   font-size: $fontsize-xxl;
