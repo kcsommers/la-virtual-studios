@@ -1,6 +1,14 @@
 <div class="calendar-wrap">
   <div class="calendar-header">
-    <h2 class="calendar-month">
+    <h2 class="calendar-header-date-wrap">
+      <span class="calendar-month">
+        {{ displayedMonth$ | async | getMonthDisplay }}
+      </span>
+      <span class="calendar-year">
+        {{ displayedYear$ | async }}
+      </span>
+    </h2>
+    <span class="calendar-controls">
       <la-icon
         [icon]="'faAngleLeft'"
         [size]="'xlarge'"
@@ -11,21 +19,21 @@
         [size]="'xlarge'"
         (click)="nextMonth()"
       ></la-icon>
-      <span>
-        {{ displayedMonth$ | async | getMonthDisplay }}
-      </span>
-    </h2>
-    <h2 class="calendar-year">{{ displayedYear$ | async }}</h2>
+    </span>
   </div>
   <div class="calendar-grid-container">
-    <div *ngFor="let day of WEEKDAYS" class="calendar-column-header">
+    <div
+      *ngFor="let day of WEEKDAYS"
+      class="calendar-column-header font-small-bold"
+    >
       {{ day }}
     </div>
     <div
       *ngFor="let day of calendarDays$ | async"
       class="calendar-day"
+      [class.accent-bold]="day.isToday"
       [class.calendar-day-disabled]="
-        (displayedMonth$ | async) % 12 !== day.month
+        (displayedMonth$ | async)?.month % 12 !== day.month
       "
     >
       <div class="calendar-day-inner">

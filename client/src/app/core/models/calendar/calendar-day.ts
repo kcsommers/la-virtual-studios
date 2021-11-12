@@ -12,9 +12,13 @@ export class CalendarDay implements ICalendarDay {
 
   public year: number;
 
+  public isToday: boolean;
+
   public events: IEvent[];
 
-  constructor(_dateModel: Date, events?: IEvent[]) {
+  constructor(_dateModel: Date, isToday = false, events?: IEvent[]) {
+    this.dateModel = _dateModel;
+    this.isToday = isToday;
     this.date = _dateModel.getDate();
     this.day = _dateModel.getDay();
     this.month = _dateModel.getMonth();

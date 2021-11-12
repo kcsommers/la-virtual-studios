@@ -13,16 +13,23 @@ div.calendar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background-color: #fff;
 }
 
-h2.calendar-month {
+span.calendar-month {
+  font-weight: bold;
+  margin-right: $spacing-xs;
+}
+
+span.calendar-controls {
   display: flex;
   align-items: center;
   > la-icon {
     cursor: pointer;
     padding: 0 $spacing-xs;
-    margin-right: $spacing-xs;
+    margin-left: $spacing-xs;
   }
 }
 
@@ -36,18 +43,19 @@ div.calendar-grid-container {
 div.calendar-header,
 div.calendar-column-header,
 div.calendar-day {
-  background-color: #fff;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
-  padding: $spacing-xs;
 }
 
 div.calendar-column-header {
   background-color: $primary;
   color: #fff;
+  padding: $spacing-xs;
 }
 
 div.calendar-day {
+  padding: $spacing-xs;
+  background-color: #fff;
   &.calendar-day-disabled {
     opacity: 0.45;
   }

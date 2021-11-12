@@ -5,5 +5,6 @@ export interface ICalendarDay {
   day: number;
   month: number;
   year: number;
+  isToday: boolean;
   events: IEvent[];
 }

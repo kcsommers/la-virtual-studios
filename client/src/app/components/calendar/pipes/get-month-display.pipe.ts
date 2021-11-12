@@ -1,11 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CalendarConstants } from '../calendar-constants';
+import { DateHelper, ICalendarMonth } from '@la/core';
 
 @Pipe({
   name: 'getMonthDisplay',
 })
 export class GetMonthDisplayPipe implements PipeTransform {
-  public transform(_month: number): string {
-    return CalendarConstants.MONTHS[_month % 12] || '--';
+  public transform(_month: ICalendarMonth): string {
+    if (!_month) {
+      return '--';
+    }
+    return DateHelper.MONTHS[_month.month % 12] || '--';
   }
 }
