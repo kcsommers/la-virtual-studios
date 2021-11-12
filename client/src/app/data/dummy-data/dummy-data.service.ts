@@ -21,4 +21,11 @@ export class DummyDataService {
   public getProducts(_count = dummyProducts.length): Observable<IProduct[]> {
     return scheduled([dummyProducts.slice(0, _count)], asyncScheduler);
   }
+
+  public getEvents(
+    _month: number,
+    _count = dummyEvents.length
+  ): Observable<IEvent[]> {
+    return this.getClasses(_count);
+  }
 }

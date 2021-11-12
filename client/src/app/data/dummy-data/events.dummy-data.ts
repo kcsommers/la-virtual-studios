@@ -1,4 +1,21 @@
-import { IEvent } from '@la/core';
+import { DateHelper, IEvent } from '@la/core';
+
+const _dateModel = new Date();
+const _currentYear: number = _dateModel.getFullYear();
+const _currentMonth: number = _dateModel.getMonth();
+_dateModel.setDate(1);
+const _firstDayOfMonth: number = _dateModel.getDate();
+_dateModel.setMonth(_currentMonth + 1);
+_dateModel.setDate(0);
+const _lastDayOfMonth: number = _dateModel.getDate();
+
+const getDates = (): number[] => {
+  const _randomDate: number = DateHelper.getRandomDateInRange(
+    new Date(_currentYear, _currentMonth, _firstDayOfMonth),
+    new Date(_currentYear, _currentMonth, _lastDayOfMonth)
+  );
+  return [_randomDate];
+};
 
 export const dummyEvents: IEvent[] = [
   {
@@ -11,6 +28,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 2',
@@ -22,6 +40,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 3',
@@ -33,6 +52,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 4',
@@ -44,6 +64,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 5',
@@ -56,6 +77,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 6',
@@ -68,6 +90,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 4',
@@ -79,6 +102,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 5',
@@ -91,6 +115,7 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
   {
     name: 'Acting class 6',
@@ -103,5 +128,6 @@ export const dummyEvents: IEvent[] = [
     slots: 10,
     coach: null,
     price: 10000,
+    dates: getDates(),
   },
 ];
