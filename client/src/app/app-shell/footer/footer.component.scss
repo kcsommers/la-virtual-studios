@@ -1,7 +1,10 @@
-@import "colors";
+@import 'variables';
 
 :host {
   display: block;
-  height: 200px;
+  height: $footer-height;
   background-color: $dark-blue;
+  position: relative;
+  z-index: 900;
+  width: 100%;
 }

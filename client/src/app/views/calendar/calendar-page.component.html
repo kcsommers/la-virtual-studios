@@ -1,14 +1,18 @@
-<div class="events-calendar-wrap">
-  <div class="calendar-wrap">
-    <la-calendar
-      (dateSelected)="setSelectedDate($event)"
-      (monthChanged)="monthChanged($event)"
-    ></la-calendar>
-  </div>
-  <div class="events-wrap">
-    <la-event-card
-      *ngFor="let event of monthEvents$ | async"
-      [event]="event"
-    ></la-event-card>
+<div class="calendar-page-inner">
+  <div class="events-calendar-wrap">
+    <div class="calendar-wrap">
+      <la-calendar
+        (dateSelected)="setSelectedDate($event)"
+        (monthChanged)="monthChanged($event)"
+      ></la-calendar>
+    </div>
+    <section class="events-section">
+      <div class="events-wrap">
+        <la-event-card
+          *ngFor="let event of monthEvents$ | async"
+          [event]="event"
+        ></la-event-card>
+      </div>
+    </section>
   </div>
 </div>

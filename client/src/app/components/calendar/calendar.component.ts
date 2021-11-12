@@ -114,7 +114,6 @@ export class CalendarComponent implements OnInit {
   }
 
   private setDayEventsMap(_month: ICalendarMonth): void {
-    this.dayEventsMap.clear();
     const _monthMap = new Map<number, IEvent[]>();
     (_month.events || []).forEach((_event: IEvent) => {
       const _dates: number[] = _event.dates;

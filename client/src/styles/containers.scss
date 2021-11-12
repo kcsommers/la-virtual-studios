@@ -20,3 +20,10 @@ $min-width: 980px;
   min-width: $min-width;
   margin: 0 auto;
 }
+
+@mixin card {
+  background-color: #fff;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $spacing-sm;
+}

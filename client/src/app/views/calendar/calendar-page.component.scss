@@ -4,13 +4,43 @@
   display: block;
   width: 100%;
   background-color: $light;
+  min-height: calc(100vh - #{$header-height});
+}
+
+div.calendar-page-inner {
+  @include max-width-container;
 }
 
 div.events-calendar-wrap {
+  position: relative;
   display: flex;
 }
 
-div.calendar-wrap,
-div.events-wrap {
+div.calendar-wrap {
+  position: sticky;
   flex: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin-top: -$header-height;
+  max-height: 100vh;
+  overflow-y: scroll;
+  z-index: 100;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  padding: calc(#{$header-height} + #{$spacing-lg}) $spacing-lg $spacing-lg
+    $spacing-lg;
+}
+
+section.events-section {
+  flex: 0.75;
+  padding: $spacing-lg;
+  margin-left: auto;
+}
+
+div.events-wrap {
+  @include card;
 }

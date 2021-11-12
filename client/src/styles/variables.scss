@@ -1,4 +1,8 @@
-@import "./colors.scss";
-@import "./containers.scss";
-@import "./spacing.scss";
-@import "./typography.scss";
+@import './colors.scss';
+@import './containers.scss';
+@import './spacing.scss';
+@import './typography.scss';
+
+$header-height: 120px;
+$footer-height: 200px;
+$header-footer-height: $header-height + $footer-height;
