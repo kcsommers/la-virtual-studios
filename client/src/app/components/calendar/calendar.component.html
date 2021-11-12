@@ -1,7 +1,10 @@
 <div class="calendar-wrap">
   <div class="calendar-grid-container">
-    <div *ngFor="let i of [].constructor(35)" class="calendar-day">
-      <div class="calendar-day-inner"></div>
+    <div *ngFor="let day of WEEKDAYS" class="calendar-header">{{ day }}</div>
+    <div *ngFor="let day of calendarDays$ | async" class="calendar-day">
+      <div class="calendar-day-inner">
+        {{ day.date }}
+      </div>
     </div>
   </div>
 </div>

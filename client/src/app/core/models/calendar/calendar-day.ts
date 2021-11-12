@@ -2,17 +2,23 @@ import { IEvent } from '../events/event.interface';
 import { ICalendarDay } from './calendar-day.interface';
 
 export class CalendarDay implements ICalendarDay {
-  date: number;
-  day: number;
-  month: number;
-  year: number;
-  events: IEvent[];
+  public dateModel: Date;
 
-  constructor(_calendarDay?: Partial<ICalendarDay>) {
-    if (_calendarDay) {
-      Object.keys(_calendarDay).forEach(
-        (_key: string) => (this[_key] = _calendarDay[_key])
-      );
-    }
+  public date: number;
+
+  public day: number;
+
+  public month: number;
+
+  public year: number;
+
+  public events: IEvent[];
+
+  constructor(_dateModel: Date, events?: IEvent[]) {
+    this.date = _dateModel.getDate();
+    this.day = _dateModel.getDay();
+    this.month = _dateModel.getMonth();
+    this.year = _dateModel.getFullYear();
+    this.events = events;
   }
 }
