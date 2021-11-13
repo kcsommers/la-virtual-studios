@@ -40,6 +40,9 @@ export class ButtonComponent {
   public isResponsive: boolean = false;
 
   @Input()
+  public icon: string;
+
+  @Input()
   public path: string;
 
   @Input()

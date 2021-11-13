@@ -43,24 +43,21 @@ div.calendar-grid-container {
 div.calendar-header,
 div.calendar-column-header,
 div.calendar-day {
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  @include card;
 }
 
 div.calendar-column-header {
   background-color: $primary;
-  color: #fff;
   padding: $spacing-xs;
+  color: #fff;
 }
 
 div.calendar-day {
   padding: $spacing-xs;
-  background-color: #fff;
   &.calendar-day-disabled {
     opacity: 0.45;
   }
   &.has-events:not(.calendar-day-disabled) {
-    // box-shadow: $box-shadow-accent;
     cursor: pointer;
   }
 }
@@ -72,21 +69,21 @@ div.calendar-day-inner {
 
 span.calendar-day-date {
   position: relative;
-  &.has-events:after {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translate(calc(100% + 0.25rem), -50%);
-    content: '';
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 100%;
-    background-color: $accent;
-  }
+}
+
+span.events-indicator {
+  position: absolute;
+  right: $spacing-xs;
+  top: $spacing-xs;
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background-color: $accent;
 }
 
 span.total-events {
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
 }

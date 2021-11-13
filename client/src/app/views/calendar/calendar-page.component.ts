@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Params } from '@angular/router';
 import {
   Destroyer,
   ICalendarDay,
@@ -6,6 +7,7 @@ import {
   RoutingService,
 } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendar-page',
@@ -16,16 +18,23 @@ import { BehaviorSubject } from 'rxjs';
 export class CalendarPageComponent extends Destroyer {
   public selectedDate$ = new BehaviorSubject<ICalendarDay>(null);
 
-  public calendarDays$ = new BehaviorSubject<ICalendarDay[]>([]);
+  public displayedDays$ = new BehaviorSubject<ICalendarDay[]>([]);
 
-  constructor(private _routingService: RoutingService) {
-    super();
+  private _daysWithEventsCache: ICalendarDay[];
+
+  public setSelectedDate(_day: ICalendarDay): void {
+    this.selectedDate$.next(_day);
+    this.displayedDays$.next([_day]);
   }
-
-  public setSelectedDate(_day: ICalendarDay): void {}
 
   public monthChanged(_month: ICalendarMonth): void {
     const _daysWithEvents: ICalendarDay[] = _month.getDaysWithEvents();
-    this.calendarDays$.next(_daysWithEvents);
+    this._daysWithEventsCache = _daysWithEvents;
+    this.displayedDays$.next(_daysWithEvents);
+  }
+
+  public browseAllEvents(): void {
+    this.selectedDate$.next(null);
+    this.displayedDays$.next(this._daysWithEventsCache);
   }
 }

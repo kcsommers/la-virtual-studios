@@ -40,6 +40,10 @@ section.events-section {
   margin-left: auto;
 }
 
+la-button.browse-all-btn {
+  margin-bottom: $spacing-xs;
+}
+
 div.events-section-date-wrap {
   position: relative;
   &:not(:first-child) {

@@ -7,7 +7,7 @@ import {
   EventCardComponentModule,
   IconComponentModule,
 } from '@la/components';
-import { DateHelper, GetDateDisplayPipeModule } from '@la/core';
+import { GetDateDisplayPipeModule } from '@la/core';
 import { CalendarPageComponent } from './calendar-page.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: CalendarPageComponent,
     children: [
       {
-        path: `:${DateHelper.DATE_PARAM}`,
+        path: ':id',
       },
     ],
   },

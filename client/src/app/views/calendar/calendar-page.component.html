@@ -7,10 +7,18 @@
       ></la-calendar>
     </div>
     <section class="events-section">
-      <div class="event-card-wrap"></div>
+      <la-button
+        *ngIf="selectedDate$ | async"
+        class="browse-all-btn"
+        [text]="'Browse All Events'"
+        [look]="'flat'"
+        [color]="'accent'"
+        [icon]="'faAngleLeft'"
+        (click)="browseAllEvents()"
+      ></la-button>
       <div class="events-wrap">
         <div
-          *ngFor="let day of calendarDays$ | async"
+          *ngFor="let day of displayedDays$ | async"
           class="events-section-date-wrap"
         >
           <div class="events-section-date-header">

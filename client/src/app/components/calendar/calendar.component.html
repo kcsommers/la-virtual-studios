@@ -28,30 +28,45 @@
     >
       {{ day }}
     </div>
-    <div
-      *ngFor="let day of calendarDays$ | async"
-      class="calendar-day"
-      [class.has-events]="day.events?.length"
-      [class.calendar-day-disabled]="
-        (displayedMonth$ | async)?.month < currentMonth ||
-        (displayedMonth$ | async | getMonthDisplay: true) !== day.month
-      "
+    <ng-container *ngFor="let day of calendarDays$ | async">
+      <ng-container
+        *ngTemplateOutlet="
+          CalendarDay;
+          context: {
+            $implicit: day,
+            isDisabled:
+              (displayedMonth$ | async)?.month < currentMonth ||
+              (displayedMonth$ | async | getMonthDisplay: true) !== day.month,
+            hasEvents: !!day.events?.length
+          }
+        "
+      ></ng-container>
+    </ng-container>
+    <ng-template
+      #CalendarDay
+      let-day
+      let-isDisabled="isDisabled"
+      let-hasEvents="hasEvents"
     >
-      <div class="calendar-day-inner">
-        <span
-          class="calendar-day-date"
-          [class.accent-bold]="day.isToday"
-          [class.has-events]="day.events?.length"
-        >
-          {{ day.date }}
-        </span>
-        <ng-container *ngIf="day.events?.length">
-          <span class="total-events font-small-bold">
-            {{ day.events.length }}
-            {{ day.events.length > 1 ? ' Events' : ' Event' }}
+      <div
+        class="calendar-day"
+        [class.has-events]="hasEvents"
+        [class.calendar-day-disabled]="isDisabled"
+        (click)="hasEvents && dateSelected.emit(day)"
+      >
+        <div class="calendar-day-inner">
+          <span class="calendar-day-date" [class.accent-bold]="day.isToday">
+            {{ day.date }}
           </span>
-        </ng-container>
+          <ng-container *ngIf="day.events?.length">
+            <span class="total-events font-small-bold">
+              {{ day.events.length }}
+              {{ day.events.length > 1 ? ' Events' : ' Event' }}
+            </span>
+            <span class="events-indicator"></span>
+          </ng-container>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </div>
 </div>
