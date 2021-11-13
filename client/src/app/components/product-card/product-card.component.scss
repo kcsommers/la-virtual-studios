@@ -1,13 +1,11 @@
-@import "variables";
+@import 'variables';
 
 :host {
-  cursor: pointer;
-  background-color: #fff;
-  box-shadow: $box-shadow;
-  border-radius: $border-radius;
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-direction: column;
+  cursor: pointer;
+  @include card;
 }
 
 div.product-card-img-wrap {

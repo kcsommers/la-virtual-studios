@@ -11,13 +11,14 @@ import { BehaviorSubject } from 'rxjs';
 export class CalendarPageComponent {
   public selectedDate$ = new BehaviorSubject<ICalendarDay>(null);
 
-  public monthEvents$ = new BehaviorSubject<IEvent[]>(null);
+  public calendarDays$ = new BehaviorSubject<ICalendarDay[]>([]);
 
   constructor() {}
 
   public setSelectedDate(_day: ICalendarDay): void {}
 
   public monthChanged(_month: ICalendarMonth): void {
-    this.monthEvents$.next(_month.events);
+    const _daysWithEvents: ICalendarDay[] = _month.getDaysWithEvents();
+    this.calendarDays$.next(_daysWithEvents);
   }
 }

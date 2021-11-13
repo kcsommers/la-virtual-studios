@@ -3,7 +3,6 @@
 :host {
   display: block;
   width: 100%;
-  background-color: $light;
   min-height: calc(100vh - #{$header-height});
 }
 
@@ -37,10 +36,34 @@ div.calendar-wrap {
 
 section.events-section {
   flex: 0.75;
-  padding: $spacing-lg;
+  padding: $spacing-lg $spacing-lg $spacing-lg 0;
   margin-left: auto;
 }
 
-div.events-wrap {
-  @include card;
+div.events-section-date-wrap {
+  position: relative;
+  &:not(:first-child) {
+    margin-top: $spacing-md;
+  }
+  > la-event-card {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+div.events-section-date-header {
+  position: relative;
+  margin-bottom: $spacing-sm;
+  &:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    background-color: rgba($dark, 0.75);
+  }
+}
+
+h3.event-date {
+  margin-top: -$spacing-xs;
 }

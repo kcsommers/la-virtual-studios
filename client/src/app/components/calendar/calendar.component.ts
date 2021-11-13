@@ -5,16 +5,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  CalendarDay,
-  DateHelper,
-  ICalendarDay,
-  ICalendarMonth,
-  IEvent,
-} from '@la/core';
+import { DateHelper, ICalendarDay, ICalendarMonth, IEvent } from '@la/core';
 import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { CalendarMonth } from 'src/app/core/models/calendar/calendar-month';
 
 @Component({
   selector: 'la-calendar',
@@ -33,9 +28,7 @@ export class CalendarComponent implements OnInit {
 
   public displayedMonth$ = new BehaviorSubject<ICalendarMonth>(null);
 
-  public dayEventsMap = new Map<number, Map<number, IEvent[]>>();
-
-  private monthEventsCache = new Map<number, ICalendarMonth>();
+  public calendarMonthsMap = new Map<number, ICalendarMonth>();
 
   @Output()
   public dateSelected = new EventEmitter<ICalendarDay>();
@@ -62,9 +55,9 @@ export class CalendarComponent implements OnInit {
   }
 
   private setMonth(_month: number): void {
-    const _monthCache: ICalendarMonth = this.monthEventsCache.get(_month);
-    if (_monthCache) {
-      this.setCalendarDays(_monthCache);
+    const _cachedMonth: ICalendarMonth = this.calendarMonthsMap.get(_month);
+    if (_cachedMonth) {
+      this.renderMonth(_cachedMonth);
       return;
     }
     this._dummyDataService
@@ -73,61 +66,17 @@ export class CalendarComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (_events: IEvent[]) => {
-          const _calendarMonth: ICalendarMonth = {
-            month: _month,
-            events: _events,
-          };
-          this.monthEventsCache.set(_month, _calendarMonth);
-          this.setDayEventsMap(_calendarMonth);
-          this.setCalendarDays({ month: _month, events: _events });
+          const _calendarMonth = new CalendarMonth(_month, _events);
+          this.renderMonth(_calendarMonth);
         },
       });
   }
 
-  private setCalendarDays(_month: ICalendarMonth): void {
-    const _calendarDays: ICalendarDay[] = [];
-    const _dateModel = new Date();
-    const _currentMonth: number = _dateModel.getMonth();
-    const _currentDate: number = _dateModel.getDate();
-    _dateModel.setMonth(_month.month);
-    _dateModel.setDate(1);
-    const _displayedYear: number = _dateModel.getFullYear();
-    const _firstDayOfMonth: number = _dateModel.getDay();
-    const _prevMonthStart = 1 - _firstDayOfMonth;
-
-    for (let i = _prevMonthStart; i < 35 + _prevMonthStart; i++) {
-      const _date: Date = new Date(_displayedYear, _month.month, i);
-      const _isToday: boolean =
-        _month.month === _currentMonth && i === _currentDate;
-      _calendarDays.push(
-        new CalendarDay(
-          _date,
-          _isToday,
-          this.dayEventsMap.get(_month.month).get(i)
-        )
-      );
-    }
-    this.calendarDays$.next(_calendarDays);
+  private renderMonth(_month: ICalendarMonth): void {
+    this.calendarMonthsMap.set(_month.month, _month);
+    this.calendarDays$.next(_month.calendarDays);
     this.displayedMonth$.next(_month);
-    this.displayedYear$.next(_displayedYear);
+    this.displayedYear$.next(_month.year);
     this.monthChanged.emit(_month);
-  }
-
-  private setDayEventsMap(_month: ICalendarMonth): void {
-    const _monthMap = new Map<number, IEvent[]>();
-    (_month.events || []).forEach((_event: IEvent) => {
-      const _dates: number[] = _event.dates;
-      if (!_dates || !_dates.length) {
-        return;
-      }
-      _dates.forEach((_date: number) => {
-        if (_monthMap.has(_date)) {
-          _monthMap.get(_date).push(_event);
-        } else {
-          _monthMap.set(_date, [_event]);
-        }
-      });
-    });
-    this.dayEventsMap.set(_month.month, _monthMap);
   }
 }

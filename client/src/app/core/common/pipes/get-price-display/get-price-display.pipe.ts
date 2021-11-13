@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'getPriceString',
+  name: 'getPriceDisplay',
   pure: true,
 })
-export class GetPriceStringPipe implements PipeTransform {
+export class GetPriceDisplayPipe implements PipeTransform {
   public transform(_price: number): string {
     if (!_price) {
       return '$0.00';

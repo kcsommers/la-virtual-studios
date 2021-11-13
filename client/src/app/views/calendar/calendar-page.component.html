@@ -7,11 +7,25 @@
       ></la-calendar>
     </div>
     <section class="events-section">
+      <div class="event-card-wrap"></div>
       <div class="events-wrap">
-        <la-event-card
-          *ngFor="let event of monthEvents$ | async"
-          [event]="event"
-        ></la-event-card>
+        <div
+          *ngFor="let day of calendarDays$ | async"
+          class="events-section-date-wrap"
+        >
+          <div class="events-section-date-header">
+            <span class="event-day">
+              {{ day.dateModel | getDateDisplay: 'day' }}
+            </span>
+            <h3 class="event-date">
+              {{ day.dateModel | getDateDisplay: 'month dd, yyyy' }}
+            </h3>
+          </div>
+          <la-event-card
+            *ngFor="let event of day.events"
+            [event]="event"
+          ></la-event-card>
+        </div>
       </div>
     </section>
   </div>

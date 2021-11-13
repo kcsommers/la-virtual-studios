@@ -7,6 +7,7 @@ import {
   EventCardComponentModule,
   IconComponentModule,
 } from '@la/components';
+import { GetDateDisplayPipeModule } from '@la/core';
 import { CalendarPageComponent } from './calendar-page.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     IconComponentModule,
     CalendarComponentModule,
     EventCardComponentModule,
+    GetDateDisplayPipeModule,
   ],
   declarations: [CalendarPageComponent],
   exports: [CalendarPageComponent],
