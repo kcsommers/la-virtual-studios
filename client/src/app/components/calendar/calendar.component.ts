@@ -30,6 +30,8 @@ export class CalendarComponent implements OnInit {
 
   public calendarMonthsMap = new Map<number, ICalendarMonth>();
 
+  public currentMonth: number;
+
   @Output()
   public dateSelected = new EventEmitter<ICalendarDay>();
 
@@ -38,8 +40,8 @@ export class CalendarComponent implements OnInit {
 
   constructor(private _dummyDataService: DummyDataService) {
     const _dateModel = new Date();
-    const _currentMonth: number = _dateModel.getMonth();
-    this.setMonth(_currentMonth);
+    this.currentMonth = _dateModel.getMonth();
+    this.setMonth(this.currentMonth);
   }
 
   ngOnInit() {}

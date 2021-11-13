@@ -26,6 +26,14 @@ export class CalendarMonth implements ICalendarMonth {
     );
   }
 
+  public getMonthIndex(): number {
+    let _monthIndex = this.month % 12;
+    if (_monthIndex < 0) {
+      _monthIndex = 12 - Math.abs(_monthIndex);
+    }
+    return _monthIndex;
+  }
+
   private setEventsByDay(): void {
     const _eventsByDayMap = new Map<number, IEvent[]>();
     this.events.forEach((_event: IEvent) => {

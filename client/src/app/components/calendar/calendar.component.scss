@@ -59,8 +59,30 @@ div.calendar-day {
   &.calendar-day-disabled {
     opacity: 0.45;
   }
+  &.has-events:not(.calendar-day-disabled) {
+    // box-shadow: $box-shadow-accent;
+    cursor: pointer;
+  }
 }
 
 div.calendar-day-inner {
   padding-bottom: 100%;
+  position: relative;
+}
+
+span.events-indicator {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.25rem;
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  background-color: $accent;
+}
+
+span.total-events {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

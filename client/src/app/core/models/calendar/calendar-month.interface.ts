@@ -6,4 +6,5 @@ export interface ICalendarMonth {
   calendarDays: ICalendarDay[];
   eventsByDay: Map<number, IEvent[]>;
   getDaysWithEvents(): ICalendarDay[];
+  getMonthIndex(): number;
 }

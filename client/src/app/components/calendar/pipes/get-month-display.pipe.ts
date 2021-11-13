@@ -5,10 +5,17 @@ import { DateHelper, ICalendarMonth } from '@la/core';
   name: 'getMonthDisplay',
 })
 export class GetMonthDisplayPipe implements PipeTransform {
-  public transform(_month: ICalendarMonth): string {
+  public transform(
+    _month: ICalendarMonth,
+    _returnIndex = false
+  ): string | number {
     if (!_month) {
       return '--';
     }
-    return DateHelper.MONTHS[_month.month % 12] || '--';
+    const _monthIndex = _month.getMonthIndex();
+    if (_returnIndex) {
+      return _monthIndex;
+    }
+    return DateHelper.MONTHS[_monthIndex] || '--';
   }
 }

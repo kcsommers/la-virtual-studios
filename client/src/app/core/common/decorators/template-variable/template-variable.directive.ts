@@ -19,7 +19,7 @@ export class TemplateVariableDirective {
     private _viewContainer: ViewContainerRef
   ) {}
 
-  @Input('adaLet')
+  @Input('laLet')
   set context(_context: any) {
     this._context.$implicit = this._context.adaLet = _context;
     this.attachTemplate();
