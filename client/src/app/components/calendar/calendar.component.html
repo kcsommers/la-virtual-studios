@@ -31,7 +31,6 @@
     <div
       *ngFor="let day of calendarDays$ | async"
       class="calendar-day"
-      [class.accent-bold]="day.isToday"
       [class.has-events]="day.events?.length"
       [class.calendar-day-disabled]="
         (displayedMonth$ | async)?.month < currentMonth ||
@@ -39,13 +38,18 @@
       "
     >
       <div class="calendar-day-inner">
-        {{ day.date }}
+        <span
+          class="calendar-day-date"
+          [class.accent-bold]="day.isToday"
+          [class.has-events]="day.events?.length"
+        >
+          {{ day.date }}
+        </span>
         <ng-container *ngIf="day.events?.length">
           <span class="total-events font-small-bold">
             {{ day.events.length }}
             {{ day.events.length > 1 ? ' Events' : ' Event' }}
           </span>
-          <span class="events-indicator"></span>
         </ng-container>
       </div>
     </div>

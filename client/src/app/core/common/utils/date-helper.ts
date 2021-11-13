@@ -1,4 +1,6 @@
 export namespace DateHelper {
+  export const DATE_PARAM = 'date';
+
   export const getRandomDate = (): number => {
     return new Date(Math.random() * new Date().getTime()).getTime();
   };

@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ICalendarDay, ICalendarMonth, IEvent } from '@la/core';
+import {
+  Destroyer,
+  ICalendarDay,
+  ICalendarMonth,
+  RoutingService,
+} from '@la/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -8,12 +13,14 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./calendar-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarPageComponent {
+export class CalendarPageComponent extends Destroyer {
   public selectedDate$ = new BehaviorSubject<ICalendarDay>(null);
 
   public calendarDays$ = new BehaviorSubject<ICalendarDay[]>([]);
 
-  constructor() {}
+  constructor(private _routingService: RoutingService) {
+    super();
+  }
 
   public setSelectedDate(_day: ICalendarDay): void {}
 
