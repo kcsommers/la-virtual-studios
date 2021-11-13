@@ -1,4 +1,5 @@
 import { DateHelper, IEvent } from '@la/core';
+import { v4 as uuidv4 } from 'uuid';
 
 const _dateModel = new Date();
 const _currentYear: number = _dateModel.getFullYear();
@@ -25,10 +26,14 @@ export const dummyEvents: IEvent[] = [
     coverImage:
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-2.jpg',
     images: [],
-    slots: 10,
+    slots: 1,
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 2',
@@ -37,10 +42,14 @@ export const dummyEvents: IEvent[] = [
     coverImage:
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-1.jpg',
     images: [],
-    slots: 10,
+    slots: 3,
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 3',
@@ -53,6 +62,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 4',
@@ -65,6 +78,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 5',
@@ -78,6 +95,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 6',
@@ -91,6 +112,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 4',
@@ -103,6 +128,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 5',
@@ -116,6 +145,10 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
   {
     name: 'Acting class 6',
@@ -129,5 +162,9 @@ export const dummyEvents: IEvent[] = [
     coach: null,
     price: 10000,
     dates: getDates(),
+    attendees: [],
+    startTime: 1400,
+    endTime: 1700,
+    _id: uuidv4(),
   },
 ];

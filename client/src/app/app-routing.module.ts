@@ -25,6 +25,13 @@ const routes: Routes = [
           fixedHeader: true,
         },
       },
+      {
+        path: 'events',
+        loadChildren: () =>
+          import('./view-wrappers/events-page-wrapper.module').then(
+            (_m) => _m.EventsPageWrapperModule
+          ),
+      },
     ],
   },
 ];

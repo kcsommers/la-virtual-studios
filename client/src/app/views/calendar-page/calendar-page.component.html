@@ -32,6 +32,8 @@
           <la-event-card
             *ngFor="let event of day.events"
             [event]="event"
+            [showRemainingSlots]="true"
+            (eventSelected)="eventSelected($event)"
           ></la-event-card>
         </div>
       </div>

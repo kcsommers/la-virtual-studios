@@ -14,11 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: CalendarPageComponent,
-    children: [
-      {
-        path: ':id',
-      },
-    ],
+    children: [],
   },
 ];
 

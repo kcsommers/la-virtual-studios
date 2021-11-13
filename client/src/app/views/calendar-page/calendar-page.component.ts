@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Destroyer, ICalendarDay, ICalendarMonth } from '@la/core';
+import {
+  Destroyer,
+  ICalendarDay,
+  ICalendarMonth,
+  IEvent,
+  RoutingService,
+} from '@la/core';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -15,6 +21,10 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
   public displayedDays$ = new BehaviorSubject<ICalendarDay[]>([]);
 
   private _daysWithEventsCache: ICalendarDay[] = [];
+
+  constructor(private _routingService: RoutingService) {
+    super();
+  }
 
   ngOnInit() {
     this.selectedDate$.pipe(takeUntil(this.destroyed$)).subscribe({
@@ -35,5 +45,9 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
     const _daysWithEvents: ICalendarDay[] = _month.getDaysWithEvents();
     this._daysWithEventsCache = _daysWithEvents;
     this.displayedDays$.next(_daysWithEvents);
+  }
+
+  public eventSelected(_event: IEvent): void {
+    this._routingService.router.navigate([`/events/${_event._id}`]);
   }
 }

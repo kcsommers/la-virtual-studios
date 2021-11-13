@@ -4,9 +4,12 @@
     [ngStyle]="{ backgroundImage: 'url(' + event?.coverImage + ')' }"
   ></div>
 </div>
-<div class="event-card-body">
+<div class="event-card-body" (click)="eventSelected.emit(event)">
   <span class="event-name">{{ event?.name }}</span>
   <p class="product-blurb">{{ event?.blurb }}</p>
+  <p *ngIf="showRemainingSlots" class="remaining-slots color-primary">
+    {{ remaingSlotsDisplay$ | async }}
+  </p>
   <la-button
     [text]="'More Info'"
     [look]="'flat'"
