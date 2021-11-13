@@ -54,11 +54,19 @@ div.calendar-column-header {
 
 div.calendar-day {
   padding: $spacing-xs;
+  transition: $la-transition-long;
+  z-index: 100;
   &.calendar-day-disabled {
     opacity: 0.45;
   }
   &.has-events:not(.calendar-day-disabled) {
     cursor: pointer;
+    &.selected,
+    &:hover {
+      box-shadow: $box-shadow-hovered;
+      transform: scale(1.05);
+      z-index: 101;
+    }
   }
 }
 

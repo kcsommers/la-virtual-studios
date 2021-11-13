@@ -32,10 +32,11 @@
       <div
         class="calendar-day"
         [class.has-events]="!!day.events?.length"
+        [class.selected]="(selectedDate$ | async) === day"
         [class.calendar-day-disabled]="
           day.isPast || (displayedMonth$ | async)?.month !== day.month
         "
-        (click)="handleDateSelected(day)"
+        (click)="setSelectedDate(day)"
       >
         <div class="calendar-day-inner">
           <span class="calendar-day-date" [class.accent-bold]="day.isToday">

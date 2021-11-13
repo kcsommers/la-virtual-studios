@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -24,6 +25,9 @@ import { CalendarMonth } from 'src/app/core/models/calendar/calendar-month';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
+  @Input()
+  public selectedDate$: BehaviorSubject<ICalendarDay>;
+
   public WEEKDAYS = DateHelper.DAYS_ABREVIATED;
 
   public MONTHS = DateHelper.MONTHS;
@@ -39,9 +43,6 @@ export class CalendarComponent implements OnInit {
   public currentMonth: number;
 
   @Output()
-  public dateSelected = new EventEmitter<ICalendarDay>();
-
-  @Output()
   public monthChanged = new EventEmitter<ICalendarMonth>();
 
   constructor(private _dummyDataService: DummyDataService) {
@@ -50,14 +51,18 @@ export class CalendarComponent implements OnInit {
     this.setMonth(this.currentMonth);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.selectedDate$) {
+      this.selectedDate$ = new BehaviorSubject<ICalendarDay>(null);
+    }
+  }
 
-  public handleDateSelected(_day: CalendarDay): void {
+  public setSelectedDate(_day: CalendarDay): void {
     const _displayedMonth: ICalendarMonth = this.displayedMonth$.getValue();
     if (_day.isPast || _displayedMonth.month !== _day.month) {
       return;
     }
-    this.dateSelected.emit(_day);
+    this.selectedDate$.next(_day);
   }
 
   public nextMonth(): void {

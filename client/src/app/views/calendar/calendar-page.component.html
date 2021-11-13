@@ -2,7 +2,7 @@
   <div class="events-calendar-wrap">
     <div class="calendar-wrap">
       <la-calendar
-        (dateSelected)="setSelectedDate($event)"
+        [selectedDate$]="selectedDate$"
         (monthChanged)="monthChanged($event)"
       ></la-calendar>
     </div>
@@ -14,7 +14,7 @@
         [look]="'flat'"
         [color]="'accent'"
         [icon]="'faAngleLeft'"
-        (click)="browseAllEvents()"
+        (click)="setSelectedDate(null)"
       ></la-button>
       <div class="events-wrap">
         <div
