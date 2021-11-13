@@ -29,30 +29,13 @@
       {{ day }}
     </div>
     <ng-container *ngFor="let day of calendarDays$ | async">
-      <ng-container
-        *ngTemplateOutlet="
-          CalendarDay;
-          context: {
-            $implicit: day,
-            isDisabled:
-              (displayedMonth$ | async)?.month < currentMonth ||
-              (displayedMonth$ | async | getMonthDisplay: true) !== day.month,
-            hasEvents: !!day.events?.length
-          }
-        "
-      ></ng-container>
-    </ng-container>
-    <ng-template
-      #CalendarDay
-      let-day
-      let-isDisabled="isDisabled"
-      let-hasEvents="hasEvents"
-    >
       <div
         class="calendar-day"
-        [class.has-events]="hasEvents"
-        [class.calendar-day-disabled]="isDisabled"
-        (click)="hasEvents && dateSelected.emit(day)"
+        [class.has-events]="!!day.events?.length"
+        [class.calendar-day-disabled]="
+          day.isPast || (displayedMonth$ | async)?.month !== day.month
+        "
+        (click)="handleDateSelected(day)"
       >
         <div class="calendar-day-inner">
           <span class="calendar-day-date" [class.accent-bold]="day.isToday">
@@ -67,6 +50,6 @@
           </ng-container>
         </div>
       </div>
-    </ng-template>
+    </ng-container>
   </div>
 </div>

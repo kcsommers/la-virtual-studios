@@ -14,6 +14,8 @@ export class CalendarDay implements ICalendarDay {
 
   public isToday: boolean;
 
+  public isPast: boolean;
+
   public events: IEvent[];
 
   constructor(_dateModel: Date, _events?: IEvent[]) {
@@ -31,5 +33,10 @@ export class CalendarDay implements ICalendarDay {
       this.year === _currentYear &&
       this.month === _currentMonth &&
       this.date === _currentDate;
+    _currentDateModel.setHours(0);
+    _currentDateModel.setMinutes(0);
+    _currentDateModel.setSeconds(0);
+    _currentDateModel.setMilliseconds(0);
+    this.isPast = _dateModel < _currentDateModel;
   }
 }

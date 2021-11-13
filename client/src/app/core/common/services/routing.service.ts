@@ -6,10 +6,9 @@ import {
   Params,
   Router,
 } from '@angular/router';
-import { Destroyer } from '@la/core';
+import { isEqual } from 'lodash';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { isEqual } from 'lodash';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 :host {
   display: inline-block;
@@ -65,5 +65,9 @@ button.la-btn {
   &.btn-flat,
   &.btn-outline {
     background-color: rgba(0, 0, 0, 0);
+  }
+
+  > la-icon {
+    margin-right: $spacing-xs;
   }
 }

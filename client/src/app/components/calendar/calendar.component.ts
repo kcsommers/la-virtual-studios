@@ -5,7 +5,13 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { DateHelper, ICalendarDay, ICalendarMonth, IEvent } from '@la/core';
+import {
+  CalendarDay,
+  DateHelper,
+  ICalendarDay,
+  ICalendarMonth,
+  IEvent,
+} from '@la/core';
 import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -45,6 +51,14 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  public handleDateSelected(_day: CalendarDay): void {
+    const _displayedMonth: ICalendarMonth = this.displayedMonth$.getValue();
+    if (_day.isPast || _displayedMonth.month !== _day.month) {
+      return;
+    }
+    this.dateSelected.emit(_day);
+  }
 
   public nextMonth(): void {
     const _displayedMonth: ICalendarMonth = this.displayedMonth$.getValue();

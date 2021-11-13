@@ -1,13 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Params } from '@angular/router';
-import {
-  Destroyer,
-  ICalendarDay,
-  ICalendarMonth,
-  RoutingService,
-} from '@la/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Destroyer, ICalendarDay, ICalendarMonth } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendar-page',
