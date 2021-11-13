@@ -3,4 +3,53 @@
 :host {
   display: block;
   width: 100%;
+  padding: $spacing-lg 0;
+}
+
+div.events-page-inner {
+  @include card;
+  @include max-width-container;
+  min-height: $min-body-height;
+  width: 1080px;
+  max-width: 100%;
+}
+
+div.event-header-top {
+  height: 350px;
+  display: flex;
+}
+
+div.event-image-bg {
+  flex: 1;
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: $border-radius;
+}
+
+div.event-intro-wrap {
+  flex: 0.65;
+  background-color: $light;
+  border-top-right-radius: $border-radius;
+}
+
+div.event-intro-inner {
+  padding: $spacing-lg;
+}
+
+div.event-header-bottom {
+  display: flex;
+}
+
+div.event-header-bottom-left {
+  flex: 1;
+}
+
+div.event-header-bottom-right {
+  width: 33.333%;
+  margin-left: auto;
+  flex: 0.65;
+}
+
+div.event-header-bottom-right-inner {
+  padding: $spacing-sm $spacing-md;
 }

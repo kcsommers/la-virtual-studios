@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ICoach, IProduct } from '@la/core';
-import { asyncScheduler, Observable, scheduled } from 'rxjs';
+import { asyncScheduler, Observable, scheduled, throwError } from 'rxjs';
 import { dummyEvents } from './events.dummy-data';
 import { IEvent } from '../../core/models/events/event.interface';
 import { dummyCoaches } from './coaches.dummy-data';
@@ -27,5 +27,14 @@ export class DummyDataService {
     _count = dummyEvents.length
   ): Observable<IEvent[]> {
     return this.getClasses(_count);
+  }
+
+  public getEvent(_eventId: string): Observable<IEvent> {
+    const _event = dummyEvents.find((_e: IEvent) => _e._id === _eventId);
+    if (_event) {
+      return scheduled([_event], asyncScheduler);
+    } else {
+      return throwError(new Error("Couldn't find that event"));
+    }
   }
 }

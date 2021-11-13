@@ -6,5 +6,6 @@
 $header-height: 120px;
 $footer-height: 200px;
 $header-footer-height: $header-height + $footer-height;
+$min-body-height: calc(100vh - #{$header-footer-height});
 $la-transition: all 0.2s ease;
 $la-transition-long: all 1s cubic-bezier(0, 1.1, 0.76, 1.09);

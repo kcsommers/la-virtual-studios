@@ -1,0 +1,30 @@
+<div class="events-page-inner">
+  <div *ngIf="event$ | async as event; else Loading" class="event-wrap">
+    <div class="event-header">
+      <div class="event-header-top">
+        <div
+          class="event-image-bg"
+          [ngStyle]="{ backgroundImage: 'url(' + event.coverImage + ')' }"
+        ></div>
+        <div class="event-intro-wrap">
+          <div class="event-intro-inner">
+            <h2>{{ event.name }}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="event-header-bottom">
+        <div class="event-header-bottom-left"></div>
+        <div class="event-header-bottom-right">
+          <div class="event-header-bottom-right-inner">
+            <la-button
+              [color]="'accent'"
+              [text]="'Register'"
+              [isFullWidth]="true"
+            ></la-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #Loading></ng-template>

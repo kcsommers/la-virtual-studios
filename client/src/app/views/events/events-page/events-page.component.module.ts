@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EventsHelper } from '@la/core';
 import { EventsPageComponent } from './events-page.component';
 
 const routes: Routes = [
@@ -9,7 +10,7 @@ const routes: Routes = [
     component: EventsPageComponent,
     children: [
       {
-        path: ':id',
+        path: `:${EventsHelper.EVENT_PARAM}`,
         loadChildren: () =>
           import('../event-page/event-page.component.module').then(
             (_m) => _m.EventPageComponentModule
