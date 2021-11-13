@@ -4,6 +4,7 @@
   display: block;
   width: 100%;
   padding: $spacing-lg 0;
+  position: relative;
 }
 
 div.events-page-inner {
@@ -38,6 +39,8 @@ div.event-intro-inner {
 
 div.event-header-bottom {
   display: flex;
+  position: sticky;
+  top: 0;
 }
 
 div.event-header-bottom-left {
@@ -52,4 +55,32 @@ div.event-header-bottom-right {
 
 div.event-header-bottom-right-inner {
   padding: $spacing-sm $spacing-md;
+}
+
+div.event-body-inner {
+  display: flex;
+}
+
+div.event-body-left {
+  flex: 1;
+}
+
+div.event-body-left-inner {
+  padding: $spacing-lg;
+}
+
+div.event-body-right {
+  flex: 0.65;
+}
+
+div.event-body-right-inner {
+  padding: $spacing-lg;
+}
+
+p.event-description {
+  margin-top: $spacing-md;
+}
+
+div.location-name-wrap {
+  margin: $spacing-sm 0 $spacing-xs 0;
 }

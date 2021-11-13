@@ -1,6 +1,6 @@
 <div class="events-page-inner">
   <div *ngIf="event$ | async as event; else Loading" class="event-wrap">
-    <div class="event-header">
+    <section class="event-header">
       <div class="event-header-top">
         <div
           class="event-image-bg"
@@ -24,7 +24,37 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <section class="event-body">
+      <div class="event-body-inner">
+        <div class="event-body-left">
+          <div class="event-body-left-inner">
+            <h4>About this event</h4>
+            <h1>{{ event.name }}</h1>
+            <p class="event-description">
+              {{ event.description || 'asdfasdf' }}
+            </p>
+          </div>
+        </div>
+        <div class="event-body-right">
+          <div class="event-body-right-inner">
+            <span class="color-primary">Location</span>
+            <div class="location-name-wrap">
+              <h4>{{ event.location.name }}</h4>
+              <p *ngIf="event.location.address.unit" class="color-primary">
+                {{ event.location.address.unit }}
+              </p>
+            </div>
+            <p>{{ event.location.address.street }}</p>
+            <p>
+              {{ event.location.address.city }}
+              &nbsp;{{ event.location.address.state }},
+              {{ event.location.address.zip }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 <ng-template #Loading></ng-template>

@@ -1,4 +1,4 @@
-import { IUser } from '@la/core';
+import { ILocation, IUser } from '@la/core';
 import { ICoach } from '../coaches/coach.interface';
 import { IProduct } from '../products/product.interface';
 
@@ -9,4 +9,5 @@ export interface IEvent extends IProduct {
   dates: number[];
   startTime: number;
   endTime: number;
+  location: ILocation;
 }

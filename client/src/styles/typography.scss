@@ -11,6 +11,7 @@ $font-main: 'Open Sans';
   font-size: $fontsize-xxl;
   line-height: 160%;
   color: $dark;
+  font-weight: bold;
 }
 
 @mixin h2-styles {
@@ -27,7 +28,8 @@ $font-main: 'Open Sans';
 }
 
 @mixin h4-styles {
-  font-size: $fontsize-lg;
+  font-size: 1.15rem;
+  font-weight: bold;
   line-height: 150%;
   color: $dark;
 }
@@ -35,4 +37,5 @@ $font-main: 'Open Sans';
 @mixin p-styles {
   line-height: 160%;
   color: $dark;
+  white-space: pre-wrap;
 }
