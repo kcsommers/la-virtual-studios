@@ -8,7 +8,7 @@
   <span class="event-name">{{ event?.name }}</span>
   <p class="product-blurb">{{ event?.blurb }}</p>
   <p *ngIf="showRemainingSlots" class="remaining-slots color-primary">
-    {{ remaingSlotsDisplay$ | async }}
+    {{ event | getRemainingSlotsDisplay }}
   </p>
   <la-button
     [text]="'More Info'"

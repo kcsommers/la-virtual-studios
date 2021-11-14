@@ -17,17 +17,24 @@ type DateDisplayType =
   pure: true,
 })
 export class GetDateDisplayPipe implements PipeTransform {
-  public transform(_dateModel: Date, _displayType?: DateDisplayType): string {
-    if (!_dateModel) {
-      return null;
+  public transform(
+    _dateInput: Date | number,
+    _displayType?: DateDisplayType
+  ): string {
+    console.log(_dateInput);
+    if (!_dateInput) {
+      return '';
+    }
+    if (typeof _dateInput === 'number') {
+      _dateInput = new Date(_dateInput);
     }
     if (!_displayType) {
       _displayType = 'full';
     }
-    const _year: number = _dateModel.getFullYear();
-    const _month: number = _dateModel.getMonth();
-    const _day: number = _dateModel.getDay();
-    const _date: number = _dateModel.getDate();
+    const _year: number = _dateInput.getFullYear();
+    const _month: number = _dateInput.getMonth();
+    const _day: number = _dateInput.getDay();
+    const _date: number = _dateInput.getDate();
     switch (_displayType) {
       case 'year':
         return String(_year);

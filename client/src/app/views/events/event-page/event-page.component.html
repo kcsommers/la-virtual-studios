@@ -7,33 +7,58 @@
           [ngStyle]="{ backgroundImage: 'url(' + event.coverImage + ')' }"
         ></div>
         <div class="event-intro-wrap">
-          <div class="event-intro-inner">
+          <div class="event-intro-top">
+            <p>{{ event.date | getDateDisplay: 'day' }}</p>
+            <h4>{{ event.date | getDateDisplay: 'month dd, yyyy' }}</h4>
             <h2>{{ event.name }}</h2>
+            <span class="font-small-bold color-accent">
+              {{ event | getRemainingSlotsDisplay }}
+            </span>
           </div>
-        </div>
-      </div>
-      <div class="event-header-bottom">
-        <div class="event-header-bottom-left"></div>
-        <div class="event-header-bottom-right">
-          <div class="event-header-bottom-right-inner">
-            <la-button
-              [color]="'accent'"
-              [text]="'Register'"
-              [isFullWidth]="true"
-            ></la-button>
+          <div class="event-intro-bottom font-small-bold color-primary">
+            <span class="event-price">{{ event.price | getPriceDisplay }}</span>
           </div>
         </div>
       </div>
     </section>
+    <div class="event-header-sticky">
+      <div class="event-header-sticky-left"></div>
+      <div class="event-header-sticky-right">
+        <div class="event-header-sticky-right-inner">
+          <la-button
+            [color]="'accent'"
+            [text]="'Register'"
+            [isFullWidth]="true"
+          ></la-button>
+        </div>
+      </div>
+    </div>
     <section class="event-body">
       <div class="event-body-inner">
         <div class="event-body-left">
           <div class="event-body-left-inner">
-            <h4>About this event</h4>
+            <p class="font-large">About this event</p>
             <h1>{{ event.name }}</h1>
             <p class="event-description">
-              {{ event.description || 'asdfasdf' }}
+              {{ event.description }}
             </p>
+            <div class="instructor-details-wrap">
+              <p class="instructor-details-title font-large">
+                About the instructor
+              </p>
+              <span class="instructor-img-wrap">
+                <span
+                  class="instructor-img-bg"
+                  [ngStyle]="{
+                    backgroundImage: 'url(' + event.coach.profileImage + ')'
+                  }"
+                ></span>
+              </span>
+              <h3 class="instructor-name">
+                {{ event.coach.firstName + ' ' + event.coach.lastName }}
+              </h3>
+              <p>{{ event.coach.bio }}</p>
+            </div>
           </div>
         </div>
         <div class="event-body-right">

@@ -30,6 +30,7 @@ span {
 
 span {
   display: inline-block;
+  color: inherit;
 }
 
 div.classes-grid {
@@ -62,6 +63,24 @@ div.angle-down-div {
 
 *.accent-bold {
   color: $accent;
+  font-weight: bold;
+}
+
+*.font-xl {
+  font-size: $fontsize-xl;
+}
+
+*.font-xl-bold {
+  font-size: $fontsize-xl;
+  font-weight: bold;
+}
+
+*.font-large {
+  font-size: $fontsize-lg;
+}
+
+*.font-large-bold {
+  font-size: $fontsize-lg;
   font-weight: bold;
 }
 

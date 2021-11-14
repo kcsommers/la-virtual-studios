@@ -6,7 +6,7 @@ export interface IEvent extends IProduct {
   slots: number;
   attendees: IUser[];
   coach: ICoach;
-  dates: number[];
+  date: number;
   startTime: number;
   endTime: number;
   location: ILocation;

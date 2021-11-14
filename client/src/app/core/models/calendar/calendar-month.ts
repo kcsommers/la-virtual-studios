@@ -37,19 +37,17 @@ export class CalendarMonth implements ICalendarMonth {
   private setEventsByDay(): void {
     const _eventsByDayMap = new Map<number, IEvent[]>();
     this.events.forEach((_event: IEvent) => {
-      const _dates: number[] = _event.dates;
-      if (!_dates || !_dates.length) {
+      const _dateNum: number = _event.date;
+      if (!_dateNum) {
         return;
       }
-      _dates.forEach((_dateNum: number) => {
-        const _dateModel = new Date(_dateNum);
-        const _date: number = _dateModel.getDate();
-        if (_eventsByDayMap.has(_date)) {
-          _eventsByDayMap.get(_date).push(_event);
-        } else {
-          _eventsByDayMap.set(_date, [_event]);
-        }
-      });
+      const _dateModel = new Date(_dateNum);
+      const _date: number = _dateModel.getDate();
+      if (_eventsByDayMap.has(_date)) {
+        _eventsByDayMap.get(_date).push(_event);
+      } else {
+        _eventsByDayMap.set(_date, [_event]);
+      }
     });
     this.eventsByDay = _eventsByDayMap;
   }

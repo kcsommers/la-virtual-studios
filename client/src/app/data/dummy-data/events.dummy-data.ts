@@ -1,4 +1,5 @@
-import { DateHelper, IEvent } from '@la/core';
+import { DateHelper, ICoach, IEvent } from '@la/core';
+import { dummyCoaches } from '.';
 import { dummyLocations } from './locations.dummy-data';
 
 const _dateModel = new Date();
@@ -10,12 +11,12 @@ _dateModel.setMonth(_currentMonth + 1);
 _dateModel.setDate(0);
 const _lastDayOfMonth: number = _dateModel.getDate();
 
-const getDates = (): number[] => {
+const getDate = (): number => {
   const _randomDate: number = DateHelper.getRandomDateInRange(
     new Date(_currentYear, _currentMonth, _firstDayOfMonth),
     new Date(_currentYear, _currentMonth, _lastDayOfMonth)
   );
-  return [_randomDate];
+  return _randomDate;
 };
 
 export const dummyEvents: IEvent[] = [
@@ -28,9 +29,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-2.jpg',
     images: [],
     slots: 1,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -46,9 +47,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-1.jpg',
     images: [],
     slots: 3,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -64,9 +65,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-2.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -82,9 +83,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-4.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -101,9 +102,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-5.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -120,9 +121,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-3.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -138,9 +139,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-4.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -157,9 +158,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-5.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
@@ -176,9 +177,9 @@ export const dummyEvents: IEvent[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-3.jpg',
     images: [],
     slots: 10,
-    coach: null,
+    coach: dummyCoaches[0],
     price: 10000,
-    dates: getDates(),
+    date: getDate(),
     attendees: [],
     startTime: 1400,
     endTime: 1700,
