@@ -8,3 +8,5 @@ export * from './product-card/product-card.component';
 export * from './product-card/product-card.component.module';
 export * from './calendar/calendar.component';
 export * from './calendar/calendar.component.module';
+export * from './carousel/carousel.component';
+export * from './carousel/carousel.component.module';

@@ -4,11 +4,15 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
+import { ICoach, IEvent, IProduct } from '@la/core';
+import {
+  DummyDataService,
+  dummyHeadshots1,
+  dummyHeadshots2,
+  dummyHeadshots3,
+} from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { ICoach, IEvent, IProduct } from '@la/core';
-import { DummyDataService } from '@la/data';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
@@ -22,6 +26,12 @@ export class HomePageComponent {
   public events$ = new BehaviorSubject<IEvent[]>(null);
 
   public coaches$ = new BehaviorSubject<ICoach[]>(null);
+
+  public headshotsGroup1: string[] = dummyHeadshots1;
+
+  public headshotsGroup2: string[] = dummyHeadshots2;
+
+  public headshotsGroup3: string[] = dummyHeadshots3;
 
   @ViewChild('LandingVideo', { read: ElementRef })
   private _landingVideo: ElementRef<HTMLVideoElement>;

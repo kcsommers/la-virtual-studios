@@ -124,9 +124,29 @@
     <div class="angle-down-div"></div>
   </div>
   <div class="headshots-section-body">
-    <div class="headshots-section-img"></div>
-    <div class="headshots-section-img"></div>
-    <div class="headshots-section-img"></div>
+    <la-carousel>
+      <ng-container *ngFor="let imgSrc of headshotsGroup1">
+        <span
+          *laCarouselItem
+          class="headshots-section-img"
+          [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
+        ></span>
+      </ng-container>
+    </la-carousel>
+    <!-- <div>
+      <span
+        *ngFor="let imgSrc of headshotsGroup2"
+        class="headshots-section-img"
+        [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
+      ></span>
+    </div>
+    <div>
+      <span
+        *ngFor="let imgSrc of headshotsGroup3"
+        class="headshots-section-img"
+        [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
+      ></span>
+    </div> -->
   </div>
 </section>
 <section class="contact-section">

@@ -159,22 +159,17 @@ div.headshots-section-header-right {
 
 div.headshots-section-body {
   display: flex;
+  > div,
+  > la-carousel {
+    flex: 1;
+  }
 }
 
-div.headshots-section-img {
-  flex: 1;
-  padding-bottom: 50%;
+span.headshots-section-img {
+  width: 100%;
+  padding-bottom: 150%;
   background-size: cover;
   background-position: center;
-  &:nth-child(1) {
-    background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636310116/LA%20Virtual%20Studios/headshot-1.jpg);
-  }
-  &:nth-child(2) {
-    background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636310116/LA%20Virtual%20Studios/headshot-2.jpg);
-  }
-  &:nth-child(3) {
-    background-image: url(https://res.cloudinary.com/kcsommers/image/upload/v1636310116/LA%20Virtual%20Studios/headshot-3.jpg);
-  }
 }
 
 section.contact-section {

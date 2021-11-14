@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import {
   ButtonComponentModule,
+  CarouselComponentModule,
   EventCardComponentModule,
   IconComponentModule,
   ProductCardComponentModule,
@@ -25,6 +25,7 @@ const routes: Routes = [
     ButtonComponentModule,
     IconComponentModule,
     ProductCardComponentModule,
+    CarouselComponentModule,
   ],
   declarations: [HomePageComponent],
   exports: [HomePageComponent],
