@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod && cp src/_redirects dist/_redirects",
+    "build": "ng build --prod && cp src/_redirects dist/la-virtual-studios/_redirects",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng run la-virtual-studios:serve-ssr",
