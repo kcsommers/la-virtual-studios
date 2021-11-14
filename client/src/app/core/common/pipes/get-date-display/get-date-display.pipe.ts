@@ -21,7 +21,6 @@ export class GetDateDisplayPipe implements PipeTransform {
     _dateInput: Date | number,
     _displayType?: DateDisplayType
   ): string {
-    console.log(_dateInput);
     if (!_dateInput) {
       return '';
     }

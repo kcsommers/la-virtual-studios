@@ -40,7 +40,6 @@ export class CarouselComponent implements OnDestroy {
   constructor(private _renderer: Renderer2) {}
 
   ngAfterViewInit() {
-    console.log('item:::: ', this._items);
     this.appendElement(0);
     if (this.slideDurations.length < 2) {
       this.setCarouselInterval(
