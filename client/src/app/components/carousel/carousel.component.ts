@@ -1,64 +1,71 @@
 import {
   Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ContentChild,
   ContentChildren,
   Input,
   QueryList,
-  Renderer2,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  ViewRef,
 } from '@angular/core';
 import { Destroyer } from '@la/core';
+import { CarouselItemWrapperComponent } from './carousel-item.component';
 import { CarouselItemDirective } from './carousel-item.directive';
 
 @Component({
   selector: 'la-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
+  template: `
+    <ng-container #ViewContainer>
+      <ng-content></ng-content>
+    </ng-container>
+  `,
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+    `,
+  ],
 })
-export class CarouselComponent extends Destroyer {
+export class CarouselComponent {
   @Input()
   slideDuration: number = 2000;
 
   @Input()
   animationDuration: number = 1000;
 
-  @ContentChildren(CarouselItemDirective, { read: TemplateRef })
-  private _items: QueryList<TemplateRef<any>>;
-
   @ViewChild('ViewContainer', { read: ViewContainerRef })
   private _viewContainer: ViewContainerRef;
-  @ViewChild('ViewContainer2', { read: ViewContainerRef })
-  private _viewContainer2: ViewContainerRef;
 
-  @ViewChild('ItemTemplate', { read: TemplateRef })
-  private _itemTemplate: TemplateRef<any>;
+  @ContentChildren(CarouselItemDirective, { read: TemplateRef })
+  private _itemTemplates: QueryList<TemplateRef<any>>;
+
+  private _viewMap = new Map<number, ViewRef>();
 
   private _currentIndex: number = 0;
 
-  constructor(private _renderer: Renderer2) {
-    super();
-  }
+  constructor(private _cfr: ComponentFactoryResolver) {}
 
   ngAfterViewInit() {
-    this.attachTemplate(this._currentIndex);
-    this._nextItem();
-    console.log('tempalte::: ', this._itemTemplate, this._viewContainer2);
+    console.log(this._itemTemplates);
+    this.createWrapperComponents();
   }
 
-  private _nextItem(): void {
-    let _nextIndex: number = this._currentIndex + 1;
-    if (_nextIndex >= this._items.length) {
-      _nextIndex = 0;
-    }
-    this.attachTemplate(_nextIndex);
-  }
-
-  private attachTemplate(_index: number): void {
-    const _template: TemplateRef<any> = this._items.get(_index);
-    if (this._viewContainer.length > 1) {
-      this._viewContainer.detach(1);
-    }
-    this._viewContainer.createEmbeddedView(_template);
+  private createWrapperComponents(): void {
+    const _cmpFactory: ComponentFactory<CarouselItemWrapperComponent> =
+      this._cfr.resolveComponentFactory(CarouselItemWrapperComponent);
+    this._itemTemplates.forEach((_template: TemplateRef<any>) => {
+      const _cmpRef: ComponentRef<CarouselItemWrapperComponent> =
+        this._viewContainer.createComponent(_cmpFactory);
+      console.log('cmp::: ', _cmpRef);
+    });
   }
 }

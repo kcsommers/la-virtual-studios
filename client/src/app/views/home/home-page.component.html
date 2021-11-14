@@ -133,20 +133,22 @@
         ></span>
       </ng-container>
     </la-carousel>
-    <!-- <div>
-      <span
-        *ngFor="let imgSrc of headshotsGroup2"
-        class="headshots-section-img"
-        [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
-      ></span>
-    </div>
-    <div>
-      <span
-        *ngFor="let imgSrc of headshotsGroup3"
-        class="headshots-section-img"
-        [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
-      ></span>
-    </div> -->
+    <!-- <la-carousel>
+      <la-carousel-item *ngFor="let imgSrc of headshotsGroup2">
+        <span
+          class="headshots-section-img"
+          [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
+        ></span>
+      </la-carousel-item>
+    </la-carousel>
+    <la-carousel>
+      <la-carousel-item *ngFor="let imgSrc of headshotsGroup3">
+        <span
+          class="headshots-section-img"
+          [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
+        ></span>
+      </la-carousel-item>
+    </la-carousel> -->
   </div>
 </section>
 <section class="contact-section">

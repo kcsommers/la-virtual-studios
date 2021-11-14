@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, TemplateRef } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[laCarouselItem]',
