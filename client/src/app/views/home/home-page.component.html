@@ -73,17 +73,25 @@
 <section class="coaching-section">
   <div class="coaching-section-inner">
     <div class="coaching-section-left">
-      <div *ngFor="let coach of coaches$ | async" class="coach-wrap">
-        <div class="coaching-section-img-wrap">
-          <span
-            class="coaching-section-img"
-            [ngStyle]="{ backgroundImage: 'url(' + coach.profileImage + ')' }"
-          ></span>
-          <span class="coach-name">{{
-            coach.firstName + ' ' + coach.lastName
-          }}</span>
-        </div>
-      </div>
+      <ng-container *ngIf="coaches$ | async as coaches; else Loading">
+        <la-carousel [slideDurations]="[3000]">
+          <ng-container *ngFor="let coach of coaches">
+            <div laCarouselItem class="coach-wrap">
+              <div class="coaching-section-img-wrap">
+                <span
+                  class="coaching-section-img"
+                  [ngStyle]="{
+                    backgroundImage: 'url(' + coach.profileImage + ')'
+                  }"
+                ></span>
+                <span class="coach-name">{{
+                  coach.firstName + ' ' + coach.lastName
+                }}</span>
+              </div>
+            </div>
+          </ng-container>
+        </la-carousel>
+      </ng-container>
     </div>
     <div class="coaching-section-cta">
       <h1>Private Coaching</h1>
@@ -170,3 +178,4 @@
     </div>
   </div>
 </section>
+<ng-template #Loading></ng-template>

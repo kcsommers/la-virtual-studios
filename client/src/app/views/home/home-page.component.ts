@@ -52,7 +52,7 @@ export class HomePageComponent {
       });
 
     this._dummyDataService
-      .getCoaches(1)
+      .getCoaches()
       .pipe(take(1))
       .subscribe({
         next: (_events: ICoach[]) => this.coaches$.next(_events),
