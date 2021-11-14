@@ -4,7 +4,7 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
-import { ICoach, IEvent, IProduct } from '@la/core';
+import { ICoach, IEvent, IProduct, RoutingService } from '@la/core';
 import {
   DummyDataService,
   dummyHeadshots1,
@@ -36,7 +36,10 @@ export class HomePageComponent {
   @ViewChild('LandingVideo', { read: ElementRef })
   private _landingVideo: ElementRef<HTMLVideoElement>;
 
-  constructor(private _dummyDataService: DummyDataService) {
+  constructor(
+    private _dummyDataService: DummyDataService,
+    private _routingService: RoutingService
+  ) {
     this._dummyDataService
       .getProducts()
       .pipe(take(1))
@@ -62,5 +65,9 @@ export class HomePageComponent {
   ngAfterViewInit() {
     this._landingVideo.nativeElement.muted = true;
     this._landingVideo.nativeElement.play();
+  }
+
+  public eventSelected(_event: IEvent): void {
+    this._routingService.router.navigate([`/events/${_event._id}`]);
   }
 }

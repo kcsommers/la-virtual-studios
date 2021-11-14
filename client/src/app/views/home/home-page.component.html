@@ -60,6 +60,7 @@
     <la-event-card
       *ngFor="let event of events$ | async"
       [event]="event"
+      (eventSelected)="eventSelected($event)"
     ></la-event-card>
   </div>
   <div class="classes-section-more-info-wrap">
@@ -67,6 +68,7 @@
       [text]="'View Calendar'"
       [look]="'outline'"
       [isResponsive]="true"
+      [path]="'/calendar'"
     ></la-button>
   </div>
 </section>
@@ -174,7 +176,11 @@
         [isResponsive]="true"
         [look]="'outline'"
       ></la-button>
-      <la-button [text]="'View Calendar'" [isResponsive]="true"></la-button>
+      <la-button
+        [text]="'View Calendar'"
+        [isResponsive]="true"
+        [path]="'/calendar'"
+      ></la-button>
     </div>
   </div>
 </section>
