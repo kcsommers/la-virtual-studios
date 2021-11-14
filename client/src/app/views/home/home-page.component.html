@@ -124,31 +124,33 @@
     <div class="angle-down-div"></div>
   </div>
   <div class="headshots-section-body">
-    <la-carousel>
-      <ng-container *ngFor="let imgSrc of headshotsGroup1">
+    <la-carousel [slideDurations]="[3000, 4000, 5000]">
+      <ng-container *ngFor="let imgSrc of headshotsGroup1; let i = index">
         <span
-          *laCarouselItem
+          laCarouselItem
           class="headshots-section-img"
           [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
         ></span>
       </ng-container>
     </la-carousel>
-    <!-- <la-carousel>
-      <la-carousel-item *ngFor="let imgSrc of headshotsGroup2">
+    <la-carousel [slideDurations]="[3000, 4000, 5000]">
+      <ng-container *ngFor="let imgSrc of headshotsGroup2">
         <span
+          laCarouselItem
           class="headshots-section-img"
           [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
         ></span>
-      </la-carousel-item>
+      </ng-container>
     </la-carousel>
-    <la-carousel>
-      <la-carousel-item *ngFor="let imgSrc of headshotsGroup3">
+    <la-carousel [slideDurations]="[3000, 4000, 5000]">
+      <ng-container *ngFor="let imgSrc of headshotsGroup3">
         <span
+          laCarouselItem
           class="headshots-section-img"
           [ngStyle]="{ backgroundImage: 'url(' + imgSrc + ')' }"
         ></span>
-      </la-carousel-item>
-    </la-carousel> -->
+      </ng-container>
+    </la-carousel>
   </div>
 </section>
 <section class="contact-section">
