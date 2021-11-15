@@ -8,6 +8,9 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { Destroyer } from '@la/core';
+import { interval, timer } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 import { CarouselItemDirective } from './carousel-item.directive';
 
 const FADE_OUT_CLASS = 'fade-out';
@@ -21,7 +24,7 @@ const DEFAULT_SLIDE_DURATION = 5000;
   template: `<div #Container class="carousel-container"></div>`,
   styleUrls: ['./carousel.component.scss'],
 })
-export class CarouselComponent implements OnDestroy {
+export class CarouselComponent extends Destroyer {
   @Input()
   slideDurations: number[] = [DEFAULT_SLIDE_DURATION];
 
@@ -33,11 +36,9 @@ export class CarouselComponent implements OnDestroy {
 
   private _currentIndex: number = 0;
 
-  private _interval: number;
-
-  private _timeout: number;
-
-  constructor(private _renderer: Renderer2) {}
+  constructor(private _renderer: Renderer2) {
+    super();
+  }
 
   ngAfterViewInit() {
     this.appendElement(0);
@@ -48,24 +49,22 @@ export class CarouselComponent implements OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    window.clearInterval(this._interval);
-  }
-
   private setCarouselInterval(_duration: number): void {
-    this._interval = window.setInterval(
-      this.nextTemplate.bind(this),
-      _duration
-    );
+    const _interval$ = interval(_duration);
+    _interval$.pipe(takeUntil(this.destroyed$)).subscribe({
+      next: this.nextTemplate.bind(this),
+    });
   }
 
   private setCarouselTimeout(): void {
-    window.clearTimeout(this._timeout);
     const _index: number = Math.floor(
       Math.random() * this.slideDurations.length
     );
-    const _duration: number = this.slideDurations[_index];
-    this._timeout = window.setTimeout(this.nextTemplate.bind(this), _duration);
+    const _delay: number = this.slideDurations[_index];
+    const _delay$ = timer(_delay);
+    _delay$.pipe(take(1)).subscribe({
+      next: this.nextTemplate.bind(this),
+    });
   }
 
   private nextTemplate(): void {
@@ -99,12 +98,15 @@ export class CarouselComponent implements OnDestroy {
     const _childEls: HTMLCollection = this._container.nativeElement.children;
     const _lastEl: Element = _childEls[_childEls.length - 1];
     this._renderer.addClass(_lastEl, FADE_OUT_CLASS);
-    window.setTimeout(() => {
-      this._renderer.removeChild(
-        this._container.nativeElement,
-        _childEls[_childEls.length - 1]
-      );
-    }, DEFAULT_FADE_DURATION);
+    const fadeDelay$ = timer(DEFAULT_FADE_DURATION);
+    fadeDelay$.pipe(take(1)).subscribe({
+      next: () => {
+        this._renderer.removeChild(
+          this._container.nativeElement,
+          _childEls[_childEls.length - 1]
+        );
+      },
+    });
   }
 
   private getNextIndex(): number {

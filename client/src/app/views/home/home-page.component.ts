@@ -63,8 +63,8 @@ export class HomePageComponent {
   }
 
   ngAfterViewInit() {
-    this._landingVideo.nativeElement.muted = true;
-    this._landingVideo.nativeElement.play();
+    // this._landingVideo.nativeElement.muted = true;
+    // this._landingVideo.nativeElement.play();
   }
 
   public eventSelected(_event: IEvent): void {
