@@ -1,9 +1,12 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   ContentChildren,
   ElementRef,
+  Inject,
   Input,
   OnDestroy,
+  PLATFORM_ID,
   QueryList,
   Renderer2,
   ViewChild,
@@ -36,7 +39,10 @@ export class CarouselComponent extends Destroyer {
 
   private _currentIndex: number = 0;
 
-  constructor(private _renderer: Renderer2) {
+  constructor(
+    @Inject(PLATFORM_ID) private _platformId: Object,
+    private _renderer: Renderer2
+  ) {
     super();
   }
 
@@ -50,6 +56,9 @@ export class CarouselComponent extends Destroyer {
   }
 
   private setCarouselInterval(_duration: number): void {
+    if (!isPlatformBrowser(this._platformId)) {
+      return;
+    }
     const _interval$ = interval(_duration);
     _interval$.pipe(takeUntil(this.destroyed$)).subscribe({
       next: this.nextTemplate.bind(this),
@@ -57,6 +66,9 @@ export class CarouselComponent extends Destroyer {
   }
 
   private setCarouselTimeout(): void {
+    if (!isPlatformBrowser(this._platformId)) {
+      return;
+    }
     const _index: number = Math.floor(
       Math.random() * this.slideDurations.length
     );

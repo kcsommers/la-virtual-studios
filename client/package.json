@@ -10,7 +10,7 @@
     "dev:ssr": "ng run la-virtual-studios:serve-ssr",
     "serve:ssr": "node dist/la-virtual-studios/server/main.js",
     "build:ssr": "ng build && ng run la-virtual-studios:server",
-    "prerender": "ng run la-virtual-studios:prerender"
+    "prerender": "ng run la-virtual-studios:prerender --routes-file routes.txt"
   },
   "private": true,
   "dependencies": {
