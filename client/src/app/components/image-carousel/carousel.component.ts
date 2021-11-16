@@ -5,7 +5,6 @@ import {
   ElementRef,
   Inject,
   Input,
-  OnDestroy,
   PLATFORM_ID,
   QueryList,
   Renderer2,
