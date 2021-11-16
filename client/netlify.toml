@@ -1,0 +1,10 @@
+[build]
+  command = "npm run prerender"
+  publish = "dist/la-virtual-studios/browser"
+[dev]
+  command = "npm run start"
+  publish = "src"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
