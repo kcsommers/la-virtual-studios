@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { environment } from 'src/environments/environment';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -30,7 +31,9 @@ export function app(): express.Express {
   // Example Express Rest API endpoints
   // TODO: implement data requests securely
   server.get('/api/**', (req, res) => {
-    res.status(404).send('data requests are not yet supported');
+    const _path = req.path.replace('/api', '');
+    res.redirect(environment.apiUrl + _path);
+    // res.status(404).send('data requests are not yet supported' + req.path);
   });
   // Serve static files from /browser
   server.get(
