@@ -1,6 +1,8 @@
 [build]
   command = "npm run prerender"
   publish = "dist/la-virtual-studios/browser"
+[functions]
+  directory = "functions"
 [dev]
   command = "npm run start"
   publish = "src"
