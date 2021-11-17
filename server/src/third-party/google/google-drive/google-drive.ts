@@ -1,11 +1,10 @@
 import { google } from 'googleapis';
-import { drive } from 'googleapis/build/src/apis/drive';
 import path from 'path';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'token.json';
 
-const _jwtClient = new google.auth.JWT({
+const jwtClient = new google.auth.JWT({
   keyFile: path.join(
     __dirname,
     '../../../certs/google-drive-service-account.json'
@@ -13,9 +12,9 @@ const _jwtClient = new google.auth.JWT({
   scopes: SCOPES,
 });
 
-console.log('JWT CLIENT:::: ', _jwtClient);
+console.log('JWT CLIENT:::: ', jwtClient);
 
-_jwtClient.authorize((_error: Error, _token) => {
+jwtClient.authorize((_error: Error, _token) => {
   if (_error) {
     console.error('ERR::::: ', _error);
   } else {
@@ -23,22 +22,25 @@ _jwtClient.authorize((_error: Error, _token) => {
   }
 });
 
-const _drive = google.drive('v3');
-_drive.files.list(
+const drive = google.drive('v3');
+
+// drive.files.get;
+
+drive.files.list(
   {
-    auth: _jwtClient,
+    auth: jwtClient,
+    q: "name contains 'greg_james_studio_tour'",
   },
   (_error: Error, _response: any) => {
     if (_error) {
       console.error('ERR::::: ', _error);
     } else {
       const _files: any[] = _response.data.files || [];
-      if (_files.length) {
-        _files.forEach((_f) => {
-          console.log('FILENAME:::: ', _f.name);
-          console.log('FILE:::: ', _f);
-        });
+      if (!_files.length) {
+        return;
       }
+      const _video = _files[0];
+      const _id: string = _video.id;
     }
   }
 );
