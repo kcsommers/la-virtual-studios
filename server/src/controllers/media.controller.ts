@@ -2,11 +2,10 @@ import { Router, Request, Response } from 'express';
 import HttpStatusCodes from 'http-status-codes';
 import fs from 'fs';
 import path from 'path';
-import { GoogleDriveService } from '../third-party';
+import { GoogleDriveService, IFileInfo } from '../third-party';
+import stream from 'stream';
 
 const router = Router();
-
-const MAX_CHUNK_SIZE: number = 20000000;
 
 router.get('/videos/:videoName', (_req: Request, _res: Response) => {
   // Listing 3.
@@ -48,9 +47,9 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
     `../public/videos/${_videoName}.mp4`
   );
 
-  GoogleDriveService.getFileSize(
+  GoogleDriveService.getFileInfo(
     _videoName,
-    (_error: Error, _fileSize: number) => {
+    (_error: Error, _fileInfo: IFileInfo) => {
       if (_error) {
         _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
         return;
@@ -59,8 +58,49 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
       if (_req.method === 'HEAD') {
         _res.statusCode = HttpStatusCodes.OK;
         _res.setHeader('accept-ranges', 'bytes');
-        _res.setHeader('content-length', _fileSize);
+        _res.setHeader('content-length', _fileInfo.size);
+        _res.end();
+        return;
       }
+      let _retrievedLength: number;
+      if (_start !== undefined && _end !== undefined) {
+        _retrievedLength = _end + 1 - _start;
+      } else if (_start !== undefined) {
+        _retrievedLength = _fileInfo.size - _start;
+      } else if (_end !== undefined) {
+        _retrievedLength = _end + 1;
+      } else {
+        _retrievedLength = _fileInfo.size;
+      }
+      _res.statusCode =
+        _start !== undefined || _end !== undefined
+          ? HttpStatusCodes.PARTIAL_CONTENT
+          : HttpStatusCodes.OK;
+
+      _res.setHeader('content-length', _retrievedLength);
+
+      if (_range !== undefined) {
+        _res.setHeader(
+          'content-range',
+          `bytes ${_start || 0}-${_end || _fileInfo.size - 1}/${_fileInfo.size}`
+        );
+        _res.setHeader('accept-ranges', 'bytes');
+      }
+
+      GoogleDriveService.stream(_fileInfo.id, (_error: Error, _chunk: any) => {
+        console.log('download file chunk:::: ', _chunk, typeof _chunk);
+        const fileStream = fs.createReadStream(
+          _chunk.readableState.buffer,
+          _options
+        );
+        fileStream.on('error', (error) => {
+          console.log(`Error reading file ${_filePath}.`);
+          console.log(error);
+          _res.sendStatus(500);
+        });
+
+        fileStream.pipe(_res);
+      });
     }
   );
 

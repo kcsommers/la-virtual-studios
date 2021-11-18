@@ -2,6 +2,7 @@ import { google } from 'googleapis';
 import path from 'path';
 import { Callback } from '@la/core';
 import { JWT, Credentials } from 'google-auth-library';
+import { IFileInfo } from '../file-info.interface';
 
 class GoogleDriveServiceClass {
   private SCOPES: string[] = ['https://www.googleapis.com/auth/drive'];
@@ -41,7 +42,7 @@ class GoogleDriveServiceClass {
     });
   }
 
-  public getFileSize(_fileName: string, _callback: Callback): void {
+  public getFileInfo(_fileName: string, _callback: Callback<IFileInfo>): void {
     const _getFileSize = (): void => {
       const _drive = google.drive('v3');
       _drive.files.list(
@@ -63,8 +64,11 @@ class GoogleDriveServiceClass {
             _callback(new Error(_msg));
             return;
           }
-          console.log('files::::: ', _files[0]);
-          _callback(null, _files[0].size);
+          _callback(null, {
+            name: _fileName,
+            id: _files[0].id,
+            size: _files[0].size,
+          });
         }
       );
     };
@@ -77,23 +81,31 @@ class GoogleDriveServiceClass {
     }
   }
 
-  public downloadFile = (_fileId: string, _callback: Callback): void => {
+  public stream = (_fileId: string, _callback: Callback): void => {
     const _drive = google.drive('v3');
-    _drive.files
-      .get({
+    _drive.files.get(
+      {
         fileId: _fileId,
+        alt: 'media',
         prettyPrint: true,
         auth: this._authorizedClient,
-        fields: 'size',
-      })
-      .then((_response) => {
-        console.log('get file response:::: ', _response);
+      },
+      {
+        headers: {
+          Range: `bytes=0-${this.MAX_CHUNK_SIZE}`,
+        },
+        responseType: 'stream',
+      },
+      (_error: Error, _response) => {
+        if (_error) {
+          console.error('GoogleDriveHelper.stream', _error);
+          _callback(_error);
+          return;
+        }
+        console.log('GoogleDriveHelper.stream', _response);
         _callback(null, _response.data);
-      })
-      .catch((_error: Error) => {
-        console.error('GoogleDriveHelper.downloadFile', _error);
-        _callback(_error);
-      });
+      }
+    );
   };
 }
 
