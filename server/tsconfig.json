@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
+      "*": ["node_modules/*", "src/types/*"],
+      "@la/core": ["src/core/index.ts"]
     },
     "skipLibCheck": true
   },
