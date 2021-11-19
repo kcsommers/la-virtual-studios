@@ -2,200 +2,132 @@ import { Request, Response, Router } from 'express';
 import fs from 'fs';
 import HttpStatusCodes from 'http-status-codes';
 import path from 'path';
+import stream from 'stream';
 import { GoogleDriveService, IFileInfo } from '../third-party';
 
 const router = Router();
 
 router.get('/videos/:videoName', (_req: Request, _res: Response) => {
-  const _videoName: string = _req.params.videoName;
-  GoogleDriveService.getFileInfo(
-    _videoName,
-    (_error: Error, _fileInfo: IFileInfo) => {
-      if (_error) {
-        _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
-        return;
-      }
-      const _range: string = _req.headers.range;
-      console.log('range:::: ', _range);
-      if (_range) {
-        const rangeStringParts = _range.replace(/bytes=/, '').split('-');
-        const bytesStart = parseInt(rangeStringParts[0]);
-        const bytesEnd = rangeStringParts[1]
-          ? parseInt(rangeStringParts[1])
-          : _fileInfo.size - 1;
+  // Listing 3.
+  const options: { [header: string]: any } = {};
 
-        const CHUNK_SIZE = bytesEnd - bytesStart + 1; // 1MB
-        GoogleDriveService.getReadableStream(
-          _fileInfo.id,
-          (_error: Error, _videoStream: fs.ReadStream) => {
-            const _headers = {
-              'Content-Range': `bytes ${bytesStart}-${bytesEnd}/${_fileInfo.size}`,
-              'Accept-Ranges': 'bytes',
-              'Content-Length': CHUNK_SIZE,
-              'Content-Type': 'video/mp4',
-            };
-            _res.writeHead(HttpStatusCodes.PARTIAL_CONTENT, _headers);
-            _videoStream.pipe(_res);
-          }
-        );
-        return;
-      }
+  let start;
+  let end;
 
-      GoogleDriveService.getReadableStream(
-        _fileInfo.id,
-        (_error: Error, _videoStream: fs.ReadStream) => {
-          const _headers = {
-            'Content-Length': _fileInfo.size,
-            'Content-Type': 'video/mp4',
-          };
-          _res.writeHead(HttpStatusCodes.PARTIAL_CONTENT, _headers);
-          _videoStream.pipe(_res);
+  const range = _req.headers.range;
+  if (range) {
+    const bytesPrefix = 'bytes=';
+    if (range.startsWith(bytesPrefix)) {
+      const bytesRange = range.substring(bytesPrefix.length);
+      const parts = bytesRange.split('-');
+      if (parts.length === 2) {
+        const rangeStart = parts[0] && parts[0].trim();
+        if (rangeStart && rangeStart.length > 0) {
+          options.start = start = parseInt(rangeStart);
         }
-      );
+        const rangeEnd = parts[1] && parts[1].trim();
+        if (rangeEnd && rangeEnd.length > 0) {
+          options.end = end = parseInt(rangeEnd);
+        }
+      }
     }
+  }
+
+  _res.setHeader('content-type', 'video/mp4');
+  const _videoName: string = _req.params.videoName;
+  const _filePath: string = path.join(
+    __dirname,
+    `../public/videos/${_videoName}.mp4`
   );
 
-  // router.get('/videos/:videoName', (_req: Request, _res: Response) => {
-  //   const _videoName: string = _req.params.videoName;
-  //   const _range: string = _req.headers.range;
-  //   const BYTES_PREFIX = 'bytes=';
-  //   if (!_range.startsWith(BYTES_PREFIX)) {
-  //     return;
-  //   }
-  //   GoogleDriveService.getFileInfo(
-  //     _videoName,
-  //     (_error: Error, _fileInfo: IFileInfo) => {
-  //       if (_error) {
-  //         _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
-  //         return;
-  //       }
-  //       console.log('REQ METHOD:::: ', _req.method, _range);
+  GoogleDriveService.getFileInfo(
+    _videoName,
+    (_err: Error, _fileInfo: IFileInfo) => {
+      if (_err) {
+        return _res.sendStatus(500);
+      }
+      // });
 
-  //       let _start: number;
-  //       let _end: number;
-  //       const _bytesRange: number[] = _range
-  //         .substring(BYTES_PREFIX.length)
-  //         .split('-')
-  //         .map((_b) => +_b.trim());
-  //       if (_bytesRange.length === 2) {
-  //         _start = _bytesRange[0];
-  //         _end = _bytesRange[1];
-  //       }
+      // fs.stat(_filePath, (err, stat) => {
+      //   if (err) {
+      //     console.error(`File stat error for ${_filePath}.`);
+      //     console.error(err);
+      //     _res.sendStatus(500);
+      //     return;
+      //   }
 
-  //       console.log('start:::: ', _start);
-  //       console.log('end:::: ', _end);
+      let contentLength = _fileInfo.size;
 
-  //       _res.setHeader('content-type', 'video/mp4');
-  //       if (_req.method === 'HEAD') {
-  //         _res.statusCode = HttpStatusCodes.OK;
-  //         _res.setHeader('accept-ranges', 'bytes');
-  //         _res.setHeader('content-length', _fileInfo.size);
-  //         _res.end();
-  //         return;
-  //       }
-  //       let _retrievedLength: number;
-  //       if (_start !== undefined && _end !== undefined) {
-  //         _retrievedLength = _end + 1 - _start;
-  //       } else if (_start !== undefined) {
-  //         _retrievedLength = _fileInfo.size - _start;
-  //       } else if (_end !== undefined) {
-  //         _retrievedLength = _end + 1;
-  //       } else {
-  //         _retrievedLength = _fileInfo.size;
-  //       }
-  //       _res.statusCode =
-  //         _start !== undefined || _end !== undefined
-  //           ? HttpStatusCodes.PARTIAL_CONTENT
-  //           : HttpStatusCodes.OK;
+      if (_req.method === 'HEAD') {
+        _res.statusCode = 200;
+        _res.setHeader('accept-ranges', 'bytes');
+        _res.setHeader('content-length', contentLength);
+        _res.end();
+      } else {
+        let retrievedLength;
+        if (start !== undefined && end !== undefined) {
+          retrievedLength = end + 1 - start;
+        } else if (start !== undefined) {
+          retrievedLength = contentLength - start;
+        } else if (end !== undefined) {
+          retrievedLength = end + 1;
+        } else {
+          retrievedLength = contentLength;
+        }
 
-  //       _res.setHeader('content-length', _retrievedLength);
+        _res.statusCode = start !== undefined || end !== undefined ? 206 : 200;
 
-  //       console.log(
-  //         'hmmmmmmmmm::::: ',
-  //         `bytes ${_start || 0}-${_end || _fileInfo.size - 1}/${_fileInfo.size}`
-  //       );
+        _res.setHeader('content-length', retrievedLength);
 
-  //       _res.setHeader(
-  //         'content-range',
-  //         `bytes ${_start || 0}-${_end || _fileInfo.size - 1}/${_fileInfo.size}`
-  //       );
-  //       _res.setHeader('accept-ranges', 'bytes');
+        if (range !== undefined) {
+          _res.setHeader(
+            'content-range',
+            `bytes ${start || 0}-${end || contentLength - 1}/${contentLength}`
+          );
+          _res.setHeader('accept-ranges', 'bytes');
+        }
 
-  //       GoogleDriveService.getReadableStream(
-  //         _fileInfo.id,
-  //         (_error: Error, _fileStream: fs.ReadStream) => {
-  //           _fileStream.on('error', (error) => {
-  //             console.log(`Error reading file ${_videoName}.`);
-  //             console.log(error);
-  //             _res.sendStatus(500);
-  //           });
+        GoogleDriveService.getReadableStream(
+          _fileInfo.id,
+          (_err: Error, _fileStream: stream.PassThrough) => {
+            _fileStream.on('error', (error) => {
+              console.log(`Error reading file ${_filePath}.`);
+              console.log(error);
+              _res.sendStatus(500);
+            });
 
-  //           _fileStream.on('data', (_chunk) => {
-  //             console.log('chunk:::: ', _chunk);
-  //           });
+            _fileStream.on('data', (_data) => {
+              // console.log('::::more data::::');
+            });
 
-  //           _fileStream.pipe(_res);
-  //         }
-  //       );
-  //     }
-  //   );
+            _fileStream.on('end', (_data) => {
+              console.log('::::STREAM ENDED::::');
+              _fileStream.unpipe();
+            });
 
-  // fs.stat(_filePath, (err: NodeJS.ErrnoException, stat: fs.Stats) => {
-  //   if (err) {
-  //     console.error(`File stat error for ${_filePath}.`);
-  //     console.error(err);
-  //     _res.sendStatus(500);
-  //     return;
-  //   }
+            _fileStream.on('close', (_data) => {
+              console.log('::::STREAM CLOSED::::');
+              _fileStream.unpipe();
+            });
 
-  //   let _contentLength = stat.size;
-  //   console.log('ContentLenght:::: ', _contentLength);
+            _fileStream.on('unpipe', (_data) => {
+              console.log('::::STREAM UNPIPED::::');
+            });
 
-  //   // Listing 4.
-  //   if (_req.method === 'HEAD') {
-  //     _res.statusCode = 200;
-  //     _res.setHeader('accept-ranges', 'bytes');
-  //     _res.setHeader('content-length', _contentLength);
-  //     _res.end();
-  //   } else {
-  //     // Listing 5.
-  //     let _retrievedLength: number;
-  //     if (_start !== undefined && _end !== undefined) {
-  //       _retrievedLength = _end + 1 - _start;
-  //     } else if (_start !== undefined) {
-  //       _retrievedLength = _contentLength - _start;
-  //     } else if (_end !== undefined) {
-  //       _retrievedLength = _end + 1;
-  //     } else {
-  //       _retrievedLength = _contentLength;
-  //     }
-  //     console.log('retrievedLength:::: ', _retrievedLength);
+            _fileStream.pipe(_res);
+          }
+        );
+        // const fileStream = fs.createReadStream(_filePath, options);
+        // fileStream.on('error', (error) => {
+        //   console.log(`Error reading file ${_filePath}.`);
+        //   console.log(error);
+        //   _res.sendStatus(500);
+        // });
 
-  //     console.log('======================================================');
-  //     // Listing 6.
-  //     _res.statusCode = _start !== undefined || _end !== undefined ? 206 : 200;
-
-  //     _res.setHeader('content-length', _retrievedLength);
-
-  //     if (_range !== undefined) {
-  //       _res.setHeader(
-  //         'content-range',
-  //         `bytes ${_start || 0}-${_end || _contentLength - 1}/${_contentLength}`
-  //       );
-  //       _res.setHeader('accept-ranges', 'bytes');
-  //     }
-
-  //     // Listing 7.
-  //     const fileStream = fs.createReadStream(_filePath, _options);
-  //     fileStream.on('error', (error) => {
-  //       console.log(`Error reading file ${_filePath}.`);
-  //       console.log(error);
-  //       _res.sendStatus(500);
-  //     });
-
-  //     fileStream.pipe(_res);
-  //   }
-  // });
+        // fileStream.pipe(_res);
+      }
+    }
+  );
 });
 
 export const mediaController = router;

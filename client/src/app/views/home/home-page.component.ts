@@ -65,7 +65,9 @@ export class HomePageComponent {
   }
 
   ngAfterViewInit() {
-    this.createMediaSource();
+    // this.createMediaSource();
+    this._landingVideo.nativeElement.muted = true;
+    this._landingVideo.nativeElement.play();
   }
 
   private createMediaSource(): void {
@@ -91,13 +93,13 @@ export class HomePageComponent {
       _mediaSource.addSourceBuffer(_mimeCodec);
     _videoSourceBuffer.addEventListener('updateend', () => {
       console.log('end of stream::::');
-      // _mediaSource.endOfStream();
+      _mediaSource.endOfStream();
       this._landingVideo.nativeElement.muted = true;
       this._landingVideo.nativeElement.play();
     });
     this._http
       .get(`${environment.apiUrl}/media/videos/greg_james_studio_tour`, {
-        headers: new HttpHeaders(),
+        headers: new HttpHeaders({ Range: 'bytes=0-1000' }),
         responseType: 'arraybuffer',
       })
       .subscribe({

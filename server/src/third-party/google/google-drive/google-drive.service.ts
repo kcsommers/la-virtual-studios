@@ -1,18 +1,20 @@
 import { Callback, LAConstants } from '@la/core';
+import fs from 'fs';
+import stream from 'stream';
 import { Credentials, JWT } from 'google-auth-library';
 import { google } from 'googleapis';
-import stream from 'stream';
 import { IFileInfo } from '../file-info.interface';
-import fs from 'fs';
 
 class _GoogleDriveService {
   private SCOPES: string[] = ['https://www.googleapis.com/auth/drive'];
 
   private TOKEN_PATH: string = `${LAConstants.CREDENTIALS_DIRECTORY}/google-drive-token.json`;
 
-  private SERVICE_ACCOUNT_KEY_PATH: string = `${LAConstants.CREDENTIALS_DIRECTORY}/google-drive-service-account.json`;
+  private SERVICE_ACCOUNT_KEY_PATH: string = `${LAConstants.CREDENTIALS_DIRECTORY}/google-drive-account-key.json`;
 
   private _jwtClient: JWT;
+
+  private _currentStream: stream.PassThrough;
 
   public setAuthorizedClient(): Promise<void> {
     return new Promise((_resolve, _reject) => {
@@ -135,8 +137,12 @@ class _GoogleDriveService {
 
   public getReadableStream = (
     _fileId: string,
-    _callback: Callback<stream.Readable>
+    _callback: Callback<stream.PassThrough>
   ): void => {
+    if (this._currentStream) {
+      this._currentStream.unpipe();
+      this._currentStream.destroy();
+    }
     const _drive = google.drive('v3');
     _drive.files.get(
       {
@@ -146,6 +152,9 @@ class _GoogleDriveService {
         auth: this._jwtClient,
       },
       {
+        // headers: {
+        //   Range: `bytes=0-100`,
+        // },
         responseType: 'stream',
       },
       (_error: Error, _response) => {
@@ -156,9 +165,11 @@ class _GoogleDriveService {
         }
         console.log(
           'GoogleDriveHelper.getReadableStream',
-          `Successfully got readable stream for ${_fileId}`
+          `Successfully got readable stream for ${_fileId}`,
+          _response
         );
-        _callback(null, _response.data as stream.Readable);
+        this._currentStream = _response.data as stream.PassThrough;
+        _callback(null, this._currentStream);
       }
     );
   };

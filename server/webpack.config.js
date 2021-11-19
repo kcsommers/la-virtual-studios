@@ -34,6 +34,7 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
+        { from: path.resolve(__dirname, './public'), to: 'public' },
         { from: path.resolve(__dirname, './credentials'), to: 'credentials' },
       ],
     }),
