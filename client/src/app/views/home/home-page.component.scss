@@ -11,6 +11,14 @@ div.landing-inner {
   padding: 1rem;
 }
 
+div.landing-video {
+  width: 100%;
+  background-image: url(../../../assets/images/intro-screenshot.PNG);
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 52.7%;
+}
+
 video.landing-video {
   width: 100%;
 }

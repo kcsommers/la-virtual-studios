@@ -73,8 +73,8 @@ export class HomePageComponent {
     if (!isPlatformBrowser(this._platformId)) {
       return;
     }
-    this._landingVideo.nativeElement.muted = true;
-    this._landingVideo.nativeElement.play();
+    // this._landingVideo.nativeElement.muted = true;
+    // this._landingVideo.nativeElement.play();
   }
 
   private createMediaSource(): void {
