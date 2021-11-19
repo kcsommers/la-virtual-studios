@@ -22,6 +22,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@la/core': path.resolve(__dirname, 'src/core/index.ts'),
+    },
   },
   output: {
     filename: 'bundle.js',
@@ -30,7 +33,12 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: path.resolve(__dirname, './public'), to: 'public' }],
+      patterns: [
+        { from: path.resolve(__dirname, './credentials'), to: 'credentials' },
+      ],
     }),
   ],
+  watchOptions: {
+    ignored: '/credentials/',
+  },
 };

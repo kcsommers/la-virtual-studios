@@ -1,44 +1,94 @@
+import { Callback, LAConstants } from '@la/core';
+import { Credentials, JWT } from 'google-auth-library';
 import { google } from 'googleapis';
-import path from 'path';
-import { Callback } from '@la/core';
-import { JWT, Credentials } from 'google-auth-library';
+import stream from 'stream';
 import { IFileInfo } from '../file-info.interface';
+import fs from 'fs';
 
-class GoogleDriveServiceClass {
+class _GoogleDriveService {
   private SCOPES: string[] = ['https://www.googleapis.com/auth/drive'];
-  private TOKEN_PATH: string = 'token.json';
-  private SERVICE_ACCOUNT_KEY_PATH: string = path.join(
-    __dirname,
-    './certs/google-drive-service-account.json'
-  );
-  private MAX_CHUNK_SIZE: number = 20000000;
 
-  private _authorizedClient: JWT;
+  private TOKEN_PATH: string = `${LAConstants.CREDENTIALS_DIRECTORY}/google-drive-token.json`;
 
-  private _credentials: Credentials;
+  private SERVICE_ACCOUNT_KEY_PATH: string = `${LAConstants.CREDENTIALS_DIRECTORY}/google-drive-service-account.json`;
 
-  public setAuthorizedClient(): Promise<boolean> {
-    console.log('this', __dirname, this.SERVICE_ACCOUNT_KEY_PATH);
-    const _jwtClient = new google.auth.JWT({
-      keyFile: this.SERVICE_ACCOUNT_KEY_PATH,
-      scopes: this.SCOPES,
-    });
+  private _jwtClient: JWT;
+
+  public setAuthorizedClient(): Promise<void> {
     return new Promise((_resolve, _reject) => {
-      _jwtClient.authorize((_error: Error, _credentials: Credentials) => {
-        if (_error) {
-          console.error('GoogleDriveHelper.getAuthorizedClient::::: ', _error);
-          _reject(_error);
-        } else {
-          console.log(
-            'GoogleDriveService.setAuthorizedClient',
-            'Successfully authenticated jwt client',
-            _credentials
-          );
-          this._authorizedClient = _jwtClient;
-          this._credentials = _credentials;
-          _resolve(true);
-        }
+      this._jwtClient = new google.auth.JWT({
+        keyFile: this.SERVICE_ACCOUNT_KEY_PATH,
+        scopes: this.SCOPES,
       });
+      fs.readFile(
+        this.TOKEN_PATH,
+        (_error: Error, _credentialsBuffer: Buffer) => {
+          if (_error) {
+            this._jwtClient.authorize(
+              (_error: Error, _credentials: Credentials) => {
+                if (_error) {
+                  console.error(
+                    'GoogleDriveHelper.getAuthorizedClient::::: ',
+                    _error
+                  );
+                  _reject(_error);
+                } else {
+                  console.log(
+                    'GoogleDriveService.setAuthorizedClient',
+                    'Successfully authenticated jwt client',
+                    _credentials
+                  );
+                  this._jwtClient.credentials = _credentials;
+                  this.storeCredentials();
+                  _resolve();
+                }
+              }
+            );
+          } else {
+            console.log(
+              'GoogleDriveService.setAuthorizedClient',
+              'Found existing credentials'
+            );
+            const _credentials: Credentials = JSON.parse(
+              _credentialsBuffer.toString()
+            );
+            this._jwtClient.credentials = _credentials;
+            this.refreshTokenIfNeeded()
+              .then(() => _resolve())
+              .catch(() => _reject());
+          }
+        }
+      );
+    });
+  }
+
+  private refreshTokenIfNeeded(): Promise<void> {
+    return new Promise((_resolve, _reject) => {
+      const _currentTime = new Date().getTime();
+      if (this._jwtClient.credentials.expiry_date > _currentTime) {
+        _resolve();
+      } else {
+        console.log(
+          'GoogleDriveHelper.refreshTokenIfNeeded',
+          'Refreshing access token...'
+        );
+        this._jwtClient.refreshAccessToken(
+          (_error: Error, _credentials: Credentials) => {
+            if (_error) {
+              console.error('GoogleDriveHelper.refreshTokenIfNeeded', _error);
+              _reject();
+              return;
+            }
+            console.log(
+              'GoogleDriveHelper.refreshTokenIfNeeded',
+              'Successfully refreshed access token'
+            );
+            this._jwtClient.credentials = _credentials;
+            this.storeCredentials();
+            _resolve();
+          }
+        );
+      }
     });
   }
 
@@ -47,7 +97,7 @@ class GoogleDriveServiceClass {
       const _drive = google.drive('v3');
       _drive.files.list(
         {
-          auth: this._authorizedClient,
+          auth: this._jwtClient,
           q: `name contains '${_fileName}'`,
           fields: '*',
         },
@@ -68,11 +118,13 @@ class GoogleDriveServiceClass {
             name: _fileName,
             id: _files[0].id,
             size: _files[0].size,
+            webContentLink: _files[0].webContentLink,
+            webViewLink: _files[0].webViewLink,
           });
         }
       );
     };
-    if (!this._authorizedClient) {
+    if (!this._jwtClient) {
       this.setAuthorizedClient()
         .then(_getFileSize.bind(this))
         .catch((_error: Error) => _callback(_error));
@@ -81,32 +133,47 @@ class GoogleDriveServiceClass {
     }
   }
 
-  public stream = (_fileId: string, _callback: Callback): void => {
+  public getReadableStream = (
+    _fileId: string,
+    _callback: Callback<stream.Readable>
+  ): void => {
     const _drive = google.drive('v3');
     _drive.files.get(
       {
         fileId: _fileId,
         alt: 'media',
         prettyPrint: true,
-        auth: this._authorizedClient,
+        auth: this._jwtClient,
       },
       {
-        headers: {
-          Range: `bytes=0-${this.MAX_CHUNK_SIZE}`,
-        },
         responseType: 'stream',
       },
       (_error: Error, _response) => {
         if (_error) {
-          console.error('GoogleDriveHelper.stream', _error);
+          console.error('GoogleDriveHelper.getReadableStream', _error);
           _callback(_error);
           return;
         }
-        console.log('GoogleDriveHelper.stream', _response);
-        _callback(null, _response.data);
+        console.log(
+          'GoogleDriveHelper.getReadableStream',
+          `Successfully got readable stream for ${_fileId}`
+        );
+        _callback(null, _response.data as stream.Readable);
       }
     );
   };
+
+  private storeCredentials(): void {
+    fs.writeFile(
+      this.TOKEN_PATH,
+      JSON.stringify(this._jwtClient.credentials),
+      (_error: Error) => {
+        if (_error) {
+          console.error('GoogleDriveService.storeCredentials', _error);
+        }
+      }
+    );
+  }
 }
 
-export const GoogleDriveService = new GoogleDriveServiceClass();
+export const GoogleDriveService = new _GoogleDriveService();

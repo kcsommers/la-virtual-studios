@@ -9,7 +9,7 @@
     "deploy": "NODE_ENV=production node dist/bundle.js",
     "deploy:windows": "node dist/bundle.js",
     "watch-deploy": "NODE_ENV=development nodemon dist/bundle.js",
-    "watch-deploy:windows": "nodemon dist/bundle.js",
+    "watch-deploy:windows": "nodemon dist/bundle.js --ignore dist/credentials",
     "start": "npm run build:prod && npm run deploy",
     "start:windows": "set NODE_ENV=production && npm run build:prod && npm run deploy:windows",
     "heroku-postbuild": "npm run build:prod",
