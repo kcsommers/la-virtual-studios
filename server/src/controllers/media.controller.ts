@@ -40,94 +40,93 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
     `../public/videos/${_videoName}.mp4`
   );
 
-  GoogleDriveService.getFileInfo(
-    _videoName,
-    (_err: Error, _fileInfo: IFileInfo) => {
-      if (_err) {
-        return _res.sendStatus(500);
-      }
-      // });
+  // GoogleDriveService.getFileInfo(
+  //   _videoName,
+  //   (_err: Error, _fileInfo: IFileInfo) => {
+  //     if (_err) {
+  //       return _res.sendStatus(500);
+  //     }
+  // });
 
-      // fs.stat(_filePath, (err, stat) => {
-      //   if (err) {
-      //     console.error(`File stat error for ${_filePath}.`);
-      //     console.error(err);
-      //     _res.sendStatus(500);
-      //     return;
-      //   }
-
-      let contentLength = _fileInfo.size;
-
-      if (_req.method === 'HEAD') {
-        _res.statusCode = 200;
-        _res.setHeader('accept-ranges', 'bytes');
-        _res.setHeader('content-length', contentLength);
-        _res.end();
-      } else {
-        let retrievedLength;
-        if (start !== undefined && end !== undefined) {
-          retrievedLength = end + 1 - start;
-        } else if (start !== undefined) {
-          retrievedLength = contentLength - start;
-        } else if (end !== undefined) {
-          retrievedLength = end + 1;
-        } else {
-          retrievedLength = contentLength;
-        }
-
-        _res.statusCode = start !== undefined || end !== undefined ? 206 : 200;
-
-        _res.setHeader('content-length', retrievedLength);
-
-        if (range !== undefined) {
-          _res.setHeader(
-            'content-range',
-            `bytes ${start || 0}-${end || contentLength - 1}/${contentLength}`
-          );
-          _res.setHeader('accept-ranges', 'bytes');
-        }
-
-        GoogleDriveService.getReadableStream(
-          _fileInfo.id,
-          (_err: Error, _fileStream: stream.PassThrough) => {
-            _fileStream.on('error', (error) => {
-              console.log(`Error reading file ${_filePath}.`);
-              console.log(error);
-              _res.sendStatus(500);
-            });
-
-            _fileStream.on('data', (_data) => {
-              // console.log('::::more data::::');
-            });
-
-            _fileStream.on('end', (_data) => {
-              console.log('::::STREAM ENDED::::');
-              _fileStream.unpipe();
-            });
-
-            _fileStream.on('close', (_data) => {
-              console.log('::::STREAM CLOSED::::');
-              _fileStream.unpipe();
-            });
-
-            _fileStream.on('unpipe', (_data) => {
-              console.log('::::STREAM UNPIPED::::');
-            });
-
-            _fileStream.pipe(_res);
-          }
-        );
-        // const fileStream = fs.createReadStream(_filePath, options);
-        // fileStream.on('error', (error) => {
-        //   console.log(`Error reading file ${_filePath}.`);
-        //   console.log(error);
-        //   _res.sendStatus(500);
-        // });
-
-        // fileStream.pipe(_res);
-      }
+  fs.stat(_filePath, (err, stat) => {
+    if (err) {
+      console.error(`File stat error for ${_filePath}.`);
+      console.error(err);
+      _res.sendStatus(500);
+      return;
     }
-  );
+
+    let contentLength = stat.size;
+
+    if (_req.method === 'HEAD') {
+      _res.statusCode = 200;
+      _res.setHeader('accept-ranges', 'bytes');
+      _res.setHeader('content-length', contentLength);
+      _res.end();
+    } else {
+      let retrievedLength;
+      if (start !== undefined && end !== undefined) {
+        retrievedLength = end + 1 - start;
+      } else if (start !== undefined) {
+        retrievedLength = contentLength - start;
+      } else if (end !== undefined) {
+        retrievedLength = end + 1;
+      } else {
+        retrievedLength = contentLength;
+      }
+
+      _res.statusCode = start !== undefined || end !== undefined ? 206 : 200;
+
+      _res.setHeader('content-length', retrievedLength);
+
+      if (range !== undefined) {
+        _res.setHeader(
+          'content-range',
+          `bytes ${start || 0}-${end || contentLength - 1}/${contentLength}`
+        );
+        _res.setHeader('accept-ranges', 'bytes');
+      }
+
+      // GoogleDriveService.getReadableStream(
+      //   _fileInfo.id,
+      //   (_err: Error, _fileStream: stream.PassThrough) => {
+      //     _fileStream.on('error', (error) => {
+      //       console.log(`Error reading file ${_videoName}.`);
+      //       console.log(error);
+      //       _res.sendStatus(500);
+      //     });
+
+      //     _fileStream.on('data', (_data) => {
+      //       // console.log('::::more data::::');
+      //     });
+
+      //     _fileStream.on('end', (_data) => {
+      //       console.log('::::STREAM ENDED::::');
+      //       _fileStream.unpipe();
+      //     });
+
+      //     _fileStream.on('close', (_data) => {
+      //       console.log('::::STREAM CLOSED::::');
+      //       _fileStream.unpipe();
+      //     });
+
+      //     _fileStream.on('unpipe', (_data) => {
+      //       console.log('::::STREAM UNPIPED::::');
+      //     });
+
+      //     _fileStream.pipe(_res);
+      //   }
+      // );
+      const fileStream = fs.createReadStream(_filePath, options);
+      fileStream.on('error', (error) => {
+        console.log(`Error reading file ${_filePath}.`);
+        console.log(error);
+        _res.sendStatus(500);
+      });
+
+      fileStream.pipe(_res);
+    }
+  });
 });
 
 export const mediaController = router;

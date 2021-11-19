@@ -37,8 +37,7 @@ class _GoogleDriveService {
                 } else {
                   console.log(
                     'GoogleDriveService.setAuthorizedClient',
-                    'Successfully authenticated jwt client',
-                    _credentials
+                    'Successfully authenticated jwt client'
                   );
                   this._jwtClient.credentials = _credentials;
                   this.storeCredentials();
@@ -165,8 +164,7 @@ class _GoogleDriveService {
         }
         console.log(
           'GoogleDriveHelper.getReadableStream',
-          `Successfully got readable stream for ${_fileId}`,
-          _response
+          `Successfully got readable stream for ${_fileId}`
         );
         this._currentStream = _response.data as stream.PassThrough;
         _callback(null, this._currentStream);

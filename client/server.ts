@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
-  const server = express();
+  const server = express.default();
   const distFolder = join(process.cwd(), 'dist/la-virtual-studios/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'

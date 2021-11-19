@@ -1,8 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Inject,
+  PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import { ICoach, IEvent, IProduct, RoutingService } from '@la/core';
@@ -38,6 +41,7 @@ export class HomePageComponent {
   private _landingVideo: ElementRef<HTMLVideoElement>;
 
   constructor(
+    @Inject(PLATFORM_ID) private _platformId: Object,
     private _dummyDataService: DummyDataService,
     private _routingService: RoutingService,
     private _http: HttpClient
@@ -66,6 +70,9 @@ export class HomePageComponent {
 
   ngAfterViewInit() {
     // this.createMediaSource();
+    if (!isPlatformBrowser(this._platformId)) {
+      return;
+    }
     this._landingVideo.nativeElement.muted = true;
     this._landingVideo.nativeElement.play();
   }
