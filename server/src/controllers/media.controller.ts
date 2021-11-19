@@ -1,7 +1,9 @@
-import { Router, Request, Response } from 'express';
-import HttpStatusCodes from 'http-status-codes';
+import { Request, Response, Router } from 'express';
 import fs from 'fs';
+import HttpStatusCodes from 'http-status-codes';
 import path from 'path';
+import stream from 'stream';
+import { GoogleDriveService, IFileInfo } from '../third-party';
 
 const router = Router();
 
@@ -38,6 +40,14 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
     `../public/videos/${_videoName}.mp4`
   );
 
+  // GoogleDriveService.getFileInfo(
+  //   _videoName,
+  //   (_err: Error, _fileInfo: IFileInfo) => {
+  //     if (_err) {
+  //       return _res.sendStatus(500);
+  //     }
+  // });
+
   fs.stat(_filePath, (err, stat) => {
     if (err) {
       console.error(`File stat error for ${_filePath}.`);
@@ -48,14 +58,12 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
 
     let contentLength = stat.size;
 
-    // Listing 4.
     if (_req.method === 'HEAD') {
       _res.statusCode = 200;
       _res.setHeader('accept-ranges', 'bytes');
       _res.setHeader('content-length', contentLength);
       _res.end();
     } else {
-      // Listing 5.
       let retrievedLength;
       if (start !== undefined && end !== undefined) {
         retrievedLength = end + 1 - start;
@@ -67,7 +75,6 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
         retrievedLength = contentLength;
       }
 
-      // Listing 6.
       _res.statusCode = start !== undefined || end !== undefined ? 206 : 200;
 
       _res.setHeader('content-length', retrievedLength);
@@ -80,7 +87,36 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
         _res.setHeader('accept-ranges', 'bytes');
       }
 
-      // Listing 7.
+      // GoogleDriveService.getReadableStream(
+      //   _fileInfo.id,
+      //   (_err: Error, _fileStream: stream.PassThrough) => {
+      //     _fileStream.on('error', (error) => {
+      //       console.log(`Error reading file ${_videoName}.`);
+      //       console.log(error);
+      //       _res.sendStatus(500);
+      //     });
+
+      //     _fileStream.on('data', (_data) => {
+      //       // console.log('::::more data::::');
+      //     });
+
+      //     _fileStream.on('end', (_data) => {
+      //       console.log('::::STREAM ENDED::::');
+      //       _fileStream.unpipe();
+      //     });
+
+      //     _fileStream.on('close', (_data) => {
+      //       console.log('::::STREAM CLOSED::::');
+      //       _fileStream.unpipe();
+      //     });
+
+      //     _fileStream.on('unpipe', (_data) => {
+      //       console.log('::::STREAM UNPIPED::::');
+      //     });
+
+      //     _fileStream.pipe(_res);
+      //   }
+      // );
       const fileStream = fs.createReadStream(_filePath, options);
       fileStream.on('error', (error) => {
         console.log(`Error reading file ${_filePath}.`);
@@ -92,39 +128,5 @@ router.get('/videos/:videoName', (_req: Request, _res: Response) => {
     }
   });
 });
-
-// router.get('/videos/:videoName', (_req: Request, _res: Response) => {
-//   const _range = _req.headers.range;
-//   if (!_range) {
-//     _res.status(HttpStatusCodes.BAD_REQUEST).send('Requires range header');
-//     return;
-//   }
-
-//   const _videoName: string = _req.params.videoName;
-//   const _videoPath: string = path.join(
-//     __dirname,
-//     `../public/videos/${_videoName}.mp4`
-//   );
-//   const _videoSize = fs.statSync(_videoPath).size;
-
-//   const CHUNK_SIZE: number = 10 ** 6; // 1MB
-//   const _start: number = Number(_range.replace(/\D/g, ''));
-//   const _end: number = Math.min(_start + CHUNK_SIZE, _videoSize - 1);
-//   const _contentLength = _end - _start + 1;
-//   const _headers = {
-//     'Content-Range': `bytes ${_start}-${_end}/${_videoSize}`,
-//     'Accept-Ranges': 'bytes',
-//     'Content-Length': _contentLength,
-//     'Content-Type': 'video/mp4',
-//   };
-//   _res.writeHead(HttpStatusCodes.PARTIAL_CONTENT, _headers);
-
-//   const _videoStream = fs.createReadStream(_videoPath, {
-//     start: _start,
-//     end: _end,
-//   });
-//   _videoStream.pipe(_res);
-//   console.log('video size:::: ', _videoSize);
-// });
 
 export const mediaController = router;

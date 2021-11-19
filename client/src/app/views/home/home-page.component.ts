@@ -1,7 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Inject,
+  PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
 import { ICoach, IEvent, IProduct, RoutingService } from '@la/core';
@@ -13,12 +17,12 @@ import {
 } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
   public products$ = new BehaviorSubject<IProduct[]>(null);
@@ -37,8 +41,10 @@ export class HomePageComponent {
   private _landingVideo: ElementRef<HTMLVideoElement>;
 
   constructor(
+    @Inject(PLATFORM_ID) private _platformId: Object,
     private _dummyDataService: DummyDataService,
-    private _routingService: RoutingService
+    private _routingService: RoutingService,
+    private _http: HttpClient
   ) {
     this._dummyDataService
       .getProducts()
@@ -63,8 +69,55 @@ export class HomePageComponent {
   }
 
   ngAfterViewInit() {
+    // this.createMediaSource();
+    if (!isPlatformBrowser(this._platformId)) {
+      return;
+    }
     this._landingVideo.nativeElement.muted = true;
     this._landingVideo.nativeElement.play();
+  }
+
+  private createMediaSource(): void {
+    const _video: HTMLVideoElement = this._landingVideo.nativeElement;
+    const _mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+    if ('MediaSource' in window && MediaSource.isTypeSupported(_mimeCodec)) {
+      const _mediaSource = new MediaSource();
+      _video.src = URL.createObjectURL(_mediaSource);
+      console.log(_video.src);
+      _mediaSource.addEventListener(
+        'sourceopen',
+        this.mediaSourceOpen.bind(this, _mediaSource)
+      );
+    } else {
+      console.error('Unsupported MIME type or codec: ', _mimeCodec);
+    }
+  }
+
+  private mediaSourceOpen(_mediaSource: MediaSource): void {
+    console.log('media source open:::: ', _mediaSource);
+    const _mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+    const _videoSourceBuffer: SourceBuffer =
+      _mediaSource.addSourceBuffer(_mimeCodec);
+    _videoSourceBuffer.addEventListener('updateend', () => {
+      console.log('end of stream::::');
+      _mediaSource.endOfStream();
+      this._landingVideo.nativeElement.muted = true;
+      this._landingVideo.nativeElement.play();
+    });
+    this._http
+      .get(`${environment.apiUrl}/media/videos/greg_james_studio_tour`, {
+        headers: new HttpHeaders({ Range: 'bytes=0-1000' }),
+        responseType: 'arraybuffer',
+      })
+      .subscribe({
+        next: (_chunk: ArrayBuffer) => {
+          console.log('CHUNK:::: ', _chunk);
+          _videoSourceBuffer.appendBuffer(_chunk);
+        },
+        error: (_error: any) => {
+          console.error('HomPageComponent.mediaSourceOpen', _error);
+        },
+      });
   }
 
   public eventSelected(_event: IEvent): void {
