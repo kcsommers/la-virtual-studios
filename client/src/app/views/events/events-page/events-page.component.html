@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<section class="section-header-centered">
+  <h1>Acting Classes and Workshops</h1>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum suscipit
+    dolorem aliquid quidem fugiat repudiandae deserunt eaque possimus.
+  </p>
+  <la-button
+    [text]="'View Event Calendar'"
+    [look]="'outline'"
+    [color]="'accent'"
+    [isResponsive]="true"
+    [path]="'/calendar'"
+  ></la-button>
+</section>
+<section class="page-body">
+  <div class="events-section-grid">
+    <la-event-card
+      *ngFor="let event of events$ | async"
+      [event]="event"
+      (eventSelected)="eventSelected($event)"
+    ></la-event-card>
+  </div>
+</section>

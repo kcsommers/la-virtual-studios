@@ -5,5 +5,6 @@ export interface IProduct {
   coverImage: string;
   images: string[];
   price: number;
+  route?: string;
   _id?: string;
 }

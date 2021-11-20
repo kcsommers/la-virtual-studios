@@ -4,7 +4,10 @@
     [ngStyle]="{ backgroundImage: 'url(' + product.coverImage + ')' }"
   ></div>
 </div>
-<div class="product-card-body">
+<div
+  class="product-card-body"
+  [routerLink]="product.route ? [product.route] : []"
+>
   <div class="product-card-body-top">
     <span class="product-name">{{ product.name }}</span>
     <p class="product-blurb">{{ product.blurb }}</p>

@@ -64,6 +64,7 @@ export class ButtonComponent {
   constructor(private _router: Router, private _route: ActivatedRoute) {}
 
   public handleClick(_event: MouseEvent): void {
+    _event.stopPropagation();
     if (this.path) {
       this._router.navigate([this.path], {
         relativeTo: this._route,

@@ -9,6 +9,7 @@ export const dummyProducts: IProduct[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/acting-coach-1.jpg',
     images: [],
     price: 10000,
+    route: '/events',
   },
   {
     name: 'STAR',
@@ -18,6 +19,7 @@ export const dummyProducts: IProduct[] = [
       'https://res.cloudinary.com/kcsommers/image/upload/v1636090931/LA%20Virtual%20Studios/audition-1.jpg',
     images: [],
     price: 10000,
+    route: '/star',
   },
   {
     name: 'Demo Reels',
