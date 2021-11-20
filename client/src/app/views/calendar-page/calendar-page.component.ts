@@ -4,6 +4,7 @@ import {
   ICalendarDay,
   ICalendarMonth,
   IEvent,
+  LAConstants,
   RoutingService,
 } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
@@ -35,6 +36,10 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
         this.displayedDays$.next(_displayedDays);
       },
     });
+    const _productId: string = this._routingService.routeParameterMap.get(
+      LAConstants.ID_PARAM
+    );
+    console.log('_product:::: ', _productId);
   }
 
   public setSelectedDate(_day: ICalendarDay): void {

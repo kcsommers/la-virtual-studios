@@ -22,6 +22,17 @@ export class DummyDataService {
     return scheduled([dummyProducts.slice(0, _count)], asyncScheduler);
   }
 
+  public getProduct(_productId: string): Observable<IProduct> {
+    const _product = dummyProducts.find(
+      (_e: IProduct) => _e._id === _productId
+    );
+    if (_product) {
+      return scheduled([_product], asyncScheduler);
+    } else {
+      return throwError(new Error("Couldn't find that product"));
+    }
+  }
+
   public getEvents(
     _month: number,
     _count = dummyEvents.length

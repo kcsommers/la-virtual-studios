@@ -10,6 +10,7 @@ import {
   GetDateDisplayPipeModule,
   GetPriceDisplayPipeModule,
   GetRemainingSlotsDisplayPipeModule,
+  LAConstants,
 } from '@la/core';
 import { EventPageComponent } from './event-page/event-page.component';
 import { EventsPageComponent } from './events-page/events-page.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
     component: EventsWrapperComponent,
     children: [
       {
-        path: `:${EventsHelper.EVENT_PARAM}`,
+        path: `:${LAConstants.ID_PARAM}`,
         component: EventPageComponent,
       },
       {

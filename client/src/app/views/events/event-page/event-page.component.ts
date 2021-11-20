@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Destroyer, EventsHelper, IEvent, RoutingService } from '@la/core';
+import { Destroyer, IEvent, LAConstants, RoutingService } from '@la/core';
 import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class EventPageComponent extends Destroyer implements OnInit {
 
   ngOnInit() {
     const _eventId: string = this._routingService.routeParameterMap.get(
-      EventsHelper.EVENT_PARAM
+      LAConstants.ID_PARAM
     );
     if (!_eventId) {
       return;

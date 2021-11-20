@@ -1,4 +1,4 @@
-import { DateHelper, ICoach, IEvent } from '@la/core';
+import { DateHelper, IEvent } from '@la/core';
 import { dummyCoaches } from '.';
 import { dummyLocations } from './locations.dummy-data';
 
