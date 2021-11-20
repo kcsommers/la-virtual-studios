@@ -1,4 +1,4 @@
-import { IEvent } from '../events/event.interface';
+import { ILAEvent } from '../events/la-event.interface';
 import { ICalendarDay } from './calendar-day.interface';
 
 export class CalendarDay implements ICalendarDay {
@@ -16,9 +16,9 @@ export class CalendarDay implements ICalendarDay {
 
   public isPast: boolean;
 
-  public events: IEvent[];
+  public events: ILAEvent[];
 
-  constructor(_dateModel: Date, _events?: IEvent[]) {
+  constructor(_dateModel: Date, _events?: ILAEvent[]) {
     const _currentDateModel: Date = new Date();
     const _currentYear: number = _currentDateModel.getFullYear();
     const _currentMonth: number = _currentDateModel.getMonth();

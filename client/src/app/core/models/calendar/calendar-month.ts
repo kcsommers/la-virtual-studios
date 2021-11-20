@@ -1,17 +1,17 @@
-import { CalendarDay, ICalendarDay, ICalendarMonth, IEvent } from '@la/core';
+import { CalendarDay, ICalendarDay, ICalendarMonth, ILAEvent } from '@la/core';
 
 export class CalendarMonth implements ICalendarMonth {
   public month: number;
 
   public year: number;
 
-  public events: IEvent[] = [];
+  public events: ILAEvent[] = [];
 
-  public eventsByDay: Map<number, IEvent[]>;
+  public eventsByDay: Map<number, ILAEvent[]>;
 
   public calendarDays: ICalendarDay[];
 
-  constructor(_month: number, _events?: IEvent[]) {
+  constructor(_month: number, _events?: ILAEvent[]) {
     this.month = _month;
     if (_events) {
       this.events = _events;
@@ -35,8 +35,8 @@ export class CalendarMonth implements ICalendarMonth {
   }
 
   private setEventsByDay(): void {
-    const _eventsByDayMap = new Map<number, IEvent[]>();
-    this.events.forEach((_event: IEvent) => {
+    const _eventsByDayMap = new Map<number, ILAEvent[]>();
+    this.events.forEach((_event: ILAEvent) => {
       const _dateNum: number = _event.date;
       if (!_dateNum) {
         return;
@@ -62,7 +62,7 @@ export class CalendarMonth implements ICalendarMonth {
     const _prevMonthStart = 1 - _firstDayOfMonth;
     for (let i = _prevMonthStart; i < 35 + _prevMonthStart; i++) {
       const _date: Date = new Date(this.year, this.month, i);
-      const _events: IEvent[] = this.eventsByDay.get(i);
+      const _events: ILAEvent[] = this.eventsByDay.get(i);
       _calendarDays.push(new CalendarDay(_date, _events || []));
     }
     this.calendarDays = _calendarDays;

@@ -3,7 +3,7 @@ import {
   Destroyer,
   ICalendarDay,
   ICalendarMonth,
-  IEvent,
+  ILAEvent,
   LAConstants,
   RoutingService,
 } from '@la/core';
@@ -52,7 +52,7 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
     this.displayedDays$.next(_daysWithEvents);
   }
 
-  public eventSelected(_event: IEvent): void {
+  public eventSelected(_event: ILAEvent): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
   }
 }

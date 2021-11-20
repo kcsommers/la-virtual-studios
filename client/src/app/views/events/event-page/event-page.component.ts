@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Destroyer, IEvent, LAConstants, RoutingService } from '@la/core';
+import { Destroyer, ILAEvent, LAConstants, RoutingService } from '@la/core';
 import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventPageComponent extends Destroyer implements OnInit {
-  public event$ = new BehaviorSubject<IEvent>(null);
+  public event$ = new BehaviorSubject<ILAEvent>(null);
 
   constructor(
     private _dummyDataService: DummyDataService,
@@ -35,7 +35,7 @@ export class EventPageComponent extends Destroyer implements OnInit {
       .getEvent(_eventId)
       .pipe(take(1))
       .subscribe({
-        next: (_event: IEvent) => {
+        next: (_event: ILAEvent) => {
           this.event$.next(_event);
         },
         error: (_error: any) => {

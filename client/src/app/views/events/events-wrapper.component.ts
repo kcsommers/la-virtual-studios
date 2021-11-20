@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: '<router-outlet></router-outlet>',
   styles: [
     `
-      host: {
+      :host {
         display: block;
         width: 100%;
       }

@@ -1,4 +1,4 @@
-export * from './events/event.interface';
+export * from './events/la-event.interface';
 export * from './coaches/coach.interface';
 export * from './products/product.interface';
 export * from './users/user.interface';

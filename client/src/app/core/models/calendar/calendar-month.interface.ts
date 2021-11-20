@@ -1,10 +1,10 @@
-import { ICalendarDay, IEvent } from '@la/core';
+import { ICalendarDay, ILAEvent } from '@la/core';
 
 export interface ICalendarMonth {
   year: number;
   month: number;
   calendarDays: ICalendarDay[];
-  eventsByDay: Map<number, IEvent[]>;
+  eventsByDay: Map<number, ILAEvent[]>;
   getDaysWithEvents(): ICalendarDay[];
   getMonthIndex(): number;
 }

@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IEvent } from '@la/core';
+import { ILAEvent } from '@la/core';
 
 @Component({
   selector: 'la-event-card',
@@ -15,11 +15,11 @@ import { IEvent } from '@la/core';
 })
 export class EventCardComponent {
   @Input()
-  public event: IEvent;
+  public event: ILAEvent;
 
   @Input()
   public showRemainingSlots: boolean = false;
 
   @Output()
-  public eventSelected = new EventEmitter<IEvent>();
+  public eventSelected = new EventEmitter<ILAEvent>();
 }

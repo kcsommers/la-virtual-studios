@@ -1,4 +1,4 @@
-import { IEvent } from '../events/event.interface';
+import { ILAEvent } from '../events/la-event.interface';
 
 export interface ICalendarDay {
   dateModel: Date;
@@ -8,5 +8,5 @@ export interface ICalendarDay {
   year: number;
   isToday: boolean;
   isPast: boolean;
-  events: IEvent[];
+  events: ILAEvent[];
 }

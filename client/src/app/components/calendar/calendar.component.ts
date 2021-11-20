@@ -11,7 +11,7 @@ import {
   DateHelper,
   ICalendarDay,
   ICalendarMonth,
-  IEvent,
+  ILAEvent,
 } from '@la/core';
 import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
@@ -86,7 +86,7 @@ export class CalendarComponent implements OnInit {
       .getEvents(_month)
       .pipe(take(1))
       .subscribe({
-        next: (_events: IEvent[]) => {
+        next: (_events: ILAEvent[]) => {
           const _calendarMonth = new CalendarMonth(_month, _events);
           this.renderMonth(_calendarMonth);
         },

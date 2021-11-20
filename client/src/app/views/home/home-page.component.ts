@@ -8,7 +8,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { ICoach, IEvent, IProduct, RoutingService } from '@la/core';
+import { ICoach, ILAEvent, IProduct, RoutingService } from '@la/core';
 import {
   DummyDataService,
   dummyHeadshots1,
@@ -27,7 +27,7 @@ import { environment } from '../../../environments/environment';
 export class HomePageComponent {
   public products$ = new BehaviorSubject<IProduct[]>(null);
 
-  public events$ = new BehaviorSubject<IEvent[]>(null);
+  public events$ = new BehaviorSubject<ILAEvent[]>(null);
 
   public coaches$ = new BehaviorSubject<ICoach[]>(null);
 
@@ -57,7 +57,7 @@ export class HomePageComponent {
       .getClasses()
       .pipe(take(1))
       .subscribe({
-        next: (_events: IEvent[]) => this.events$.next(_events),
+        next: (_events: ILAEvent[]) => this.events$.next(_events),
       });
 
     this._dummyDataService
@@ -120,7 +120,7 @@ export class HomePageComponent {
       });
   }
 
-  public eventSelected(_event: IEvent): void {
+  public eventSelected(_event: ILAEvent): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
   }
 }

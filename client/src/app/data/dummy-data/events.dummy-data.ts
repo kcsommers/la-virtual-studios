@@ -1,4 +1,4 @@
-import { DateHelper, IEvent } from '@la/core';
+import { DateHelper, ILAEvent } from '@la/core';
 import { dummyCoaches } from '.';
 import { dummyLocations } from './locations.dummy-data';
 
@@ -19,7 +19,7 @@ const getDate = (): number => {
   return _randomDate;
 };
 
-export const dummyEvents: IEvent[] = [
+export const dummyEvents: ILAEvent[] = [
   {
     name: 'Acting class 1',
     blurb: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',

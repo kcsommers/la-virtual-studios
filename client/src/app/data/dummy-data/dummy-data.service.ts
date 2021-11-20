@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ICoach, IProduct } from '@la/core';
 import { asyncScheduler, Observable, scheduled, throwError } from 'rxjs';
 import { dummyEvents } from './events.dummy-data';
-import { IEvent } from '../../core/models/events/event.interface';
+import { ILAEvent } from '../../core/models/events/la-event.interface';
 import { dummyCoaches } from './coaches.dummy-data';
 import { dummyProducts } from './products.dummy-data';
 
@@ -10,7 +10,7 @@ import { dummyProducts } from './products.dummy-data';
   providedIn: 'root',
 })
 export class DummyDataService {
-  public getClasses(_count = dummyEvents.length): Observable<IEvent[]> {
+  public getClasses(_count = dummyEvents.length): Observable<ILAEvent[]> {
     return scheduled([dummyEvents.slice(0, _count)], asyncScheduler);
   }
 
@@ -36,12 +36,12 @@ export class DummyDataService {
   public getEvents(
     _month: number,
     _count = dummyEvents.length
-  ): Observable<IEvent[]> {
+  ): Observable<ILAEvent[]> {
     return this.getClasses(_count);
   }
 
-  public getEvent(_eventId: string): Observable<IEvent> {
-    const _event = dummyEvents.find((_e: IEvent) => _e._id === _eventId);
+  public getEvent(_eventId: string): Observable<ILAEvent> {
+    const _event = dummyEvents.find((_e: ILAEvent) => _e._id === _eventId);
     if (_event) {
       return scheduled([_event], asyncScheduler);
     } else {
