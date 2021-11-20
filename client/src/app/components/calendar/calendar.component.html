@@ -2,10 +2,10 @@
   <div class="calendar-header">
     <h2 class="calendar-header-date-wrap">
       <span class="calendar-month">
-        {{ displayedMonth$ | async | getMonthDisplay }}
+        {{ activeMonth$ | async | getMonthDisplay }}
       </span>
       <span class="calendar-year">
-        {{ displayedYear$ | async }}
+        {{ activeYear$ | async }}
       </span>
     </h2>
     <span class="calendar-controls">
@@ -32,23 +32,17 @@
       <div
         class="calendar-day"
         [class.has-events]="!!day.events?.length"
-        [class.selected]="(selectedDate$ | async) === day"
+        [class.selected]="(activeDay$ | async) === day"
         [class.calendar-day-disabled]="
-          day.isPast || (displayedMonth$ | async)?.month !== day.month
+          day.isPast || (activeMonth$ | async)?.month !== day.month
         "
-        (click)="setSelectedDate(day)"
+        (click)="setActiveDay(day)"
       >
         <div class="calendar-day-inner">
           <span class="calendar-day-date" [class.accent-bold]="day.isToday">
             {{ day.date }}
           </span>
-          <ng-container *ngIf="day.events?.length">
-            <span class="total-events font-small-bold">
-              {{ day.events.length }}
-              {{ day.events.length > 1 ? ' Events' : ' Event' }}
-            </span>
-            <span class="events-indicator"></span>
-          </ng-container>
+          <span *ngIf="day.events?.length" class="events-indicator"></span>
         </div>
       </div>
     </ng-container>
