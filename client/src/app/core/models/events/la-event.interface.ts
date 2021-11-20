@@ -1,13 +1,11 @@
-import { ILocation, IUser } from '@la/core';
+import { IUser } from '@la/core';
+import { ICalendarEvent } from '../calendar/calendar-event.interface';
 import { ICoach } from '../coaches/coach.interface';
-import { IProduct } from '../products/product.interface';
 
-export interface ILAEvent extends IProduct {
+export interface ILAEvent extends ICalendarEvent {
   slots: number;
   attendees: IUser[];
   coach: ICoach;
-  date: number;
   startTime: number;
   endTime: number;
-  location: ILocation;
 }
