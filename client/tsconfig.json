@@ -22,7 +22,8 @@
     "paths": {
       "@la/core": ["src/app/core/index.ts"],
       "@la/components": ["src/app/components/index.ts"],
-      "@la/data": ["src/app/data/index.ts"]
+      "@la/data": ["src/app/data/index.ts"],
+      "@la/environment": ["src/environments/environment.ts"]
     },
     "esModuleInterop": true,
     "isolatedModules": true
