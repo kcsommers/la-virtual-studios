@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IUser } from '@la/core';
+import { IUser, LAConstants, RoutingService } from '@la/core';
 import { AuthenticationService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -20,19 +20,22 @@ export class LoginPageComponent {
 
   public loginError$ = new BehaviorSubject<string>('');
 
-  constructor(private _authService: AuthenticationService) {}
+  constructor(
+    private _authService: AuthenticationService,
+    private _routingService: RoutingService
+  ) {}
 
   private _validateForm(): boolean {
     let _isValid: boolean = true;
     if (!this.emailAddress) {
       _isValid = false;
-      this.emailError$.next('Email required');
+      this.emailError$.next('Please enter a valid email address');
     } else {
       this.emailError$.next('');
     }
     if (!this.password) {
       _isValid = false;
-      this.passwordError$.next('Password required');
+      this.passwordError$.next('Password is required');
     } else {
       this.passwordError$.next('');
     }
@@ -40,6 +43,9 @@ export class LoginPageComponent {
   }
 
   public login(): void {
+    if (!this._validateForm()) {
+      return;
+    }
     this._authService
       .login({
         email: this.emailAddress,
@@ -49,6 +55,11 @@ export class LoginPageComponent {
       .subscribe({
         next: (_user: IUser) => {
           console.log('user:::: ', _user);
+          const _requestedUrl: string =
+            this._routingService.queryParameterMap.get(
+              LAConstants.REQUESTED_URL_PARAM
+            );
+          this._routingService.router.navigate([_requestedUrl || '/']);
         },
         error: (_error: any) => {
           console.error('LoginPageComponent.login', _error);

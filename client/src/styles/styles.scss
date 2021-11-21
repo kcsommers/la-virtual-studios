@@ -132,14 +132,28 @@ textarea {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: $spacing-sm;
+  &:not(.input-wrap-errored) {
+    margin-bottom: $spacing-sm;
+  }
   &:focus-within {
     box-shadow: $box-shadow-hovered;
+  }
+  &.input-wrap-errored {
+    box-shadow: $box-shadow-error;
+    > span.input-label {
+      color: $error;
+    }
   }
 }
 
 span.input-label {
   font-size: $fontsize-xs;
+}
+
+div.input-error {
+  font-size: $fontsize-xs;
+  color: $error;
+  margin-bottom: $spacing-xs;
 }
 
 *.centered-text {

@@ -105,7 +105,7 @@ export class CalendarPageComponent extends BaseView implements OnInit {
   public goToAuthPage(_page: 'login' | 'signup'): void {
     this.routingService.router.navigate([`/auth/${_page}`], {
       queryParams: {
-        requestedUrl: `events/${this._selectedProduct._id}`,
+        [LAConstants.REQUESTED_URL_PARAM]: `events/${this._selectedProduct._id}`,
       },
     });
   }

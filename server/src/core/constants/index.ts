@@ -1,1 +1,1 @@
-export * from './LaConstants.namespace';
+export * from './la-constants.namespace';
