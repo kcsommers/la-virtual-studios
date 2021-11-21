@@ -1,17 +1,41 @@
 import { Injectable } from '@angular/core';
-import { ICoach, IProduct } from '@la/core';
+import {
+  DateHelper,
+  ICoach,
+  ILAEvent,
+  IProduct,
+  IProductCalendarDay,
+} from '@la/core';
 import { asyncScheduler, Observable, scheduled, throwError } from 'rxjs';
-import { dummyEvents } from './events.dummy-data';
-import { ILAEvent } from '../../core/models/events/la-event.interface';
+import { dummyClasses } from './classes.dummy-data';
 import { dummyCoaches } from './coaches.dummy-data';
+import { dummyProductCalendarDays } from './product-calendar-days.dummy-data';
 import { dummyProducts } from './products.dummy-data';
+
+const _dateModel = new Date();
+const _currentYear: number = _dateModel.getFullYear();
+const _currentMonth: number = _dateModel.getMonth();
+_dateModel.setDate(1);
+const _firstDayOfMonth: number = _dateModel.getDate();
+_dateModel.setMonth(_currentMonth + 1);
+_dateModel.setDate(0);
+const _lastDayOfMonth: number = _dateModel.getDate();
 
 @Injectable({
   providedIn: 'root',
 })
 export class DummyDataService {
-  public getClasses(_count = dummyEvents.length): Observable<ILAEvent[]> {
-    return scheduled([dummyEvents.slice(0, _count)], asyncScheduler);
+  public getClasses(_count = dummyClasses.length): Observable<IProduct[]> {
+    return scheduled([dummyClasses.slice(0, _count)], asyncScheduler);
+  }
+
+  public getClass(_productId: string): Observable<IProduct> {
+    const _event = dummyClasses.find((_e: IProduct) => _e._id === _productId);
+    if (_event) {
+      return scheduled([_event], asyncScheduler);
+    } else {
+      return throwError(new Error("Couldn't find that event"));
+    }
   }
 
   public getCoaches(_count = dummyCoaches.length): Observable<ICoach[]> {
@@ -33,19 +57,11 @@ export class DummyDataService {
     }
   }
 
-  public getEvents(
+  public getProductCalendarDays(
     _month: number,
-    _count = dummyEvents.length
-  ): Observable<ILAEvent[]> {
-    return this.getClasses(_count);
-  }
-
-  public getEvent(_eventId: string): Observable<ILAEvent> {
-    const _event = dummyEvents.find((_e: ILAEvent) => _e._id === _eventId);
-    if (_event) {
-      return scheduled([_event], asyncScheduler);
-    } else {
-      return throwError(new Error("Couldn't find that event"));
-    }
+    _productId: string,
+    _count = dummyClasses.length
+  ): Observable<IProductCalendarDay[]> {
+    return scheduled([dummyProductCalendarDays(_productId)], asyncScheduler);
   }
 }

@@ -85,6 +85,7 @@ export class RoutingService implements OnDestroy {
   }
 
   private updateRouteParams(): void {
+    this.routeParameterMap.clear();
     const _params: Params = {};
     const _routeStack: ActivatedRouteSnapshot[] = [
       this.router.routerState.snapshot.root,

@@ -57,7 +57,7 @@ export class CalendarComponent extends Destroyer implements OnInit {
       });
   }
 
-  public setActiveDay(_day: CalendarDay): void {
+  public setActiveDay(_day: ICalendarDay): void {
     const _activeMonth: ICalendarMonth = this.activeMonth$.getValue();
     if (
       _day.isPast ||

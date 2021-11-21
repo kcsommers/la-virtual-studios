@@ -4,6 +4,8 @@ import {
   ICalendarDay,
   ICalendarMonth,
   ILAEvent,
+  IProduct,
+  IProductCalendarDay,
   LAConstants,
   RoutingService,
 } from '@la/core';
@@ -27,19 +29,21 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
 
   public calendarMonthsMap = new Map<number, ICalendarMonth>();
 
+  public productId: string;
+
   constructor(
     private _dummyDataService: DummyDataService,
     private _routingService: RoutingService
   ) {
     super();
-    const _dateModel = new Date();
-    this.setActiveMonth(_dateModel.getMonth());
   }
 
   ngOnInit() {
-    const _productId: string = this._routingService.routeParameterMap.get(
+    this.productId = this._routingService.routeParameterMap.get(
       LAConstants.ID_PARAM
     );
+    const _dateModel = new Date();
+    this.setActiveMonth(_dateModel.getMonth());
   }
 
   public setActiveMonth(_month: number): void {
@@ -50,12 +54,19 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
       this.setDisplayedDays();
       return;
     }
+    this.fetchProductCalendarDays(_month);
+  }
+
+  private fetchProductCalendarDays(_month: number): void {
     this._dummyDataService
-      .getEvents(_month)
+      .getProductCalendarDays(_month, this.productId)
       .pipe(take(1))
       .subscribe({
-        next: (_events: ILAEvent[]) => {
-          const _calendarMonth = new CalendarMonth(_month, _events);
+        next: (_calendarDays: IProductCalendarDay[]) => {
+          const _calendarMonth = new CalendarMonth<IProductCalendarDay>(
+            _month,
+            _calendarDays
+          );
           this.activeMonth$.next(_calendarMonth);
           this.calendarMonthsMap.set(_calendarMonth.month, _calendarMonth);
           this.setDisplayedDays();
@@ -71,8 +82,7 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
     const _activeDay: ICalendarDay = this.activeDay$.getValue();
     const _displayedDays: ICalendarDay[] = _activeDay
       ? [_activeDay]
-      : _activeMonth.getDaysWithEvents();
-    console.log(_displayedDays);
+      : _activeMonth.getEventDays();
     this.displayedDays$.next(_displayedDays);
   }
 
@@ -81,7 +91,7 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
     this.setDisplayedDays();
   }
 
-  public eventSelected(_event: ILAEvent): void {
+  public eventSelected(_event: IProduct): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
   }
 }

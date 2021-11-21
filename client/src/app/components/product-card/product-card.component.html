@@ -7,6 +7,7 @@
 <div
   class="product-card-body"
   [routerLink]="product.route ? [product.route] : []"
+  (click)="goToProductRoute()"
 >
   <div class="product-card-body-top">
     <span class="product-name">{{ product.name }}</span>
@@ -19,7 +20,7 @@
       [look]="'outline'"
       [color]="'accent'"
       [isFullWidth]="true"
-      [clickHandler]="bookNow.bind(this)"
+      [clickHandler]="goToCalendar.bind(this)"
     ></la-button>
   </div>
 </div>

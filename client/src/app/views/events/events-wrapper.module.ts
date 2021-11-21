@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   ButtonComponentModule,
-  EventCardComponentModule,
+  ProductCardComponentModule,
 } from '@la/components';
 import {
-  EventsHelper,
   GetDateDisplayPipeModule,
   GetPriceDisplayPipeModule,
   GetRemainingSlotsDisplayPipeModule,
@@ -41,7 +40,7 @@ const routes: Routes = [
     GetPriceDisplayPipeModule,
     GetRemainingSlotsDisplayPipeModule,
     GetDateDisplayPipeModule,
-    EventCardComponentModule,
+    ProductCardComponentModule,
   ],
   declarations: [
     EventsWrapperComponent,

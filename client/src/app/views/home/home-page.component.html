@@ -58,11 +58,11 @@
     </p>
   </div>
   <div class="events-section-grid">
-    <la-event-card
+    <la-product-card
       *ngFor="let event of events$ | async"
-      [event]="event"
-      (eventSelected)="eventSelected($event)"
-    ></la-event-card>
+      [product]="event"
+      (productSelected)="eventSelected($event)"
+    ></la-product-card>
   </div>
   <div class="classes-section-more-info-wrap">
     <la-button

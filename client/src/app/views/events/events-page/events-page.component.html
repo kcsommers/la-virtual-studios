@@ -14,10 +14,9 @@
 </section>
 <section class="page-body">
   <div class="events-section-grid">
-    <la-event-card
+    <la-product-card
       *ngFor="let event of events$ | async"
-      [event]="event"
-      (eventSelected)="eventSelected($event)"
-    ></la-event-card>
+      [product]="event"
+    ></la-product-card>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { IAddress } from '../common/address.interface';
+import { IAddress } from '../users/address.interface';
 
 export interface ILocation {
   name: string;
