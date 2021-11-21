@@ -11,7 +11,8 @@
     "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*", "src/types/*"],
-      "@la/core": ["src/core/index.ts"]
+      "@la/core": ["src/core/index.ts"],
+      "@la/mongodb": ["src/mongodb/index.ts"]
     },
     "skipLibCheck": true
   },

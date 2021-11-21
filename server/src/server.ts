@@ -1,11 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { mediaController } from './controllers';
+import { authController, mediaController } from './controllers';
 
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const port = 3001;
 const dbUri = process.env.MONGODB_CONNECTION_STRING;
@@ -17,6 +18,7 @@ connection.once('open', () => {
 });
 
 app.use('/media', mediaController);
+app.use('/auth', authController);
 
 app.listen(port, () => {
   console.log(`Hooked on ${port}`);

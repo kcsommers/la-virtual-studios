@@ -24,6 +24,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@la/core': path.resolve(__dirname, 'src/core/index.ts'),
+      '@la/mongodb': path.resolve(__dirname, 'src/mongodb/index.ts'),
     },
   },
   output: {
@@ -35,7 +36,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.resolve(__dirname, './public'), to: 'public' },
-        { from: path.resolve(__dirname, './credentials'), to: 'credentials' },
+        // { from: path.resolve(__dirname, './credentials'), to: 'credentials' },
       ],
     }),
   ],
