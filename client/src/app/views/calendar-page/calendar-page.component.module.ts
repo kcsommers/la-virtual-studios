@@ -4,17 +4,21 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ButtonComponentModule,
   CalendarComponentModule,
-  EventCardComponentModule,
   IconComponentModule,
+  ProductCardComponentModule,
 } from '@la/components';
-import { GetDateDisplayPipeModule } from '@la/core';
+import { GetDateDisplayPipeModule, LAConstants } from '@la/core';
 import { CalendarPageComponent } from './calendar-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CalendarPageComponent,
-    children: [],
+    children: [
+      {
+        path: `:${LAConstants.ID_PARAM}`,
+      },
+    ],
   },
 ];
 
@@ -25,8 +29,8 @@ const routes: Routes = [
     ButtonComponentModule,
     IconComponentModule,
     CalendarComponentModule,
-    EventCardComponentModule,
     GetDateDisplayPipeModule,
+    ProductCardComponentModule,
   ],
   declarations: [CalendarPageComponent],
   exports: [CalendarPageComponent],

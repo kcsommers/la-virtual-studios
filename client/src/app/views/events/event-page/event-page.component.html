@@ -8,12 +8,12 @@
         ></div>
         <div class="event-intro-wrap">
           <div class="event-intro-top">
-            <p>{{ event.date | getDateDisplay: 'day' }}</p>
-            <h4>{{ event.date | getDateDisplay: 'month dd, yyyy' }}</h4>
+            <!-- <p>{{ event.date | getDateDisplay: 'day' }}</p>
+            <h4>{{ event.date | getDateDisplay: 'month dd, yyyy' }}</h4> -->
             <h2>{{ event.name }}</h2>
-            <span class="font-small-bold color-accent">
+            <!-- <span class="font-small-bold color-accent">
               {{ event | getRemainingSlotsDisplay }}
-            </span>
+            </span> -->
           </div>
           <div class="event-intro-bottom font-small-bold color-primary">
             <span class="event-price">{{ event.price | getPriceDisplay }}</span>
@@ -42,27 +42,29 @@
             <p class="event-description">
               {{ event.description }}
             </p>
-            <div class="instructor-details-wrap">
+            <!-- <div class="instructor-details-wrap">
               <p class="instructor-details-title font-large">
                 About the instructor
               </p>
-              <span class="instructor-img-wrap">
-                <span
-                  class="instructor-img-bg"
-                  [ngStyle]="{
-                    backgroundImage: 'url(' + event.coach.profileImage + ')'
-                  }"
-                ></span>
-              </span>
-              <h3 class="instructor-name">
-                {{ event.coach.firstName + ' ' + event.coach.lastName }}
-              </h3>
-              <p>{{ event.coach.bio }}</p>
-            </div>
+              <ng-container *ngFor="let coach of event.coaches">
+                <span class="instructor-img-wrap">
+                  <span
+                    class="instructor-img-bg"
+                    [ngStyle]="{
+                      backgroundImage: 'url(' + coach.profileImage + ')'
+                    }"
+                  ></span>
+                </span>
+                <h3 class="instructor-name">
+                  {{ coach.firstName + ' ' + coach.lastName }}
+                </h3>
+                <p>{{ coach.bio }}</p>
+              </ng-container>
+            </div> -->
           </div>
         </div>
         <div class="event-body-right">
-          <div class="event-body-right-inner">
+          <!-- <div class="event-body-right-inner">
             <span class="color-primary">Location</span>
             <div class="location-name-wrap">
               <h4>{{ event.location.name }}</h4>
@@ -76,7 +78,7 @@
               &nbsp;{{ event.location.address.state }},
               {{ event.location.address.zip }}
             </p>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>

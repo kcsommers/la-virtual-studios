@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { EventsPageComponentModule } from '../views';
+import { EventsWrapperModule } from '../views';
 
 @NgModule({
-  imports: [EventsPageComponentModule],
+  imports: [EventsWrapperModule],
 })
 export class EventsPageWrapperModule {}

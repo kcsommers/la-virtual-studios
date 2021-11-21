@@ -3,11 +3,16 @@ import {
   Destroyer,
   ICalendarDay,
   ICalendarMonth,
-  IEvent,
+  ILAEvent,
+  IProduct,
+  IProductCalendarDay,
+  LAConstants,
   RoutingService,
 } from '@la/core';
+import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+import { CalendarMonth } from 'src/app/core/models/calendar/calendar-month';
 
 @Component({
   selector: 'app-calendar-page',
@@ -16,38 +21,79 @@ import { takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarPageComponent extends Destroyer implements OnInit {
-  public selectedDate$ = new BehaviorSubject<ICalendarDay>(null);
+  public activeDay$ = new BehaviorSubject<ICalendarDay>(null);
+
+  public activeMonth$ = new BehaviorSubject<ICalendarMonth>(null);
 
   public displayedDays$ = new BehaviorSubject<ICalendarDay[]>([]);
 
-  private _daysWithEventsCache: ICalendarDay[] = [];
+  public calendarMonthsMap = new Map<number, ICalendarMonth>();
 
-  constructor(private _routingService: RoutingService) {
+  public productId: string;
+
+  constructor(
+    private _dummyDataService: DummyDataService,
+    private _routingService: RoutingService
+  ) {
     super();
   }
 
   ngOnInit() {
-    this.selectedDate$.pipe(takeUntil(this.destroyed$)).subscribe({
-      next: (_selectedDay: ICalendarDay) => {
-        const _displayedDays: ICalendarDay[] = _selectedDay
-          ? [_selectedDay]
-          : this._daysWithEventsCache;
-        this.displayedDays$.next(_displayedDays);
-      },
-    });
+    this.productId = this._routingService.routeParameterMap.get(
+      LAConstants.ID_PARAM
+    );
+    const _dateModel = new Date();
+    this.setActiveMonth(_dateModel.getMonth());
   }
 
-  public setSelectedDate(_day: ICalendarDay): void {
-    this.selectedDate$.next(_day);
+  public setActiveMonth(_month: number): void {
+    this.setActiveDay(null);
+    const _cachedMonth: ICalendarMonth = this.calendarMonthsMap.get(_month);
+    if (_cachedMonth) {
+      this.activeMonth$.next(_cachedMonth);
+      this.setDisplayedDays();
+      return;
+    }
+    this.fetchProductCalendarDays(_month);
   }
 
-  public monthChanged(_month: ICalendarMonth): void {
-    const _daysWithEvents: ICalendarDay[] = _month.getDaysWithEvents();
-    this._daysWithEventsCache = _daysWithEvents;
-    this.displayedDays$.next(_daysWithEvents);
+  private fetchProductCalendarDays(_month: number): void {
+    this._dummyDataService
+      .getProductCalendarDays(_month, this.productId)
+      .pipe(take(1))
+      .subscribe({
+        next: (_calendarDays: IProductCalendarDay[]) => {
+          const _calendarMonth = new CalendarMonth<IProductCalendarDay>(
+            _month,
+            _calendarDays
+          );
+          this.activeMonth$.next(_calendarMonth);
+          this.calendarMonthsMap.set(_calendarMonth.month, _calendarMonth);
+          this.setDisplayedDays();
+        },
+      });
   }
 
-  public eventSelected(_event: IEvent): void {
+  private setDisplayedDays(): void {
+    const _activeMonth: ICalendarMonth = this.activeMonth$.getValue();
+    if (!_activeMonth) {
+      return;
+    }
+    const _activeDay: ICalendarDay = this.activeDay$.getValue();
+    const _displayedDays: ICalendarDay[] = _activeDay
+      ? [_activeDay]
+      : _activeMonth.getEventDays();
+    this.displayedDays$.next(_displayedDays);
+  }
+
+  public setActiveDay(_day: ICalendarDay): void {
+    this.activeDay$.next(_day);
+    this.setDisplayedDays();
+  }
+
+  public eventSelected(_event: IProduct): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
   }
+
+  public register(_event: IProduct): void {}
 }

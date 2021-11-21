@@ -4,7 +4,6 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  cursor: pointer;
   @include card;
 }
 
@@ -24,6 +23,7 @@ div.product-card-img {
 
 div.product-card-body {
   flex: 1;
+  cursor: pointer;
   padding: $spacing-sm;
   display: flex;
   flex-direction: column;

@@ -8,7 +8,7 @@ import {
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
-import { ICoach, IEvent, IProduct, RoutingService } from '@la/core';
+import { ICoach, ILAEvent, IProduct, RoutingService } from '@la/core';
 import {
   DummyDataService,
   dummyHeadshots1,
@@ -27,7 +27,7 @@ import { environment } from '../../../environments/environment';
 export class HomePageComponent {
   public products$ = new BehaviorSubject<IProduct[]>(null);
 
-  public events$ = new BehaviorSubject<IEvent[]>(null);
+  public events$ = new BehaviorSubject<IProduct[]>(null);
 
   public coaches$ = new BehaviorSubject<ICoach[]>(null);
 
@@ -57,7 +57,7 @@ export class HomePageComponent {
       .getClasses()
       .pipe(take(1))
       .subscribe({
-        next: (_events: IEvent[]) => this.events$.next(_events),
+        next: (_events: IProduct[]) => this.events$.next(_events),
       });
 
     this._dummyDataService
@@ -73,8 +73,8 @@ export class HomePageComponent {
     if (!isPlatformBrowser(this._platformId)) {
       return;
     }
-    this._landingVideo.nativeElement.muted = true;
-    this._landingVideo.nativeElement.play();
+    // this._landingVideo.nativeElement.muted = true;
+    // this._landingVideo.nativeElement.play();
   }
 
   private createMediaSource(): void {
@@ -83,7 +83,6 @@ export class HomePageComponent {
     if ('MediaSource' in window && MediaSource.isTypeSupported(_mimeCodec)) {
       const _mediaSource = new MediaSource();
       _video.src = URL.createObjectURL(_mediaSource);
-      console.log(_video.src);
       _mediaSource.addEventListener(
         'sourceopen',
         this.mediaSourceOpen.bind(this, _mediaSource)
@@ -94,12 +93,10 @@ export class HomePageComponent {
   }
 
   private mediaSourceOpen(_mediaSource: MediaSource): void {
-    console.log('media source open:::: ', _mediaSource);
     const _mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
     const _videoSourceBuffer: SourceBuffer =
       _mediaSource.addSourceBuffer(_mimeCodec);
     _videoSourceBuffer.addEventListener('updateend', () => {
-      console.log('end of stream::::');
       _mediaSource.endOfStream();
       this._landingVideo.nativeElement.muted = true;
       this._landingVideo.nativeElement.play();
@@ -111,7 +108,6 @@ export class HomePageComponent {
       })
       .subscribe({
         next: (_chunk: ArrayBuffer) => {
-          console.log('CHUNK:::: ', _chunk);
           _videoSourceBuffer.appendBuffer(_chunk);
         },
         error: (_error: any) => {
@@ -120,7 +116,15 @@ export class HomePageComponent {
       });
   }
 
-  public eventSelected(_event: IEvent): void {
+  public productSelected(_event: IProduct): void {
+    this._routingService.router.navigate([_event.route]);
+  }
+
+  public eventSelected(_event: IProduct): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
+  }
+
+  public goToCalendar(_event: IProduct): void {
+    this._routingService.router.navigate([`/calendar/${_event._id}`]);
   }
 }

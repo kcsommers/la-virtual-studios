@@ -1,0 +1,40 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: 100%;
+  background-color: $light;
+}
+
+div.auth-page-wrap {
+  display: flex;
+  min-height: 100vh;
+}
+
+div.auth-page-left {
+  flex: 1;
+}
+
+div.auth-left-inner {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+div.auth-page-right {
+  flex: 0.75;
+  background-color: $dark;
+}
+
+span.auth-logo-wrap {
+  width: 100%;
+  max-width: 200px;
+  margin: $spacing-md 0;
+  > img {
+    width: 100%;
+  }
+}
+
+div.form-wrap {
+  margin: $spacing-md 0;
+}

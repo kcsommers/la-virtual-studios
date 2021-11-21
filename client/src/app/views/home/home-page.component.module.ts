@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ButtonComponentModule,
   CarouselComponentModule,
-  EventCardComponentModule,
   IconComponentModule,
   ProductCardComponentModule,
 } from '../../components';
@@ -21,7 +20,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    EventCardComponentModule,
     ButtonComponentModule,
     IconComponentModule,
     ProductCardComponentModule,

@@ -1,8 +1,9 @@
 <div class="landing-wrap">
   <div class="landing-inner">
-    <video #LandingVideo class="landing-video" controls>
+    <div class="landing-video"></div>
+    <!-- <video #LandingVideo class="landing-video" controls>
       <source src="/api/media/videos/greg_james_studio_tour" type="video/mp4" />
-    </video>
+    </video> -->
   </div>
 </div>
 <section class="icon-section">
@@ -25,6 +26,8 @@
     <la-product-card
       *ngFor="let product of products$ | async"
       [product]="product"
+      (productSelected)="productSelected($event)"
+      (productButtonSelected)="goToCalendar($event)"
     ></la-product-card>
   </div>
 </section>
@@ -56,12 +59,13 @@
       dolorem aliquid quidem.
     </p>
   </div>
-  <div class="classes-section-grid">
-    <la-event-card
+  <div class="events-section-grid">
+    <la-product-card
       *ngFor="let event of events$ | async"
-      [event]="event"
-      (eventSelected)="eventSelected($event)"
-    ></la-event-card>
+      [product]="event"
+      (productSelected)="eventSelected($event)"
+      (productButtonSelected)="goToCalendar($event)"
+    ></la-product-card>
   </div>
   <div class="classes-section-more-info-wrap">
     <la-button

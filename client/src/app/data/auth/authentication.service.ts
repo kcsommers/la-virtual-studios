@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUser } from '@la/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '@la/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ILoginCredentials } from './login-credentials.interface';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

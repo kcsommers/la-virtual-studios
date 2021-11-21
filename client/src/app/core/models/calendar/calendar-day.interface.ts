@@ -1,12 +1,12 @@
-import { IEvent } from '../events/event.interface';
+import { ILAEvent } from '@la/core';
 
-export interface ICalendarDay {
-  dateModel: Date;
+export interface ICalendarDay<EventType = any> {
   date: number;
-  day: number;
-  month: number;
-  year: number;
-  isToday: boolean;
-  isPast: boolean;
-  events: IEvent[];
+  events: EventType[];
+  dateModel?: Date;
+  day?: number;
+  month?: number;
+  year?: number;
+  isToday?: boolean;
+  isPast?: boolean;
 }

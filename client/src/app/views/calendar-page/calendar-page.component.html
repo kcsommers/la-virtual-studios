@@ -2,19 +2,21 @@
   <div class="events-calendar-wrap">
     <div class="calendar-wrap">
       <la-calendar
-        [selectedDate$]="selectedDate$"
-        (monthChanged)="monthChanged($event)"
+        [activeDay$]="activeDay$"
+        [activeMonth$]="activeMonth$"
+        (activeMonthChanged)="setActiveMonth($event)"
+        (activeDayChanged)="setActiveDay($event)"
       ></la-calendar>
     </div>
     <section class="events-section">
       <la-button
-        *ngIf="selectedDate$ | async"
+        *ngIf="activeDay$ | async"
         class="browse-all-btn"
         [text]="'Browse All Events'"
         [look]="'flat'"
         [color]="'accent'"
         [icon]="'faAngleLeft'"
-        (click)="setSelectedDate(null)"
+        [clickHandler]="setActiveDay.bind(this, null)"
       ></la-button>
       <div class="events-wrap">
         <div
@@ -29,12 +31,13 @@
               {{ day.dateModel | getDateDisplay: 'month dd, yyyy' }}
             </h3>
           </div>
-          <la-event-card
+          <la-product-card
             *ngFor="let event of day.events"
-            [event]="event"
-            [showRemainingSlots]="true"
-            (eventSelected)="eventSelected($event)"
-          ></la-event-card>
+            [product]="event.product"
+            [buttonText]="'Register'"
+            (productSelected)="eventSelected($event)"
+            (productButtonSelected)="register($event)"
+          ></la-product-card>
         </div>
       </div>
     </section>
