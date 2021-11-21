@@ -42,7 +42,6 @@ export class EventPageComponent extends Destroyer implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (_event: IProduct) => {
-          console.log('got it:::: ', _event);
           this.event$.next(_event);
         },
         error: (_error: any) => {

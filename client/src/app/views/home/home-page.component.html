@@ -26,6 +26,8 @@
     <la-product-card
       *ngFor="let product of products$ | async"
       [product]="product"
+      (productSelected)="productSelected($event)"
+      (productButtonSelected)="goToCalendar($event)"
     ></la-product-card>
   </div>
 </section>
@@ -62,6 +64,7 @@
       *ngFor="let event of events$ | async"
       [product]="event"
       (productSelected)="eventSelected($event)"
+      (productButtonSelected)="goToCalendar($event)"
     ></la-product-card>
   </div>
   <div class="classes-section-more-info-wrap">

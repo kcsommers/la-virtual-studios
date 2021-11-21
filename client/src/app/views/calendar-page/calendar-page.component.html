@@ -35,6 +35,7 @@
             *ngFor="let event of day.events"
             [product]="event.product"
             (productSelected)="eventSelected($event)"
+            (productButtonSelected)="register($event)"
           ></la-product-card>
         </div>
       </div>

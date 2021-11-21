@@ -94,4 +94,6 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
   public eventSelected(_event: IProduct): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
   }
+
+  public register(_event: IProduct): void {}
 }

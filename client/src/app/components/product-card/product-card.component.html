@@ -7,7 +7,7 @@
 <div
   class="product-card-body"
   [routerLink]="product.route ? [product.route] : []"
-  (click)="goToProductRoute()"
+  (click)="handleProductSelected()"
 >
   <div class="product-card-body-top">
     <span class="product-name">{{ product.name }}</span>
@@ -16,11 +16,11 @@
   </div>
   <div class="product-card-body-bottom">
     <la-button
-      [text]="'Book Now'"
+      [text]="buttonText"
       [look]="'outline'"
       [color]="'accent'"
       [isFullWidth]="true"
-      [clickHandler]="goToCalendar.bind(this)"
+      [clickHandler]="handleButtonClick.bind(this)"
     ></la-button>
   </div>
 </div>

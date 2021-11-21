@@ -196,5 +196,5 @@ export const dummyProductCalendarDays = (
     '66bef811-e2b5-41c7-b502-a8dc4b7aba58': _dummies(dummyProducts),
     'c7260689-e62e-4321-a54c-4a9139d0dd7c': _dummies(dummyProducts),
   };
-  return _products[_productId];
+  return _products[_productId] || _dummies(dummyProducts);
 };

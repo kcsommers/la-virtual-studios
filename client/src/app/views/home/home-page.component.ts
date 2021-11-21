@@ -116,7 +116,15 @@ export class HomePageComponent {
       });
   }
 
+  public productSelected(_event: IProduct): void {
+    this._routingService.router.navigate([_event.route]);
+  }
+
   public eventSelected(_event: IProduct): void {
     this._routingService.router.navigate([`/events/${_event._id}`]);
+  }
+
+  public goToCalendar(_event: IProduct): void {
+    this._routingService.router.navigate([`/calendar/${_event._id}`]);
   }
 }

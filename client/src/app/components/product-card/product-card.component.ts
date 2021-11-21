@@ -18,26 +18,20 @@ export class ProductCardComponent {
   @Input()
   public product: IProduct;
 
+  @Input()
+  public buttonText: string = 'Book Now';
+
   @Output()
   public productSelected = new EventEmitter<IProduct>();
 
-  constructor(private _router: Router) {}
+  @Output()
+  public productButtonSelected = new EventEmitter<IProduct>();
 
-  public goToProductRoute(): void {
-    if (!this.product.route) {
-      this.productSelected.emit(this.product);
-      return;
-    }
-    let _route: string = this.product.route;
-    const _paramRegex: RegExp = /\/\{\{([\w]+)\}\}/;
-    const _paramMatch: string[] = this.product.route.match(_paramRegex);
-    if (_paramMatch && _paramMatch[1]) {
-      _route += `/${this.product[_paramMatch[1]]}`;
-    }
-    this._router.navigate([this.product.route]);
+  public handleProductSelected(): void {
+    this.productSelected.emit(this.product);
   }
 
-  public goToCalendar(): void {
-    this._router.navigate([`/calendar/${this.product._id}`]);
+  public handleButtonClick(): void {
+    this.productButtonSelected.emit(this.product);
   }
 }
