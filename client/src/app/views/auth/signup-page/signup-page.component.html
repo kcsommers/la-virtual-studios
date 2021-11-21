@@ -1,0 +1,24 @@
+<h1 class="form-title">Sign Up</h1>
+<div class="form-wrap">
+  <div class="input-wrap">
+    <span class="input-label">Email Address</span>
+    <input type="email" [(ngModel)]="emailAddress" />
+  </div>
+  <div class="input-wrap">
+    <span class="input-label">Password</span>
+    <input type="password" [(ngModel)]="password" />
+  </div>
+  <la-button
+    [text]="'Sign Up'"
+    [isFullWidth]="true"
+    [color]="'accent'"
+  ></la-button>
+  <div class="font-xsmall centered-text">Already have an account?</div>
+  <la-button
+    [text]="'Log In'"
+    [isFullWidth]="true"
+    [color]="'accent'"
+    [look]="'outline'"
+    [path]="'/auth/login'"
+  ></la-button>
+</div>

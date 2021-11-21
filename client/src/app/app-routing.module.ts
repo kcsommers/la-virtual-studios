@@ -34,6 +34,13 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./view-wrappers/auth-page-wrapper.module').then(
+        (_m) => _m.AuthPageWrapperModule
+      ),
+  },
 ];
 
 @NgModule({

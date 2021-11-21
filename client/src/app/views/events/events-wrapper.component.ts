@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-events-wrapper',
+  selector: 'la-events-wrapper',
   template: '<router-outlet></router-outlet>',
   styles: [
     `
