@@ -4,4 +4,5 @@ export interface IUser {
   profileImage: string;
   email: string;
   token?: string;
+  _id?: string;
 }

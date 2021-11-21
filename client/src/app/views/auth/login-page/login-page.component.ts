@@ -54,7 +54,6 @@ export class LoginPageComponent {
       .pipe(take(1))
       .subscribe({
         next: (_user: IUser) => {
-          console.log('user:::: ', _user);
           const _requestedUrl: string =
             this._routingService.queryParameterMap.get(
               LAConstants.REQUESTED_URL_PARAM

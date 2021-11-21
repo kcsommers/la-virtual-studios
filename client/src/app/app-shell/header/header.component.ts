@@ -4,6 +4,7 @@ import {
   HostBinding,
   Input,
 } from '@angular/core';
+import { AuthenticationService } from '@la/data';
 
 @Component({
   selector: 'app-header',
@@ -23,4 +24,6 @@ export class HeaderComponent {
   public get isFixed(): boolean {
     return this._isFixed;
   }
+
+  constructor(public authService: AuthenticationService) {}
 }

@@ -2,4 +2,6 @@ export namespace LAConstants {
   export const ID_PARAM = 'id';
 
   export const REQUESTED_URL_PARAM = 'requestedUrl';
+
+  export const USER_STORAGE_KEY = '__la_user__key___';
 }

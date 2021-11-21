@@ -30,10 +30,20 @@
         <la-icon [icon]="'faAngleDown'"></la-icon>
       </a>
       <a class="nav-link" [routerLink]="'/contact'">Contact</a>
-      <a class="nav-link icon-left" [routerLink]="'/login'">
+      <a
+        *ngIf="authService.user$ | async as user; else Login"
+        class="nav-link icon-left"
+        [routerLink]="'/profile/' + user._id"
+      >
         <la-icon [icon]="'faUser'"></la-icon>
-        Log in
+        {{ user.firstName }}
       </a>
+      <ng-template #Login>
+        <a class="nav-link icon-left" [routerLink]="'/auth/login'">
+          <la-icon [icon]="'faUser'"></la-icon>
+          Log in
+        </a>
+      </ng-template>
     </nav>
   </div>
 </header>

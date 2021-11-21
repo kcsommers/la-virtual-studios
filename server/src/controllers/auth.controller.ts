@@ -5,6 +5,7 @@ import HttpStatusCodes from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { omit } from 'lodash';
+import { verifyToken } from '../middleware';
 
 const router = Router();
 
@@ -111,6 +112,14 @@ router.post(
       console.error('Sign Up Error::::', _error);
       _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
     }
+  }
+);
+
+router.post(
+  '/verify',
+  verifyToken,
+  (_req: Request<any, any, IUser>, _res: Response<boolean>) => {
+    _res.status(HttpStatusCodes.OK).json(true);
   }
 );
 
