@@ -8,3 +8,5 @@ export * from './calendar/calendar.component';
 export * from './calendar/calendar.component.module';
 export * from './image-carousel/carousel.component';
 export * from './image-carousel/carousel.component.module';
+export * from './event-selector/event-selector.component';
+export * from './event-selector/event-selector.component.module';

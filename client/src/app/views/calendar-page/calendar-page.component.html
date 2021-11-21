@@ -10,7 +10,11 @@
     </div>
     <section class="events-section">
       <la-button
-        *ngIf="(activeDay$ | async) || (showLoginOptions$ | async)"
+        *ngIf="
+          (activeDay$ | async) ||
+          (showLoginOptions$ | async) ||
+          (showEventSelector$ | async)
+        "
         class="browse-all-btn"
         [text]="'Browse All Events'"
         [look]="'flat'"
@@ -19,7 +23,7 @@
         [clickHandler]="setActiveDay.bind(this, null)"
       ></la-button>
       <div
-        *ngIf="!(showLoginOptions$ | async); else LoginOptions"
+        *ngIf="!(showLoginOptions$ | async) && !(showEventSelector$ | async)"
         class="events-wrap"
       >
         <div
@@ -39,30 +43,29 @@
             [product]="event.product"
             [buttonText]="'Register'"
             (productSelected)="eventSelected($event)"
-            (productButtonSelected)="register($event)"
+            (productButtonSelected)="register(event)"
           ></la-product-card>
         </div>
       </div>
-      <ng-template #LoginOptions>
-        <div class="login-options-wrap">
-          <h3>Log In to Register!</h3>
-          <div class="font-small color-primary">Have an Account?</div>
-          <la-button
-            [text]="'Log In'"
-            [isFullWidth]="true"
-            [color]="'accent'"
-            [clickHandler]="goToAuthPage.bind(this, 'login')"
-          ></la-button>
-          <div class="font-small color-primary">Or Register for an Account</div>
-          <la-button
-            [text]="'Sign Up'"
-            [isFullWidth]="true"
-            [color]="'accent'"
-            [look]="'outline'"
-            [clickHandler]="goToAuthPage.bind(this, 'signup')"
-          ></la-button>
-        </div>
-      </ng-template>
+      <div *ngIf="showEventSelector$ | async">hi</div>
+      <div *ngIf="showLoginOptions$ | async" class="login-options-wrap">
+        <h3>Log In to Register!</h3>
+        <div class="font-small color-primary">Have an Account?</div>
+        <la-button
+          [text]="'Log In'"
+          [isFullWidth]="true"
+          [color]="'accent'"
+          [clickHandler]="goToAuthPage.bind(this, 'login')"
+        ></la-button>
+        <div class="font-small color-primary">Or Register for an Account</div>
+        <la-button
+          [text]="'Sign Up'"
+          [isFullWidth]="true"
+          [color]="'accent'"
+          [look]="'outline'"
+          [clickHandler]="goToAuthPage.bind(this, 'signup')"
+        ></la-button>
+      </div>
     </section>
   </div>
 </div>

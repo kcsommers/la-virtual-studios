@@ -23,6 +23,7 @@ import { environment } from '../../../environments/environment';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent {
   public products$ = new BehaviorSubject<IProduct[]>(null);

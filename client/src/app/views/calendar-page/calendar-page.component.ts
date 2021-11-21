@@ -30,7 +30,9 @@ export class CalendarPageComponent extends BaseView implements OnInit {
 
   public showLoginOptions$ = new BehaviorSubject<boolean>(false);
 
-  private _selectedProduct: IProduct;
+  public showEventSelector$ = new BehaviorSubject<boolean>(false);
+
+  public selectedProductDay$ = new BehaviorSubject<IProductCalendarDay>(null);
 
   ngOnInit() {
     this.productId = this.routingService.routeParameterMap.get(
@@ -83,6 +85,7 @@ export class CalendarPageComponent extends BaseView implements OnInit {
   public setActiveDay(_day: ICalendarDay): void {
     this.activeDay$.next(_day);
     this.showLoginOptions$.next(false);
+    this.showEventSelector$.next(false);
     this.setDisplayedDays();
   }
 
@@ -90,22 +93,25 @@ export class CalendarPageComponent extends BaseView implements OnInit {
     this.routingService.router.navigate([`/events/${_event._id}`]);
   }
 
-  public register(_product: IProduct): void {
+  public register(_productDay: IProductCalendarDay): void {
+    if (this.isPlatformBrowser()) {
+      window.scrollTo(0, 0);
+    }
+    this.selectedProductDay$.next(_productDay);
     const _isLoggedIn: boolean = this.authService.authState$.getValue();
     if (!_isLoggedIn) {
-      this._selectedProduct = _product;
       this.showLoginOptions$.next(true);
-      if (this.isPlatformBrowser()) {
-        window.scrollTo(0, 0);
-      }
     } else {
+      this.showEventSelector$.next(true);
     }
   }
 
   public goToAuthPage(_page: 'login' | 'signup'): void {
+    const _selectedProductDay: IProductCalendarDay =
+      this.selectedProductDay$.getValue();
     this.routingService.router.navigate([`/auth/${_page}`], {
       queryParams: {
-        [LAConstants.REQUESTED_URL_PARAM]: `events/${this._selectedProduct._id}`,
+        [LAConstants.REQUESTED_URL_PARAM]: `events/${_selectedProductDay.product._id}`,
       },
     });
   }
