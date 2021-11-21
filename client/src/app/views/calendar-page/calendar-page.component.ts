@@ -1,18 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  Destroyer,
   ICalendarDay,
   ICalendarMonth,
-  ILAEvent,
   IProduct,
   IProductCalendarDay,
   LAConstants,
-  RoutingService,
 } from '@la/core';
-import { DummyDataService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { CalendarMonth } from 'src/app/core/models/calendar/calendar-month';
+import { BaseView } from '../base-view';
 
 @Component({
   selector: 'app-calendar-page',
@@ -20,7 +17,7 @@ import { CalendarMonth } from 'src/app/core/models/calendar/calendar-month';
   styleUrls: ['./calendar-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarPageComponent extends Destroyer implements OnInit {
+export class CalendarPageComponent extends BaseView implements OnInit {
   public activeDay$ = new BehaviorSubject<ICalendarDay>(null);
 
   public activeMonth$ = new BehaviorSubject<ICalendarMonth>(null);
@@ -31,15 +28,10 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
 
   public productId: string;
 
-  constructor(
-    private _dummyDataService: DummyDataService,
-    private _routingService: RoutingService
-  ) {
-    super();
-  }
+  public showLoginOptions$ = new BehaviorSubject<boolean>(false);
 
   ngOnInit() {
-    this.productId = this._routingService.routeParameterMap.get(
+    this.productId = this.routingService.routeParameterMap.get(
       LAConstants.ID_PARAM
     );
     const _dateModel = new Date();
@@ -58,7 +50,7 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
   }
 
   private fetchProductCalendarDays(_month: number): void {
-    this._dummyDataService
+    this.dummyDataService
       .getProductCalendarDays(_month, this.productId)
       .pipe(take(1))
       .subscribe({
@@ -91,9 +83,20 @@ export class CalendarPageComponent extends Destroyer implements OnInit {
     this.setDisplayedDays();
   }
 
-  public eventSelected(_event: IProduct): void {
-    this._routingService.router.navigate([`/events/${_event._id}`]);
+  public browseAllEvents(): void {
+    this.showLoginOptions$.next(false);
+    this.setActiveDay(null);
   }
 
-  public register(_event: IProduct): void {}
+  public eventSelected(_event: IProduct): void {
+    this.routingService.router.navigate([`/events/${_event._id}`]);
+  }
+
+  public register(_event: IProduct): void {
+    const _isLoggedIn: boolean = this.authService.authState$.getValue();
+    if (!_isLoggedIn) {
+      this.showLoginOptions$.next(true);
+    } else {
+    }
+  }
 }

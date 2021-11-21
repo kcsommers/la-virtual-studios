@@ -73,3 +73,9 @@ div.events-section-date-header {
 h3.event-date {
   margin-top: -$spacing-xs;
 }
+
+div.login-options-wrap {
+  > div.font-small {
+    margin: $spacing-sm 0 $spacing-xs 0;
+  }
+}

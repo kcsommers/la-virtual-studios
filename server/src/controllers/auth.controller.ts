@@ -4,6 +4,7 @@ import { Request, Response, Router } from 'express';
 import HttpStatusCodes from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { omit } from 'lodash';
 
 const router = Router();
 
@@ -47,7 +48,7 @@ router.post(
       );
       console.log(`Successfully logged in user: ${_user.email}`);
       _user.token = _token;
-      _res.status(HttpStatusCodes.OK).json(_user);
+      _res.status(HttpStatusCodes.OK).json(omit(_user.toObject(), 'password'));
     } catch (_error: any) {
       console.error('Login Error::::', _error);
       _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
@@ -105,7 +106,7 @@ router.post(
       );
       console.log(`Successfully registered user: ${_newUser.email}`);
       _newUser.token = _token;
-      _res.status(HttpStatusCodes.OK).json(_newUser);
+      _res.status(HttpStatusCodes.OK).json(_newUser.toObject());
     } catch (_error: any) {
       console.error('Sign Up Error::::', _error);
       _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);

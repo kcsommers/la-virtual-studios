@@ -15,8 +15,11 @@ export class AuthenticationService {
 
   constructor(private _http: HttpClient) {}
 
-  public login(_credentials: ILoginCredentials): Observable<any> {
-    return this._http.post(`${environment.apiUrl}/auth/login`, _credentials);
+  public login(_credentials: ILoginCredentials): Observable<IUser> {
+    return this._http.post<IUser>(
+      `${environment.apiUrl}/auth/login`,
+      _credentials
+    );
   }
 
   public signup(_credentials: ILoginCredentials): Observable<any> {

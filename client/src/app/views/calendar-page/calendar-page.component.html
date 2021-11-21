@@ -10,15 +10,18 @@
     </div>
     <section class="events-section">
       <la-button
-        *ngIf="activeDay$ | async"
+        *ngIf="(activeDay$ | async) || (showLoginOptions$ | async)"
         class="browse-all-btn"
         [text]="'Browse All Events'"
         [look]="'flat'"
         [color]="'accent'"
         [icon]="'faAngleLeft'"
-        [clickHandler]="setActiveDay.bind(this, null)"
+        [clickHandler]="browseAllEvents.bind(this)"
       ></la-button>
-      <div class="events-wrap">
+      <div
+        *ngIf="!(showLoginOptions$ | async); else LoginOptions"
+        class="events-wrap"
+      >
         <div
           *ngFor="let day of displayedDays$ | async"
           class="events-section-date-wrap"
@@ -40,6 +43,26 @@
           ></la-product-card>
         </div>
       </div>
+      <ng-template #LoginOptions>
+        <div class="login-options-wrap">
+          <h3>Log In to Register!</h3>
+          <div class="font-small color-primary">Have an Account?</div>
+          <la-button
+            [text]="'Log In'"
+            [isFullWidth]="true"
+            [color]="'accent'"
+            [path]="'/auth/login'"
+          ></la-button>
+          <div class="font-small color-primary">Or Register for an Account</div>
+          <la-button
+            [text]="'Sign Up'"
+            [isFullWidth]="true"
+            [color]="'accent'"
+            [look]="'outline'"
+            [path]="'/auth/signup'"
+          ></la-button>
+        </div>
+      </ng-template>
     </section>
   </div>
 </div>
