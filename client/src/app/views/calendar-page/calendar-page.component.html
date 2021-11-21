@@ -16,7 +16,7 @@
         [look]="'flat'"
         [color]="'accent'"
         [icon]="'faAngleLeft'"
-        [clickHandler]="browseAllEvents.bind(this)"
+        [clickHandler]="setActiveDay.bind(this, null)"
       ></la-button>
       <div
         *ngIf="!(showLoginOptions$ | async); else LoginOptions"
@@ -51,7 +51,7 @@
             [text]="'Log In'"
             [isFullWidth]="true"
             [color]="'accent'"
-            [path]="'/auth/login'"
+            [clickHandler]="goToAuthPage.bind(this, 'login')"
           ></la-button>
           <div class="font-small color-primary">Or Register for an Account</div>
           <la-button
@@ -59,7 +59,7 @@
             [isFullWidth]="true"
             [color]="'accent'"
             [look]="'outline'"
-            [path]="'/auth/signup'"
+            [clickHandler]="goToAuthPage.bind(this, 'signup')"
           ></la-button>
         </div>
       </ng-template>

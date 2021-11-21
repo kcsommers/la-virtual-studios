@@ -3,7 +3,6 @@
 :host {
   display: block;
   width: 100%;
-  min-height: calc(100vh - #{$header-height});
 }
 
 div.calendar-page-inner {
