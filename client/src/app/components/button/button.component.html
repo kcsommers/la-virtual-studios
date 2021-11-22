@@ -2,9 +2,17 @@
   class="la-btn"
   [class.full-width-btn]="isFullWidth"
   [class.responsive-btn]="isResponsive"
+  [class.disabled]="isDisabled"
   [ngClass]="['btn-' + size, 'btn-' + look, 'btn-' + color]"
   (click)="!isDisabled && handleClick($event)"
 >
-  <la-icon *ngIf="icon" [icon]="icon"></la-icon>
-  {{ text }}
+  <ng-container *ngIf="!(isLoading$ | async); else Loading">
+    <la-icon *ngIf="icon" [icon]="icon"></la-icon>
+    {{ text }}
+  </ng-container>
 </button>
+<ng-template #Loading>
+  <div class="centered-text">
+    <la-spinner></la-spinner>
+  </div>
+</ng-template>
