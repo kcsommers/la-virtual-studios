@@ -1,7 +1,8 @@
 import { IUser } from '@la/core';
-import mongoose from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const coachSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   firstName: {
     type: String,
     required: true,
@@ -22,6 +23,8 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  blurb: String,
+  bio: String,
 });
 
-export const UserModel = mongoose.model<IUser>('user', userSchema);
+export const CoachModel = model<IUser>('Coach', coachSchema);
