@@ -1,0 +1,17 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+div.event-times-grid {
+  display: grid;
+  grid-gap: $spacing-md;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+div.event-time-wrap {
+  @include card;
+  padding: $spacing-xs $spacing-sm;
+}

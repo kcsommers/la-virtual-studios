@@ -10,4 +10,10 @@ import { IProductCalendarDay } from '@la/core';
 export class EventSelectorComponent {
   @Input()
   productDay: IProductCalendarDay;
+
+  constructor() {
+    setTimeout(() => {
+      console.log(this.productDay);
+    });
+  }
 }

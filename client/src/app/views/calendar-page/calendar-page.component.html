@@ -47,7 +47,11 @@
           ></la-product-card>
         </div>
       </div>
-      <div *ngIf="showEventSelector$ | async">hi</div>
+      <div *ngIf="showEventSelector$ | async">
+        <la-event-selector
+          [productDay]="selectedProductDay$ | async"
+        ></la-event-selector>
+      </div>
       <div *ngIf="showLoginOptions$ | async" class="login-options-wrap">
         <h3>Log In to Register!</h3>
         <div class="font-small color-primary">Have an Account?</div>
