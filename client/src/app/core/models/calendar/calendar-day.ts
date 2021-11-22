@@ -1,4 +1,3 @@
-import { ILAEvent } from '@la/core';
 import { ICalendarDay } from './calendar-day.interface';
 
 export class CalendarDay<EventType = any> implements ICalendarDay<EventType> {

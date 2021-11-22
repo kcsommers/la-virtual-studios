@@ -1,5 +1,3 @@
-import { ILAEvent } from '@la/core';
-
 export interface ICalendarDay<EventType = any> {
   date: number;
   events: EventType[];

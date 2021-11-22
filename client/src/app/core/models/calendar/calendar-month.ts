@@ -1,10 +1,4 @@
-import {
-  CalendarDay,
-  ICalendarDay,
-  ICalendarMonth,
-  ILAEvent,
-  IProductCalendarDay,
-} from '@la/core';
+import { CalendarDay, ICalendarDay, ICalendarMonth } from '@la/core';
 
 export class CalendarMonth<Day extends ICalendarDay = ICalendarDay>
   implements ICalendarMonth

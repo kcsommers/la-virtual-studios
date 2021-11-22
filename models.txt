@@ -1,0 +1,66 @@
+User {
+  firstName: string;
+  lastName: string;
+  profileImage: string;
+  email: string;
+  token?: string;
+}
+
+Coach {
+  firstName: string;
+  lastName: string;
+  profileImage: string;
+  email: string;
+  token?: string;
+  blurb: string;
+  bio: string;
+}
+
+Location {
+  name: string;
+  address: {
+    street: string;
+    unit?: string;
+    city: string;
+    state: string;
+    country: string;
+    zip: number;
+  }
+}
+
+ProductCalendarDay {
+  product: IProduct;
+  date: number;
+  events: LAEvent[];
+  dateModel?: Date;
+  day?: number;
+  month?: number;
+  year?: number;
+  isToday?: boolean;
+  isPast?: boolean;
+}
+
+LAEvent {
+  startTime: number;
+  endTime: number;
+  attendees: IUser[];
+  coaches: ICoach[];
+  totalSlots: number;
+  location: ILocation;
+}
+
+Product {
+  name: string;
+  blurb: string;
+  description: string;
+  coverImage: string;
+  images: string[];
+  price: number;
+  route?: string;
+}
+
+PendingOrder {
+  product: Product
+  event: LAEvent
+  user: User
+}
