@@ -1,5 +1,5 @@
 export namespace DateHelper {
-  export const ONE_HOUR = 3600 * 1000;
+  export const ONE_HOUR = 3600000;
 
   export const DATE_PARAM = 'date';
 

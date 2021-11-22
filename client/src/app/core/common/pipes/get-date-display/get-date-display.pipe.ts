@@ -8,6 +8,7 @@ type DateDisplayType =
   | 'date'
   | 'day'
   | 'day-short'
+  | 'time'
   | 'full'
   | 'month dd, yyyy'
   | 'mm/dd/yyyy';
@@ -47,6 +48,19 @@ export class GetDateDisplayPipe implements PipeTransform {
         return DateHelper.DAYS[_day];
       case 'day-short':
         return DateHelper.DAYS_ABREVIATED[_day];
+      case 'time':
+        let _meridiem: string = 'AM';
+        const _minutes: number = _dateInput.getMinutes();
+        let _hours: number = _dateInput.getHours();
+        if (_hours >= 12) {
+          _meridiem = 'PM';
+          _hours = _hours >= 13 ? _hours - 12 : _hours;
+        }
+        const _hoursStr: string = String(_hours < 10 ? `0${_hours}` : _hours);
+        const _minutesStr: string = String(
+          _minutes < 10 ? `0${_minutes}` : _minutes
+        );
+        return `${_hoursStr}:${_minutesStr} ${_meridiem}`;
       case 'full':
         return `${DateHelper.DAYS[_day]} ${DateHelper.MONTHS[_month]} ${_date}, ${_year}`;
       case 'month dd, yyyy':

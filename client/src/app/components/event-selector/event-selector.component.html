@@ -2,8 +2,12 @@
 <h4>
   {{ productDay?.date | getDateDisplay: 'month dd, yyyy' }}
 </h4>
-<div class="event-times-grid">
+<div class="event-times-wrap">
   <div *ngFor="let event of productDay?.events" class="event-time-wrap">
-    <span>{{ event.startTime }}-{{ event.endTime }}</span>
+    <span>
+      {{ event.startTime | getDateDisplay: 'time' }} -
+      {{ event.endTime | getDateDisplay: 'time' }}
+    </span>
+    <span class="font-small">{{ event | getRemainingSlotsDisplay }}</span>
   </div>
 </div>
