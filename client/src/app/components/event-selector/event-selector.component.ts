@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ILAEvent, IProductCalendarDay } from '@la/core';
+import { Router } from '@angular/router';
+import { ILAEvent, IProductCalendarDay, LAConstants } from '@la/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -14,9 +15,19 @@ export class EventSelectorComponent {
 
   public selectedEvent$ = new BehaviorSubject<ILAEvent>(null);
 
+  constructor(private _router: Router) {}
+
   public setSelectedEvent(_event: ILAEvent): void {
     this.selectedEvent$.next(_event);
   }
 
-  public goToCheckout(): void {}
+  public goToCheckout(): void {
+    console.log('go::::');
+    // create temporary order
+    this._router.navigate(['/checkout'], {
+      queryParams: {
+        [LAConstants.ORDER_PARAM]: this.selectedEvent$.getValue()._id,
+      },
+    });
+  }
 }

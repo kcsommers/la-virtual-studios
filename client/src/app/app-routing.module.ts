@@ -32,6 +32,13 @@ const routes: Routes = [
             (_m) => _m.EventsPageWrapperModule
           ),
       },
+      {
+        path: 'checkout',
+        loadChildren: () =>
+          import('./view-wrappers/checkout-page-wrapper.module').then(
+            (_m) => _m.CheckoutPageWrapperModule
+          ),
+      },
     ],
   },
   {

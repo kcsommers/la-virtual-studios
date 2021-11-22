@@ -7,3 +7,5 @@ export * from './events/event-page/event-page.component';
 export * from './events/events-wrapper.component';
 export * from './events/events-wrapper.module';
 export * from './auth/auth-page.component.module';
+export * from './checkout/checkout-page.component';
+export * from './checkout/checkout-page.component.module';

@@ -31,4 +31,5 @@
   [text]="'Continue'"
   [isResponsive]="true"
   [isDisabled]="!(selectedEvent$ | async)"
+  [clickHandler]="goToCheckout.bind(this)"
 ></la-button>

@@ -8,3 +8,4 @@ export * from './calendar/calendar-day';
 export * from './calendar/calendar-day.interface';
 export * from './calendar/calendar-month.interface';
 export * from './users/address.interface';
+export * from './alerts/alert-config.interface';
