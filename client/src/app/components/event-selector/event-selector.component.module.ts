@@ -4,6 +4,7 @@ import {
   GetDateDisplayPipeModule,
   GetRemainingSlotsPipeModule,
 } from '@la/core';
+import { ButtonComponentModule } from '..';
 import { EventSelectorComponent } from './event-selector.component';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { EventSelectorComponent } from './event-selector.component';
     CommonModule,
     GetDateDisplayPipeModule,
     GetRemainingSlotsPipeModule,
+    ButtonComponentModule,
   ],
   declarations: [EventSelectorComponent],
   exports: [EventSelectorComponent],

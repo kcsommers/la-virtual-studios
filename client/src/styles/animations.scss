@@ -22,3 +22,16 @@ $la-transition-long: all 1s cubic-bezier(0, 1.1, 0.76, 1.09);
     opacity: 1;
   }
 }
+
+@mixin spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -5,22 +5,30 @@
 <div class="event-times-wrap">
   <ng-container *ngFor="let event of productDay?.events">
     <div
-      class="event-time-wrap"
+      class="event-time-wrap selectable"
       [class.disabled]="(event | getRemainingSlots: false) <= 0"
+      [class.selected]="(selectedEvent$ | async) === event"
+      (click)="setSelectedEvent(event)"
     >
       <span>
         {{ event.startTime | getDateDisplay: 'time' }} -
         {{ event.endTime | getDateDisplay: 'time' }}
       </span>
       <span
-        class="font-small"
+        class="font-small-bold"
         [ngClass]="[
-          (event | getRemainingSlots: false) >= 0
+          (event | getRemainingSlots: false) > 5
             ? 'color-primary'
             : 'color-accent'
         ]"
-        >{{ event | getRemainingSlots }}</span
       >
+        {{ event | getRemainingSlots }}
+      </span>
     </div>
   </ng-container>
 </div>
+<la-button
+  [text]="'Continue'"
+  [isResponsive]="true"
+  [isDisabled]="!(selectedEvent$ | async)"
+></la-button>

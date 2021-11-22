@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IProductCalendarDay } from '@la/core';
+import { ILAEvent, IProductCalendarDay } from '@la/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'la-event-selector',
@@ -11,9 +12,11 @@ export class EventSelectorComponent {
   @Input()
   productDay: IProductCalendarDay;
 
-  constructor() {
-    setTimeout(() => {
-      console.log(this.productDay);
-    });
+  public selectedEvent$ = new BehaviorSubject<ILAEvent>(null);
+
+  public setSelectedEvent(_event: ILAEvent): void {
+    this.selectedEvent$.next(_event);
   }
+
+  public goToCheckout(): void {}
 }

@@ -28,6 +28,8 @@ export class CalendarPageComponent extends BaseView implements OnInit {
 
   public productId: string;
 
+  public productDayId: string;
+
   public showLoginOptions$ = new BehaviorSubject<boolean>(false);
 
   public showEventSelector$ = new BehaviorSubject<boolean>(false);
@@ -37,6 +39,9 @@ export class CalendarPageComponent extends BaseView implements OnInit {
   ngOnInit() {
     this.productId = this.routingService.routeParameterMap.get(
       LAConstants.ID_PARAM
+    );
+    this.productDayId = this.routingService.routeParameterMap.get(
+      LAConstants.PRODUCT_CALENDAR_DAY_PARAM
     );
     const _dateModel = new Date();
     this.setActiveMonth(_dateModel.getMonth());
@@ -51,35 +56,6 @@ export class CalendarPageComponent extends BaseView implements OnInit {
       return;
     }
     this.fetchProductCalendarDays(_month);
-  }
-
-  private fetchProductCalendarDays(_month: number): void {
-    this.dummyDataService
-      .getProductCalendarDays(_month, this.productId)
-      .pipe(take(1))
-      .subscribe({
-        next: (_calendarDays: IProductCalendarDay[]) => {
-          const _calendarMonth = new CalendarMonth<IProductCalendarDay>(
-            _month,
-            _calendarDays
-          );
-          this.activeMonth$.next(_calendarMonth);
-          this.calendarMonthsMap.set(_calendarMonth.month, _calendarMonth);
-          this.setDisplayedDays();
-        },
-      });
-  }
-
-  private setDisplayedDays(): void {
-    const _activeMonth: ICalendarMonth = this.activeMonth$.getValue();
-    if (!_activeMonth) {
-      return;
-    }
-    const _activeDay: ICalendarDay = this.activeDay$.getValue();
-    const _displayedDays: ICalendarDay[] = _activeDay
-      ? [_activeDay]
-      : _activeMonth.getEventDays();
-    this.displayedDays$.next(_displayedDays);
   }
 
   public setActiveDay(_day: ICalendarDay): void {
@@ -114,5 +90,34 @@ export class CalendarPageComponent extends BaseView implements OnInit {
         [LAConstants.REQUESTED_URL_PARAM]: `events/${_selectedProductDay.product._id}`,
       },
     });
+  }
+
+  private fetchProductCalendarDays(_month: number): void {
+    this.dummyDataService
+      .getProductCalendarDays(_month, this.productId)
+      .pipe(take(1))
+      .subscribe({
+        next: (_calendarDays: IProductCalendarDay[]) => {
+          const _calendarMonth = new CalendarMonth<IProductCalendarDay>(
+            _month,
+            _calendarDays
+          );
+          this.activeMonth$.next(_calendarMonth);
+          this.calendarMonthsMap.set(_calendarMonth.month, _calendarMonth);
+          this.setDisplayedDays();
+        },
+      });
+  }
+
+  private setDisplayedDays(): void {
+    const _activeMonth: ICalendarMonth = this.activeMonth$.getValue();
+    if (!_activeMonth) {
+      return;
+    }
+    const _activeDay: ICalendarDay = this.activeDay$.getValue();
+    const _displayedDays: ICalendarDay[] = _activeDay
+      ? [_activeDay]
+      : _activeMonth.getEventDays();
+    this.displayedDays$.next(_displayedDays);
   }
 }

@@ -20,6 +20,8 @@ export class LoginPageComponent {
 
   public loginError$ = new BehaviorSubject<string>('');
 
+  public isLoading$ = new BehaviorSubject<boolean>(false);
+
   constructor(
     private _authService: AuthenticationService,
     private _routingService: RoutingService
@@ -46,6 +48,7 @@ export class LoginPageComponent {
     if (!this._validateForm()) {
       return;
     }
+    this.isLoading$.next(true);
     this._authService
       .login({
         email: this.emailAddress,
@@ -62,6 +65,7 @@ export class LoginPageComponent {
         },
         error: (_error: any) => {
           console.error('LoginPageComponent.login', _error);
+          this.isLoading$.next(false);
         },
       });
   }

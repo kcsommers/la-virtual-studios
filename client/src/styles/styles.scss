@@ -24,7 +24,6 @@ h4 {
 }
 
 p,
-div,
 span {
   @include p-styles;
 }
@@ -162,5 +161,21 @@ div.input-error {
 
 *.disabled {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.55;
+}
+
+*.margin-bottom-xs {
+  margin-bottom: $spacing-xs;
+}
+
+*.margin-bottom-sm {
+  margin-bottom: $spacing-sm;
+}
+
+*.selectable {
+  border: 2px solid rgba(#fff, 0);
+}
+
+*.selected {
+  border-color: $accent;
 }

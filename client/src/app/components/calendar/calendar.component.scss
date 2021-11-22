@@ -53,7 +53,7 @@ div.calendar-column-header {
 }
 
 div.calendar-day {
-  padding: $spacing-xs;
+  padding: calc(#{$spacing-xs} - 2px);
   transition: $la-transition-long;
   z-index: 100;
   &.calendar-day-disabled {

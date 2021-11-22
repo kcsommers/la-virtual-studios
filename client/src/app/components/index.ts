@@ -10,3 +10,5 @@ export * from './image-carousel/carousel.component';
 export * from './image-carousel/carousel.component.module';
 export * from './event-selector/event-selector.component';
 export * from './event-selector/event-selector.component.module';
+export * from './spinner/spinner.component';
+export * from './spinner/spinner.component.module';
