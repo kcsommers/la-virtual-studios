@@ -3,11 +3,14 @@ import { ILAEvent } from '../../../models';
 import { EventsHelper } from '../../utils';
 
 @Pipe({
-  name: 'getRemainingSlotsDisplay',
+  name: 'getRemainingSlots',
 })
-export class GetRemainingSlotsDisplayPipe implements PipeTransform {
-  transform(_event: ILAEvent): string {
+export class GetRemainingSlotsPipe implements PipeTransform {
+  transform(_event: ILAEvent, _isDisplay = true): string | number {
     const _remaingSlots: number = EventsHelper.getRemainingSlots(_event);
+    if (!_isDisplay) {
+      return _remaingSlots;
+    }
     let _display: string = '';
     if (_remaingSlots <= 0) {
       _display += 'This event is sold out!';

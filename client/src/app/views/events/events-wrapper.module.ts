@@ -8,7 +8,7 @@ import {
 import {
   GetDateDisplayPipeModule,
   GetPriceDisplayPipeModule,
-  GetRemainingSlotsDisplayPipeModule,
+  GetRemainingSlotsPipeModule,
   LAConstants,
 } from '@la/core';
 import { EventPageComponent } from './event-page/event-page.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
     CommonModule,
     ButtonComponentModule,
     GetPriceDisplayPipeModule,
-    GetRemainingSlotsDisplayPipeModule,
+    GetRemainingSlotsPipeModule,
     GetDateDisplayPipeModule,
     ProductCardComponentModule,
   ],

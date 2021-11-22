@@ -3,11 +3,24 @@
   {{ productDay?.date | getDateDisplay: 'month dd, yyyy' }}
 </h4>
 <div class="event-times-wrap">
-  <div *ngFor="let event of productDay?.events" class="event-time-wrap">
-    <span>
-      {{ event.startTime | getDateDisplay: 'time' }} -
-      {{ event.endTime | getDateDisplay: 'time' }}
-    </span>
-    <span class="font-small">{{ event | getRemainingSlotsDisplay }}</span>
-  </div>
+  <ng-container *ngFor="let event of productDay?.events">
+    <div
+      class="event-time-wrap"
+      [class.disabled]="(event | getRemainingSlots: false) <= 0"
+    >
+      <span>
+        {{ event.startTime | getDateDisplay: 'time' }} -
+        {{ event.endTime | getDateDisplay: 'time' }}
+      </span>
+      <span
+        class="font-small"
+        [ngClass]="[
+          (event | getRemainingSlots: false) >= 0
+            ? 'color-primary'
+            : 'color-accent'
+        ]"
+        >{{ event | getRemainingSlots }}</span
+      >
+    </div>
+  </ng-container>
 </div>

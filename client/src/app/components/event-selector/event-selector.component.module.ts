@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
   GetDateDisplayPipeModule,
-  GetRemainingSlotsDisplayPipeModule,
+  GetRemainingSlotsPipeModule,
 } from '@la/core';
 import { EventSelectorComponent } from './event-selector.component';
 
@@ -10,7 +10,7 @@ import { EventSelectorComponent } from './event-selector.component';
   imports: [
     CommonModule,
     GetDateDisplayPipeModule,
-    GetRemainingSlotsDisplayPipeModule,
+    GetRemainingSlotsPipeModule,
   ],
   declarations: [EventSelectorComponent],
   exports: [EventSelectorComponent],
