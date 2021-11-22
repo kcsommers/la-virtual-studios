@@ -1,0 +1,6 @@
+@import 'animations';
+
+:host {
+  display: inline-block;
+  @include spin;
+}
