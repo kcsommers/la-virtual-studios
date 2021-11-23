@@ -13,6 +13,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faSpinner,
+  faAngleUp,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable()
@@ -25,6 +26,7 @@ export class IconService {
     ['faFilm', faFilm],
     ['faStar', faStar],
     ['faUser', faUser],
+    ['faAngleUp', faAngleUp],
     ['faAngleDown', faAngleDown],
     ['faFacebook', faFacebook],
     ['faInstagram', faInstagram],

@@ -1,6 +1,68 @@
 @import 'variables';
 
 :host {
-  display: block;
+  display: flex;
   width: 100%;
+}
+
+div.calendar-wrap {
+  flex: 1;
+}
+
+div.date-picker-right {
+  margin-left: $spacing-sm;
+  padding-left: $spacing-sm;
+  > la-button {
+    margin-top: $spacing-sm;
+  }
+}
+
+div.time-picker-wrap {
+  display: flex;
+}
+
+div.time-picker-inputs-wrap {
+  display: flex;
+  align-items: center;
+}
+
+div.time-picker-input {
+  font-size: $fontsize-lg;
+  padding: $spacing-sm;
+  cursor: pointer;
+  @include card;
+}
+
+div.colon-wrap {
+  margin: 0 $spacing-xs;
+}
+
+div.time-picker-controls-wrap {
+  display: flex;
+  flex-direction: column;
+  color: $primary;
+}
+
+span.time-control-wrap {
+  padding: 0 $spacing-sm;
+  cursor: pointer;
+}
+
+div.meridiem-controls-wrap {
+  display: flex;
+  margin-top: $spacing-xs;
+  > span {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+    @include card;
+    &:first-child {
+      margin-right: 0.25rem;
+    }
+    &:last-child {
+      margin-left: 0.25rem;
+    }
+  }
 }

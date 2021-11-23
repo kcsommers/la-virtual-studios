@@ -1,7 +1,62 @@
-<la-calendar
-  [isPicker]="true"
-  [activeDay$]="activeDay$"
-  [activeMonth$]="activeMonth$"
-  (activeMonthChanged)="setActiveMonth($event)"
-  (activeDayChanged)="setActiveDay($event)"
-></la-calendar>
+<div class="calendar-wrap">
+  <la-calendar
+    [isPicker]="true"
+    [activeDay$]="selectedDay$"
+    [activeMonth$]="activeMonth$"
+    (activeMonthChanged)="setActiveMonth($event)"
+    (activeDayChanged)="setSelectedDay($event)"
+  ></la-calendar>
+</div>
+<div class="date-picker-right">
+  <div class="time-picker-wrap">
+    <div class="time-picker-inner">
+      <div class="time-picker-inputs-wrap">
+        <div
+          class="time-picker-input hours-wrap selectable"
+          [class.selected]="(selectedInput$ | async) === 'hours'"
+          (click)="selectedInput$.next('hours')"
+        >
+          {{ hours$ | async }}
+        </div>
+        <div class="colon-wrap font-xl-bold">:</div>
+        <div
+          class="time-picker-input minutes-wrap selectable"
+          [class.selected]="(selectedInput$ | async) === 'minutes'"
+          (click)="selectedInput$.next('minutes')"
+        >
+          {{ minutes$ | async }}
+        </div>
+      </div>
+      <div class="meridiem-controls-wrap">
+        <span
+          class="selectable"
+          [class.selected-primary]="(meridiem$ | async) === 'AM'"
+          (click)="meridiem$.next('AM')"
+        >
+          AM
+        </span>
+        <span
+          class="selectable"
+          [class.selected-primary]="(meridiem$ | async) === 'PM'"
+          (click)="meridiem$.next('PM')"
+        >
+          PM
+        </span>
+      </div>
+    </div>
+    <div class="time-picker-controls-wrap">
+      <span class="time-control-wrap" (click)="increaseTime()">
+        <la-icon [icon]="'faAngleUp'"></la-icon>
+      </span>
+      <span class="time-control-wrap" (click)="decreaseTime()">
+        <la-icon [icon]="'faAngleDown'"></la-icon>
+      </span>
+    </div>
+  </div>
+  <la-button
+    [text]="'Submit'"
+    [isFullWidth]="true"
+    [isDisabled]="!(selectedDay$ | async)"
+    [clickHandler]="submit.bind(this)"
+  ></la-button>
+</div>
