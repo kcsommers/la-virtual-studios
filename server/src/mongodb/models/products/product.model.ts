@@ -2,7 +2,6 @@ import { IProduct } from '@la/core';
 import { model, Schema } from 'mongoose';
 
 const productSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,

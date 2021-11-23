@@ -5,7 +5,7 @@ import HttpStatusCodes from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { omit } from 'lodash';
-import { verifyToken } from '../middleware';
+import { verifyToken } from '../../middleware';
 
 const router = Router();
 

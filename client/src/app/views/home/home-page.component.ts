@@ -47,12 +47,7 @@ export class HomePageComponent {
     private _routingService: RoutingService,
     private _http: HttpClient
   ) {
-    this._dummyDataService
-      .getProducts()
-      .pipe(take(1))
-      .subscribe({
-        next: (_products: IProduct[]) => this.products$.next(_products),
-      });
+    this.fetchProducts();
 
     this._dummyDataService
       .getClasses()
@@ -76,6 +71,18 @@ export class HomePageComponent {
     }
     // this._landingVideo.nativeElement.muted = true;
     // this._landingVideo.nativeElement.play();
+  }
+
+  private fetchProducts(): void {
+    this._http
+      .get<IProduct[]>('/api/products')
+      .pipe(take(1))
+      .subscribe({
+        next: (_products: IProduct[]) => this.products$.next(_products),
+        error: (_error: any) => {
+          console.error(_error);
+        },
+      });
   }
 
   private createMediaSource(): void {

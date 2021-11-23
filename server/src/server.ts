@@ -1,6 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { authController, mediaController } from './controllers';
+import {
+  authController,
+  mediaController,
+  productsController,
+} from './controllers';
 
 require('dotenv').config();
 
@@ -28,6 +32,7 @@ connection.once('open', () => {
 
 app.use('/media', mediaController);
 app.use('/auth', authController);
+app.use('/products', productsController);
 
 app.listen(port, () => {
   console.log(`Hooked on ${port}`);

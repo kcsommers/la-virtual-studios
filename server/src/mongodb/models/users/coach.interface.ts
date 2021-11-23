@@ -2,7 +2,6 @@ import { IUser } from '@la/core';
 import { model, Schema } from 'mongoose';
 
 const coachSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   firstName: {
     type: String,
     required: true,

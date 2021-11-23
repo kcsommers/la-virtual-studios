@@ -2,7 +2,6 @@ import { ILocation } from '@la/core';
 import mongoose from 'mongoose';
 
 const locationSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,

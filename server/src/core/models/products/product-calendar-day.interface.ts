@@ -2,14 +2,7 @@ import { ILAEvent } from '../events/la-event.interface';
 import { IProduct } from './product.interface';
 
 export interface IProductCalendarDay {
-  product: IProduct;
+  product: IProduct | string;
   date: number;
-  events: ILAEvent[];
-  dateModel?: Date;
-  day?: number;
-  month?: number;
-  year?: number;
-  isToday?: boolean;
-  isPast?: boolean;
-  _id?: string;
+  events: ILAEvent[] | string[];
 }

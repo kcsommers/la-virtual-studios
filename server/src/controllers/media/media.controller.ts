@@ -3,7 +3,7 @@ import fs from 'fs';
 import HttpStatusCodes from 'http-status-codes';
 import path from 'path';
 import stream from 'stream';
-import { GoogleDriveService, IFileInfo } from '../third-party';
+import { GoogleDriveService, IFileInfo } from '../../third-party';
 
 const router = Router();
 

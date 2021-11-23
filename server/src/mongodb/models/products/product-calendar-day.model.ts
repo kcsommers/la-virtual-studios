@@ -2,7 +2,6 @@ import { IProductCalendarDay } from '@la/core';
 import { model, Schema } from 'mongoose';
 
 const productCalendarDaySchema = new Schema({
-  _id: Schema.Types.ObjectId,
   product: {
     type: Schema.Types.ObjectId,
     ref: 'Product',

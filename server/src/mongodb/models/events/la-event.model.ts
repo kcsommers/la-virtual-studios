@@ -11,7 +11,6 @@ export interface ILAEvent {
 import mongoose, { Schema } from 'mongoose';
 
 const laEventSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   totalSlots: Number,
   attendees: [
     {

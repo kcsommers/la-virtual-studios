@@ -2,7 +2,6 @@ import { IPendingOrder } from '@la/core';
 import { Schema, model } from 'mongoose';
 
 const pendingOrderSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   product: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
