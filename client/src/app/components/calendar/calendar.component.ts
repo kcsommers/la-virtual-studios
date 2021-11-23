@@ -29,6 +29,9 @@ export class CalendarComponent extends Destroyer implements OnInit {
   @Input()
   public activeMonth$: BehaviorSubject<ICalendarMonth>;
 
+  @Input()
+  public isPicker: boolean = false;
+
   public activeYear$ = new BehaviorSubject<number>(null);
 
   public WEEKDAYS = DateHelper.DAYS_ABREVIATED;
@@ -60,10 +63,11 @@ export class CalendarComponent extends Destroyer implements OnInit {
   public setActiveDay(_day: ICalendarDay): void {
     const _activeMonth: ICalendarMonth = this.activeMonth$.getValue();
     if (
-      _day.isPast ||
-      _activeMonth.month !== _day.month ||
-      !_day.events ||
-      !_day.events.length
+      !this.isPicker &&
+      (_day.isPast ||
+        _activeMonth.month !== _day.month ||
+        !_day.events ||
+        !_day.events.length)
     ) {
       return;
     }

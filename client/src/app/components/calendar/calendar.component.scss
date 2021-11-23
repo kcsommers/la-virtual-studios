@@ -59,7 +59,7 @@ div.calendar-day {
   &.calendar-day-disabled {
     opacity: 0.45;
   }
-  &.has-events:not(.calendar-day-disabled) {
+  &.can-select:not(.calendar-day-disabled) {
     cursor: pointer;
     &.selected,
     &:hover {

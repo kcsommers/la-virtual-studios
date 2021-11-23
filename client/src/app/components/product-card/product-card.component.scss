@@ -24,7 +24,6 @@ div.product-card-img {
 div.product-card-body {
   flex: 1;
   cursor: pointer;
-  padding: $spacing-sm;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,6 +45,42 @@ span.product-price {
   font-weight: bold;
 }
 
+div.product-card-body-top {
+  position: relative;
+  padding: $spacing-sm;
+  background: linear-gradient(315deg, $light 40%, #fff);
+  flex: 1;
+  > div.product-card-body-overlay {
+    background: linear-gradient(315deg, darken($light, 10%) 40%, #fff);
+    transition: $la-transition;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  > div.product-card-body-top-inner {
+    position: relative;
+    z-index: 101;
+  }
+  &:hover {
+    > div.product-card-body-overlay {
+      opacity: 1;
+    }
+  }
+}
+
 div.product-card-body-bottom {
-  margin-top: $spacing-sm;
+  background-color: #fff;
+  padding: $spacing-sm;
+}
+
+div.product-body-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

@@ -31,10 +31,11 @@
     <ng-container *ngFor="let day of calendarDays$ | async">
       <div
         class="calendar-day selectable"
-        [class.has-events]="!!day.events?.length"
+        [class.can-select]="isPicker || !!day.events?.length"
         [class.selected]="(activeDay$ | async) === day"
         [class.calendar-day-disabled]="
-          day.isPast || (activeMonth$ | async)?.month !== day.month
+          !isPicker &&
+          (day.isPast || (activeMonth$ | async)?.month !== day.month)
         "
         (click)="setActiveDay(day)"
       >

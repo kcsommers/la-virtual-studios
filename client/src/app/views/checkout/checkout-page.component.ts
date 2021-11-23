@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IAlertConfig, LAConstants, RoutingService } from '@la/core';
-import { AuthenticationService, DummyDataService } from '@la/data';
+import { AuthenticationService } from '@la/data';
 import { BehaviorSubject } from 'rxjs';
-import { BaseView } from '../base-view';
 
 @Component({
   selector: 'la-checkout-page',

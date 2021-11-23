@@ -62,8 +62,11 @@ button.la-btn {
     font-weight: bold;
   }
 
-  &.btn-flat,
   &.btn-outline {
+    background-color: #fff;
+  }
+
+  &.btn-flat {
     background-color: rgba(0, 0, 0, 0);
   }
 

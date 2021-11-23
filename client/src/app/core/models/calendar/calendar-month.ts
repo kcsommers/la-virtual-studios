@@ -13,13 +13,13 @@ export class CalendarMonth<Day extends ICalendarDay = ICalendarDay>
 
   public calendarDays: ICalendarDay<Day>[];
 
-  constructor(_month: number, _eventDays: Day[]) {
+  constructor(_month: number, _eventDays?: Day[]) {
     this.month = _month;
     if (_eventDays) {
       this.eventDays = _eventDays;
       this.setEventDaysMap();
-      this.setCalendarDays();
     }
+    this.setCalendarDays();
   }
 
   public getEventDays(): ICalendarDay<Day>[] {
@@ -64,8 +64,11 @@ export class CalendarMonth<Day extends ICalendarDay = ICalendarDay>
     const _prevMonthStart = 1 - _firstDayOfMonth;
     for (let i = _prevMonthStart; i < 35 + _prevMonthStart; i++) {
       const _date: Date = new Date(this.year, this.month, i);
-      const _eventDays: Day[] = this.eventsDaysMap.get(i);
-      _calendarDays.push(new CalendarDay(_date, _eventDays || []));
+      let _eventDays: Day[] = [];
+      if (this.eventsDaysMap) {
+        _eventDays = this.eventsDaysMap.get(i);
+      }
+      _calendarDays.push(new CalendarDay(_date, _eventDays));
     }
     this.calendarDays = _calendarDays;
   }

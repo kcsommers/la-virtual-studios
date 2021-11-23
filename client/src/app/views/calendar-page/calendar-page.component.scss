@@ -45,9 +45,7 @@ la-button.browse-all-btn {
 
 div.events-section-date-wrap {
   position: relative;
-  &:not(:first-child) {
-    margin-top: $spacing-md;
-  }
+  margin-bottom: $spacing-md;
   > la-event-card {
     margin-bottom: $spacing-sm;
   }
