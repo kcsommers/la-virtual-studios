@@ -1,0 +1,7 @@
+<la-calendar
+  [isPicker]="true"
+  [activeDay$]="activeDay$"
+  [activeMonth$]="activeMonth$"
+  (activeMonthChanged)="setActiveMonth($event)"
+  (activeDayChanged)="setActiveDay($event)"
+></la-calendar>

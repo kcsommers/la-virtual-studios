@@ -12,3 +12,5 @@ export * from './event-selector/event-selector.component';
 export * from './event-selector/event-selector.component.module';
 export * from './spinner/spinner.component';
 export * from './spinner/spinner.component.module';
+export * from './date-picker/date-picker.component';
+export * from './date-picker/date-picker.component.module';

@@ -22,7 +22,6 @@ export class EventSelectorComponent {
   }
 
   public goToCheckout(): void {
-    console.log('go::::');
     // create temporary order
     this._router.navigate(['/checkout'], {
       queryParams: {
