@@ -6,7 +6,7 @@ import {
 } from '@la/mongodb';
 import { Request, Response, Router } from 'express';
 import HttpStatusCodes from 'http-status-codes';
-import { Document } from 'mongoose';
+import { Aggregate, Document } from 'mongoose';
 
 const router = Router();
 
@@ -32,6 +32,9 @@ router.post(
   }
 );
 
+/**
+ * returns all products
+ */
 router.get(
   '/',
   async (
@@ -51,6 +54,9 @@ router.get(
   }
 );
 
+/**
+ * returns one product by id
+ */
 router.get(
   '/:id',
   async (_req: Request, _res: Response<string | Document<IProduct>>) => {
@@ -70,8 +76,11 @@ router.get(
   }
 );
 
+/**
+ * creates one calendar day and child events
+ */
 router.post(
-  'calendar-days/create',
+  '/calendar-days/create',
   async (
     _req: Request<any, any, IProductCalendarDay>,
     _res: Response<string | Document<IProductCalendarDay>>
@@ -102,15 +111,57 @@ router.post(
   }
 );
 
+/**
+ * returns all calendar days for specific month all products
+ */
 router.get(
-  'calendar-days/:productId',
+  '/calendar-days/month/:month',
   async (
     _req: Request,
-    _res: Response<string | Document<IProductCalendarDay>>
+    _res: Response<string | Aggregate<IProductCalendarDay>[]>
   ) => {
-    const _productId: string = _req.params.id;
+    const _month: number = +_req.params.month;
     try {
-      const _calendarDay: Document<IProductCalendarDay> =
+      const _calendarDay: Aggregate<IProductCalendarDay>[] =
+        await ProductCalendarDayModel.aggregate([
+          {
+            $match: {
+              $eq: [{ $month: '$date' }],
+            },
+          },
+        ]);
+
+      // await ProductCalendarDayModel
+      // .find()
+      //   .populate('events')
+      //   .populate('product');
+      console.log(
+        `Successfully retrieved new calendar days with product id: ${_calendarDay}`
+      );
+      _res.status(HttpStatusCodes.OK).json(_calendarDay);
+    } catch (err: any) {
+      console.error(err);
+      // _res
+      //   .status(HttpStatusCodes.INTERNAL_SERVER_ERROR)
+      //   .send(
+      //     `Unexpected error retrieving calendar day with id: ${_productId}`
+      //   );
+    }
+  }
+);
+
+/**
+ * returns all calendar days for specific product all months
+ */
+router.get(
+  '/calendar-days/product/:productId',
+  async (
+    _req: Request,
+    _res: Response<string | Document<IProductCalendarDay>[]>
+  ) => {
+    const _productId: string = _req.params.productId;
+    try {
+      const _calendarDay: Document<IProductCalendarDay>[] =
         await ProductCalendarDayModel.find({
           product: _productId,
         })
@@ -131,8 +182,11 @@ router.get(
   }
 );
 
+/**
+ * returns one product calendar day by id
+ */
 router.get(
-  'calendar-days/day/:id',
+  '/calendar-days/day/:id',
   async (
     _req: Request,
     _res: Response<string | Document<IProductCalendarDay>>

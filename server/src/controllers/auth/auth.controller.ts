@@ -1,11 +1,12 @@
-import { ILoginCredentials, ISignupCredentials, IUser } from '@la/core';
-import { UserModel } from '@la/mongodb';
+import { ICoach, ILoginCredentials, ISignupCredentials, IUser } from '@la/core';
+import { CoachModel, UserModel } from '@la/mongodb';
 import { Request, Response, Router } from 'express';
 import HttpStatusCodes from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { omit } from 'lodash';
 import { verifyToken } from '../../middleware';
+import { Document } from 'mongoose';
 
 const router = Router();
 
@@ -108,6 +109,64 @@ router.post(
       console.log(`Successfully registered user: ${_newUser.email}`);
       _newUser.token = _token;
       _res.status(HttpStatusCodes.OK).json(_newUser.toObject());
+    } catch (_error: any) {
+      console.error('Sign Up Error::::', _error);
+      _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);
+    }
+  }
+);
+
+router.post(
+  '/coaches/signup',
+  async (_req: Request<any, any, ISignupCredentials>, _res: Response) => {
+    const _credentials: ISignupCredentials = _req.body;
+    if (
+      !(
+        _credentials.email &&
+        _credentials.password &&
+        _credentials.firstName &&
+        _credentials.lastName
+      )
+    ) {
+      return _res
+        .status(HttpStatusCodes.BAD_REQUEST)
+        .send('All Inputs Required');
+    }
+
+    try {
+      const _existingCoach: Document<ICoach> = await CoachModel.findOne({
+        email: _credentials.email,
+      });
+      if (_existingCoach) {
+        return _res
+          .status(HttpStatusCodes.CONFLICT)
+          .send('Email Already Exists');
+      }
+
+      const _encryptedPassword: string = await bcrypt.hash(
+        _credentials.password,
+        10
+      );
+      const _newCoach = await CoachModel.create({
+        firstName: _credentials.firstName,
+        lastName: _credentials.lastName,
+        email: _credentials.email,
+        password: _encryptedPassword,
+      });
+
+      const _token = jwt.sign(
+        {
+          userId: _newCoach._id,
+          email: _newCoach.email,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '2h',
+        }
+      );
+      console.log(`Successfully registered coach: ${_newCoach.email}`);
+      _newCoach.token = _token;
+      _res.status(HttpStatusCodes.OK).json(_newCoach.toObject());
     } catch (_error: any) {
       console.error('Sign Up Error::::', _error);
       _res.sendStatus(HttpStatusCodes.INTERNAL_SERVER_ERROR);

@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import {
   authController,
+  eventsController,
   mediaController,
   productsController,
 } from './controllers';
@@ -33,6 +34,7 @@ connection.once('open', () => {
 app.use('/media', mediaController);
 app.use('/auth', authController);
 app.use('/products', productsController);
+app.use('/events', eventsController);
 
 app.listen(port, () => {
   console.log(`Hooked on ${port}`);

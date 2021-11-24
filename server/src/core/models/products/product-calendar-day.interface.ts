@@ -3,6 +3,6 @@ import { IProduct } from './product.interface';
 
 export interface IProductCalendarDay {
   product: IProduct | string;
-  date: number;
+  date: number | Date;
   events: ILAEvent[] | string[];
 }

@@ -4,4 +4,4 @@ export * from './models/orders/pending-order.model';
 export * from './models/products/product-calendar-day.model';
 export * from './models/products/product.model';
 export * from './models/users/user.model';
-export * from './models/users/user.model';
+export * from './models/users/coach.model';
